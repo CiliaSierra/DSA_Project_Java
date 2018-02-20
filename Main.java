@@ -78,6 +78,16 @@ public class Main {
                     break;
                 }
                 case 3:{
+                    System.out.print("Nombre de usuario a consultar: ");
+                    String nombre = scan.nextLine();
+                    Usuario u = m.consultarUsuario(nombre);
+                    if(u == null){
+                        System.out.println("Usuario no existe");
+                        break;
+                    }
+                    System.out.println(u.toString());
+                }
+                case 4:{
 
                 }
             }

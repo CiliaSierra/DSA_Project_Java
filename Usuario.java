@@ -18,4 +18,9 @@ public class Usuario {
         this.ataque = ataque;
         this.defensa = defensa;
     }
+
+    @Override
+    public String toString(){
+        return "Nombre: " + nombre + " Password: " + password + " Nivel: " + nivel + " Ataque: " + ataque + " Defensa: " + defensa;
+    }
 }
