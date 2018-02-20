@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Mundo {
 
-    Map<String, Usuario> usuarios = new HashMap();
+    public Map<String, Usuario> usuarios = new HashMap<>();
 
     //usuario
     public boolean crearUsuario(Usuario u){
@@ -13,17 +13,20 @@ public class Mundo {
             return true;
         }
     }
-    public boolean eliminarUsuario(Usuario u){
+    /*public boolean eliminarUsuario(Usuario u){
         if(usuarios.remove(u.nombre) == null){
+            return false;
+        }
+        return true;
+    }*/
+    public boolean eliminarUsuario(String nombre){
+        if(usuarios.remove(nombre) == null){
             return false;
         }
         return true;
     }
     public Usuario consultarUsuario(String nombre){
-        if(usuarios.containsKey(nombre))
-            return usuarios.get(nombre);
-        else
-            return null;
+        return usuarios.get(nombre);
     }
 
     //objeto
@@ -35,13 +38,13 @@ public class Mundo {
     }
     public Objeto consultarObjetoDeUsuario(Usuario u, String nombreObjeto){
         for(Objeto o : u.inventario)
-            if(o.nombre==nombreObjeto)
+            if(o.nombre.equals(nombreObjeto))
                 return o;
         return null;
     }
     public boolean eliminarObjetoDeUsuario(Usuario u, String nombreObjeto){
         for(Objeto o : u.inventario)
-            if(o.nombre==nombreObjeto) {
+            if(o.nombre.equals(nombreObjeto)){
                 u.inventario.remove(o);
                 return true;
             }

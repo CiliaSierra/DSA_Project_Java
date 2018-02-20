@@ -69,12 +69,10 @@ public class Main {
                 case 2: {
                     System.out.print("Nombre de usuario a eliminar: ");
                     String nombre = scan.nextLine();
-                    Usuario u =m.consultarUsuario(nombre);
-                    if(u==null){
+                    if(m.eliminarUsuario(nombre))
+                        System.out.println("Usuario eliminado");
+                    else
                         System.out.println("Usuario no existe");
-                        break;
-                    }
-                     m.eliminarUsuario(u);
                     break;
                 }
                 case 3:{
