@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -23,9 +24,8 @@ public class Main {
             try {
                 choice = Integer.parseInt(input);
             } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
                 choice = -1;
+                e.printStackTrace();
             }
             switch (choice) {
                 case -1: {
@@ -84,9 +84,80 @@ public class Main {
                         break;
                     }
                     System.out.println(u.toString());
+                    break;
                 }
                 case 4:{
-
+                    System.out.print("Nombre del jugador: ");
+                    String nombre = scan.nextLine();
+                    Usuario user = m.consultarUsuario(nombre);
+                    if(user == null){
+                        System.out.println("Usuario no existe");
+                        break;
+                    }
+                    System.out.println("Tipo de objeto:");
+                    System.out.println("1 Ataque");
+                    System.out.println("2 Defensa");
+                    System.out.println("3 Llave");
+                    System.out.println("4 Pocion");
+                    String option = scan.nextLine();
+                    String tipo ="";
+                    if(option == "1"){
+                        tipo = "Ataque";
+                    }
+                    else if(option == "2"){
+                        tipo = "Defensa";
+                    }
+                    else if(option == "3"){
+                        tipo = "Llave";
+                    }
+                    else if(option == "4"){
+                        tipo = "Pocion";
+                    }
+                    else{
+                        System.out.println("Debes introducir un numero del 1 al 4.");
+                        break;
+                    }
+                    System.out.print("Nombre del objeto: ");
+                    String nom = scan.nextLine();
+                    System.out.print("Añadir descripción a "+nom+": ");
+                    String descripcion = scan.nextLine();
+                    System.out.print("Valor del objeto (numero): ");
+                    String value = scan.nextLine();
+                    int val = 0;
+                    try{
+                        val = Integer.parseInt(value);
+                    }
+                    catch (Exception e){
+                        System.out.println("Debes introducir un numero.");
+                        break;
+                    }
+                    Objeto objeto = new Objeto(nom,tipo, descripcion,val);
+                    m.añadirObjetoAUsuario(user,objeto);
+                    System.out.println("Objeto " + objeto.nombre + ", añadido a "+user.nombre+".");
+                    break;
+                }
+                case 5: {
+                    System.out.print("Nombre del usuario: ");
+                    String nombre = scan.nextLine();
+                    Usuario user = m.consultarUsuario(nombre);
+                    if(user == null){
+                        System.out.println("Usuario no existe.");
+                        break;
+                    }
+                    System.out.println("Objetos del usuario "+ user.nombre+":");
+                    for(Objeto obj : user.inventario){
+                        System.out.println(obj.nombre);
+                    }
+                    break;
+                }
+                case 6:{
+                    break;
+                }
+                case 7:{
+                    break;
+                }
+                case 8:{
+                    break;
                 }
             }
         }
