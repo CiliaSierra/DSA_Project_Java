@@ -62,8 +62,10 @@ public class Main {
                     Usuario u = new Usuario(nombre, passwordd, nivel, ataque, defensa);
                     if (m.crearUsuario(u))
                         System.out.println("Usuario añadido.");
+
                     else
                         System.out.println("Usuario con nombre " + u.nombre + " ya existe.");
+                    scan.nextLine();
                     break;
                 }
                 case 2: {
@@ -73,6 +75,7 @@ public class Main {
                         System.out.println("Usuario eliminado");
                     else
                         System.out.println("Usuario no existe");
+                    scan.nextLine();
                     break;
                 }
                 case 3:{
@@ -81,9 +84,11 @@ public class Main {
                     Usuario u = m.consultarUsuario(nombre);
                     if(u == null){
                         System.out.println("Usuario no existe");
+                        scan.nextLine();
                         break;
                     }
                     System.out.println(u.toString());
+                    scan.nextLine();
                     break;
                 }
                 case 4:{
@@ -92,6 +97,7 @@ public class Main {
                     Usuario user = m.consultarUsuario(nombre);
                     if(user == null){
                         System.out.println("Usuario no existe");
+                        scan.nextLine();
                         break;
                     }
                     System.out.println("Tipo de objeto:");
@@ -115,6 +121,7 @@ public class Main {
                     }
                     else{
                         System.out.println("Debes introducir un numero del 1 al 4.");
+                        scan.nextLine();
                         break;
                     }
                     System.out.print("Nombre del objeto: ");
@@ -129,11 +136,13 @@ public class Main {
                     }
                     catch (Exception e){
                         System.out.println("Debes introducir un numero.");
+                        scan.nextLine();
                         break;
                     }
                     Objeto objeto = new Objeto(nom,tipo, descripcion,val);
                     m.añadirObjetoAUsuario(user,objeto);
                     System.out.println("Objeto " + objeto.nombre + ", añadido a "+user.nombre+".");
+                    scan.nextLine();
                     break;
                 }
                 case 5: {
@@ -151,9 +160,27 @@ public class Main {
                     break;
                 }
                 case 6:{
+                    System.out.println();
                     break;
                 }
                 case 7:{
+                    System.out.print("Nombre del usuario: ");
+                    String nombre = scan.nextLine();
+                    Usuario user = m.consultarUsuario(nombre);
+                    if(user == null){
+                        System.out.println("No existe el usuario "+nombre);
+                        break;
+                    }
+                    System.out.print("Nombre del objeto a eliminar: ");
+                    String nom = scan.nextLine();
+                    Objeto obj = m.consultarObjetoDeUsuario(user,nom);
+                    if(obj == null){
+                        System.out.println("El usuario no tiene este objeto");
+                        break;
+                    }
+                    m.eliminarObjetoDeUsuario(user,nom);
+                    System.out.println("Objeto eliminado");
+                    scan.nextLine();
                     break;
                 }
                 case 8:{
