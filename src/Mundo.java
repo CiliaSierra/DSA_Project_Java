@@ -5,11 +5,7 @@ import java.util.*;
 public class Mundo {
 
     public Map<String, src.Usuario> usuarios = new HashMap<>();
-    Mapa[] mapas;
-
-    public Mundo(int mapas){
-        this.mapas = new Mapa[mapas];
-    }
+    List<Mapa> mapas = new ArrayList<>();
 
     //usuario
     public boolean crearUsuario(src.Usuario u){
