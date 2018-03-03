@@ -14,7 +14,7 @@ public class Usuario {
     private static final int invSize = 10;  //Tamaño del inventario
     private static final int packCant = 30; //Cantidad de objeto maxima en pack
 
-    public Usuario(String nombre, String password, int nivel){
+    public Usuario(String nombre, String password, String email, int nivel){
         this.setNombre(nombre);
         this.setPassword(password);
         this.setNivel(nivel);
