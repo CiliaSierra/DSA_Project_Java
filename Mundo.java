@@ -8,21 +8,16 @@ public class Mundo {
     public Mundo(int mapas){
         this.mapas = new Mapa[mapas];
     }
+
     //usuario
     public boolean crearUsuario(Usuario u){
-        if(usuarios.containsKey(u.nombre))
+        if(usuarios.containsKey(u.getNombre()))
             return false;
         else{
-            usuarios.put(u.nombre, u);
+            usuarios.put(u.getNombre(), u);
             return true;
         }
     }
-    /*public boolean eliminarUsuario(Usuario u){
-        if(usuarios.remove(u.nombre) == null){
-            return false;
-        }
-        return true;
-    }*/
     public boolean eliminarUsuario(String nombre){
         if(usuarios.remove(nombre) == null){
             return false;
@@ -35,7 +30,7 @@ public class Mundo {
 
     //objeto
     public void añadirObjetoAUsuario(Usuario u, Objeto o){
-        usuarios.get(u.nombre).inventario.add(o);
+        usuarios.get(u.getNombre()).inventario.add(o);
     }
     public LinkedList consultarObjetosDeUsuario(Usuario u){
         return u.inventario;

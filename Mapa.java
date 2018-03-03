@@ -4,10 +4,15 @@ import java.util.List;
 public class Mapa {
 
     Celda[][] celdas;
-
+    String nombre;
 
     public Mapa(int altura, int anchura){
-        celdas = new Celda[altura][anchura];
+        this.celdas = new Celda[altura][anchura];
+    }
+
+    public void llenarMapa(Celda[][] celdas){
+        //if(celdas.length == this.celdas.length(0)){}
+        
     }
 
 }
