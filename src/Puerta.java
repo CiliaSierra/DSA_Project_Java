@@ -1,8 +1,8 @@
 package src;
 
-public class Agua extends Celda {
+public class Puerta extends Celda {
     @Override
     public String letra() {
-        return "A";
+        return "P";
     }
 }

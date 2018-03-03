@@ -11,7 +11,7 @@ public class Main {
         Celda c1=new src.Pared();
         Celda c2=new src.Pared();
         Celda c3=new src.Camino();
-        Celda c4=new src.Agua();
+        Celda c4=new Rio();
         Mapa mapa = new Mapa(2,2);
         mapa.celdas[0][0] =c1;
         mapa.celdas[0][1] =c2;

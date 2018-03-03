@@ -1,10 +1,9 @@
 package src;
 
-public class Pared extends Celda {
-
+class Muro extends Celda {
 
     @Override
     public String letra() {
-        return "P";
+        return "M";
     }
 }
