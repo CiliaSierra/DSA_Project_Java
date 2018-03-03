@@ -13,5 +13,11 @@ public class Mapa {
         //if(celdas.length == this.celdas.length(0)){}
 
     }
+    public void mostrarMapa (){
+        for(int i = 0; i<celdas.length; i++){
+            for (int j=0; j<celdas[0].length;j++){
+
+            }
+    }
 
 }
