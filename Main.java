@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         while (true) {
+            ///hola
             System.out.println("Menu principal de opciones:");
             System.out.println("1 : Añadir Usuario");
             System.out.println("2 : Eliminar Usuario");
