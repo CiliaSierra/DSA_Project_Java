@@ -1,6 +1,6 @@
 package src;
 
-class Muro extends Celda {
+public class Muro extends Celda {
 
     @Override
     public String letra() {
