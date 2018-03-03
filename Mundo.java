@@ -3,7 +3,11 @@ import java.util.*;
 public class Mundo {
 
     public Map<String, Usuario> usuarios = new HashMap<>();
+    Mapa[] mapas;
 
+    public Mundo(int mapas){
+        this.mapas = new Mapa[mapas];
+    }
     //usuario
     public boolean crearUsuario(Usuario u){
         if(usuarios.containsKey(u.nombre))
