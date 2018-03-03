@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+package src;
 
 public class Mapa {
 
@@ -12,7 +11,7 @@ public class Mapa {
 
     public void llenarMapa(Celda[][] celdas){
         //if(celdas.length == this.celdas.length(0)){}
-        
+
     }
 
 }
