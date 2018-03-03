@@ -10,7 +10,7 @@ public class Usuario {
     private int ataque;
     private int defensa;
 
-    public LinkedList<Objeto> inventario = new LinkedList<Objeto>();
+    public LinkedList<src.Objeto> inventario = new LinkedList<src.Objeto>();
 
     public Usuario(String nombre, String password, int nivel, int ataque, int defensa){
         this.setNombre(nombre);

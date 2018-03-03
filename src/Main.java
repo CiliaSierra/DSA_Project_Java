@@ -4,9 +4,23 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static Mundo m = new Mundo(1);
+    public static src.Mundo m = new src.Mundo(1);
 
     public static void main(String[] args) {
+
+        Celda c1=new src.Pared();
+        Celda c2=new src.Pared();
+        Celda c3=new src.Camino();
+        Celda c4=new src.Agua();
+        Mapa mapa = new Mapa(2,2);
+        mapa.celdas[0][0] =c1;
+        mapa.celdas[0][1] =c2;
+        mapa.celdas[1][0] =c3;
+        mapa.celdas[1][1] =c4;
+        mapa.mostrarMapa();
+
+
+
 
     }
 
@@ -20,9 +34,9 @@ public class Main {
             System.out.println("3 : Consultar Usuario");
             System.out.println("4 : Añadir objeto a un Usuario");
             System.out.println("5 : Consultar Objetos de un Usuario");
-            System.out.println("6 : Consultar un Objeto de un Usuario");
-            System.out.println("7 : Eliminar Objeto de un Usuario");
-            System.out.println("8 : Tranferir un Objeto entre Usuarios");
+            System.out.println("6 : Consultar un src.Objeto de un Usuario");
+            System.out.println("7 : Eliminar src.Objeto de un Usuario");
+            System.out.println("8 : Tranferir un src.Objeto entre Usuarios");
             System.out.println("0 : Salir de la Aplicación");
 
             String input = scan.nextLine();
@@ -65,7 +79,7 @@ public class Main {
                             e.printStackTrace();
                         }
                     }
-                    Usuario u = new Usuario(nombre, passwordd, nivel, ataque, defensa);
+                    src.Usuario u = new src.Usuario(nombre, passwordd, nivel, ataque, defensa);
                     if (m.crearUsuario(u))
                         System.out.println("Usuario añadido.");
 
@@ -87,7 +101,7 @@ public class Main {
                 case 3: {
                     System.out.print("Nombre de usuario a consultar: ");
                     String nombre = scan.nextLine();
-                    Usuario u = m.consultarUsuario(nombre);
+                    src.Usuario u = m.consultarUsuario(nombre);
                     if (u == null) {
                         System.out.println("Usuario no existe");
                         scan.nextLine();
@@ -100,7 +114,7 @@ public class Main {
                 case 4: {
                     System.out.print("Nombre del jugador: ");
                     String nombre = scan.nextLine();
-                    Usuario user = m.consultarUsuario(nombre);
+                    src.Usuario user = m.consultarUsuario(nombre);
                     if (user == null) {
                         System.out.println("Usuario no existe");
                         scan.nextLine();
@@ -140,22 +154,22 @@ public class Main {
                         scan.nextLine();
                         break;
                     }
-                    Objeto objeto = new Objeto(nom, tipo, descripcion, val);
+                    src.Objeto objeto = new src.Objeto(nom, tipo, descripcion, val);
                     m.añadirObjetoAUsuario(user, objeto);
-                    System.out.println("Objeto " + objeto.nombre + ", añadido a " + user.getNombre() + ".");
+                    System.out.println("src.Objeto " + objeto.nombre + ", añadido a " + user.getNombre() + ".");
                     scan.nextLine();
                     break;
                 }
                 case 5: {
                     System.out.print("Nombre del usuario: ");
                     String nombre = scan.nextLine();
-                    Usuario user = m.consultarUsuario(nombre);
+                    src.Usuario user = m.consultarUsuario(nombre);
                     if (user == null) {
                         System.out.println("Usuario no existe.");
                         break;
                     }
                     System.out.println("Objetos del usuario " + user.getNombre() + ":");
-                    for (Objeto obj : user.inventario) {
+                    for (src.Objeto obj : user.inventario) {
                         System.out.println(obj.nombre);
                     }
                     break;
@@ -167,20 +181,20 @@ public class Main {
                 case 7: {
                     System.out.print("Nombre del usuario: ");
                     String nombre = scan.nextLine();
-                    Usuario user = m.consultarUsuario(nombre);
+                    src.Usuario user = m.consultarUsuario(nombre);
                     if (user == null) {
                         System.out.println("No existe el usuario " + nombre);
                         break;
                     }
                     System.out.print("Nombre del objeto a eliminar: ");
                     String nom = scan.nextLine();
-                    Objeto obj = m.consultarObjetoDeUsuario(user, nom);
+                    src.Objeto obj = m.consultarObjetoDeUsuario(user, nom);
                     if (obj == null) {
                         System.out.println("El usuario no tiene este objeto");
                         break;
                     }
                     m.eliminarObjetoDeUsuario(user, nom);
-                    System.out.println("Objeto eliminado");
+                    System.out.println("src.Objeto eliminado");
                     scan.nextLine();
                     break;
                 }
