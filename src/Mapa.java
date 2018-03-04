@@ -1,7 +1,10 @@
 package src;
 
+import java.io.*;
 import java.util.List;
 import java.util.logging.*;
+import org.json.*;
+
 public class Mapa {
 
     Celda[][] celdas;
@@ -29,7 +32,7 @@ public class Mapa {
         }
         return true;
     }
-    public void mostrarMapa (){
+    public void mostrarMapa(){
         for(int i = 0; i<celdas.length; i++){
             for (int j=0; j<celdas[0].length;j++) {
                     System.out.print(celdas[i][j].letra());
@@ -37,5 +40,9 @@ public class Mapa {
             System.out.println();
         }
     }
+    public void guardarMapa () throws IOException {
+        //JSONObject jobj = new JSONObject()
+        BufferedWriter bw = new BufferedWriter(new FileWriter(nombre+".txt"));
 
+    }
 }
