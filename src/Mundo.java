@@ -4,11 +4,11 @@ import java.util.*;
 
 public class Mundo {
 
-    public Map<String, src.Usuario> usuarios = new HashMap<>();
+    public Map<String, Usuario> usuarios = new HashMap<>();
     List<Mapa> mapas = new ArrayList<>();
 
     //usuario
-    public boolean crearUsuario(src.Usuario u){
+    public boolean crearUsuario(Usuario u){
         if(usuarios.containsKey(u.getNombre()))
             return false;
         else{
@@ -27,28 +27,19 @@ public class Mundo {
     }
 
     //objeto
-    public void añadirObjetoAUsuario(src.Usuario u, Objeto o){
-        usuarios.get(u.getNombre()).inventario.add(o);
+    public boolean añadirObjetoAUsuario(Usuario u, Objeto o){
+       return usuarios.get(u.getNombre()).invAdd(o);
     }
-    public LinkedList consultarObjetosDeUsuario(src.Usuario u){
-        return u.inventario;
+    public boolean eliminarObjetoDeUsuario(Usuario u, String nombreObjeto){
+        Objeto obj = objFromNombre(u,nombreObjeto);
+        return u.invRemove(obj);
     }
-    public src.Objeto consultarObjetoDeUsuario(src.Usuario u, String nombreObjeto){
-        for(src.Objeto o : u.inventario)
-            if(o.nombre.equals(nombreObjeto))
-                return o;
-        return null;
-    }
-    public boolean eliminarObjetoDeUsuario(src.Usuario u, String nombreObjeto){
-        for(src.Objeto o : u.inventario)
-            if(o.nombre.equals(nombreObjeto)){
-                u.inventario.remove(o);
-                return true;
+    private Objeto objFromNombre(Usuario u, String nombreObjeto){
+        for(Pack pack : u.getInventario()){
+            if(pack.objeto.nombre==nombreObjeto){
+                return pack.objeto;
             }
-        return false;
-    }
-    public void transferirObjetoEntreUsuarios(src.Usuario origen, src.Usuario destino, Objeto o){
-        if(origen.inventario.remove(o))
-            destino.inventario.add(o);
+        }
+        return null;        //Crear excepción nueva propia
     }
 }

@@ -1,6 +1,7 @@
 package src;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Usuario {
@@ -82,4 +83,7 @@ public class Usuario {
         }
         return false;
     } //Comprobar si el objeto esta en el invetario
+    public List<Pack> getInventario(){
+        return this.inventario;
+    }
 }
