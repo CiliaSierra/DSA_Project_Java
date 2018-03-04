@@ -1,5 +1,6 @@
 package src;
 
+import java.util.List;
 import java.util.logging.*;
 public class Mapa {
 
@@ -16,14 +17,14 @@ public class Mapa {
         this.anchura = anchura;
     }
 
-    public boolean llenarMapa(Celda... celdasArg){
+    public boolean llenarMapa(List<Celda> celdasArg){
         if(celdas.length == altura*anchura){
             logger.warning("El número de celdas no coincide con las dimensiones del mapa");
             return false;
         }
         for(int i = 0; i<altura; i++){
             for(int j = 0; j<anchura; j++){
-                celdas[i][j] = celdasArg[i*anchura+j];
+                celdas[i][j] = celdasArg.get(i*anchura+j);
             }
         }
         return true;
