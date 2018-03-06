@@ -16,7 +16,8 @@ public class Mapa {
 
     Logger logger = Logger.getLogger(Mapa.class.getName());
 
-    public Mapa(int altura, int anchura){
+    public Mapa(String nombre, int altura, int anchura){
+        this.nombre = nombre;
         this.celdas = new Celda[altura][anchura];
         this.altura = altura;
         this.anchura = anchura;
@@ -43,7 +44,10 @@ public class Mapa {
         }
     }
     public void guardarMapa() throws IOException {
-        JSONObject mapa = new JSONObject(this);
+        JSONObject mapa = new JSONObject();
+        mapa.put("nombre", nombre);
+        mapa.put("altura", altura);
+        mapa.put("celda", celdas);
         BufferedWriter bw = new BufferedWriter(new FileWriter(nombre+".txt"));
         bw.write(mapa.toString());
     }
@@ -51,6 +55,7 @@ public class Mapa {
     public void leerMapa() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(nombre+".txt"));
         JSONObject jo = new JSONObject(br.read());
-
+        this.nombre = jo.getString("nombre");
+        this.anchura = jo.getInt("altura");
     }
 }
