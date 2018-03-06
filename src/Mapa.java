@@ -1,5 +1,7 @@
 package src;
 
+import org.json.JSONObject;
+
 import java.io.*;
 import java.util.List;
 import java.util.logging.*;
@@ -41,8 +43,8 @@ public class Mapa {
         }
     }
     public void guardarMapa () throws IOException {
-        //JSONObject jobj = new JSONObject()
+        JSONObject mapa = new JSONObject(this);
         BufferedWriter bw = new BufferedWriter(new FileWriter(nombre+".txt"));
-
+        bw.write(mapa.toString());
     }
 }
