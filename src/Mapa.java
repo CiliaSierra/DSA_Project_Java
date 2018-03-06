@@ -1,15 +1,14 @@
 package src;
-
 import org.json.JSONObject;
-
 import java.io.*;
 import java.util.List;
 import java.util.logging.*;
-//import org.json.*;
+import org.json.*;
 
 public class Mapa {
 
     Celda[][] celdas;
+
     String nombre;
     int altura;
     int anchura;
@@ -30,6 +29,7 @@ public class Mapa {
         }
         for(int i = 0; i<altura; i++){
             for(int j = 0; j<anchura; j++){
+
                 celdas[i][j] = celdasArg.get(i*anchura+j);
             }
         }

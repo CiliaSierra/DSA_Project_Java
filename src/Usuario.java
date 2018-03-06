@@ -10,6 +10,7 @@ public class Usuario {
     private String password;
     public String email;
     private int nivel;
+    private int monedas;
 
     private LinkedList<Pack> inventario = new LinkedList<Pack>();
     private static final int invSize = 10;  //Tamaño del inventario

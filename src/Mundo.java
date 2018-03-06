@@ -22,7 +22,7 @@ public class Mundo {
         }
         return true;
     }
-    public src.Usuario consultarUsuario(String nombre){
+    public Usuario consultarUsuario(String nombre){
         return usuarios.get(nombre);
     }
 
