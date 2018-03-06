@@ -1,8 +1,10 @@
 package src;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.*;
 //import org.json.*;
@@ -47,9 +49,20 @@ public class Mapa {
         JSONObject mapa = new JSONObject();
         mapa.put("nombre", nombre);
         mapa.put("altura", altura);
-        mapa.put("celda", celdas);
-        BufferedWriter bw = new BufferedWriter(new FileWriter(nombre+".txt"));
-        bw.write(mapa.toString());
+        mapa.put("anchura", anchura);
+
+        List<String> list = new ArrayList<>();
+        for(int i = 0; i<celdas.length; i++){
+            for(int j = 0; j<celdas[0].length;j++){
+                list.add(celdas[i][j].getClass().getName());
+            }
+        }
+        JSONArray ja = new JSONArray(list);
+        mapa.put("celdas", ja);
+
+        PrintWriter pw = new PrintWriter(nombre+".txt");
+        pw.write(mapa.toString());
+        pw.close();
     }
 
     public void leerMapa() throws IOException {

@@ -30,9 +30,12 @@ public class Main {
         c.add(new Muro());  //16
 
         Mapa mapa = new Mapa("Proba", 4,4);
+        mapa.llenarMapa(c);
         try {
             mapa.guardarMapa();
         }
-        catch (Exception e){e.printStackTrace();}
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
