@@ -42,9 +42,15 @@ public class Mapa {
             System.out.println();
         }
     }
-    public void guardarMapa () throws IOException {
+    public void guardarMapa() throws IOException {
         JSONObject mapa = new JSONObject(this);
         BufferedWriter bw = new BufferedWriter(new FileWriter(nombre+".txt"));
         bw.write(mapa.toString());
+    }
+
+    public void leerMapa() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(nombre+".txt"));
+        JSONObject jo = new JSONObject(br.read());
+
     }
 }
