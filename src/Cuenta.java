@@ -15,4 +15,12 @@ public class Cuenta extends Banco {
     public int getSaldo() {
         return saldo;
     }
+
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
 }
