@@ -9,4 +9,12 @@ public class Cofre extends Celda {
     public String letra() {
         return "$";
     }
+    public Cofre(Tipo tipo){
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toJSON(){
+        return "{\"nombre\":\""+this.getClass().getSimpleName()+"\",\"tipo\":\""+tipo+"\"}";
+    }
 }

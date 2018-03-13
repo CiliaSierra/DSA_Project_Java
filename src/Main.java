@@ -19,7 +19,7 @@ public class Main {
         c.add(new Rio());  //5
         c.add(new Rio());  //6
         c.add(new Rio());  //7
-        c.add(new Rio());  //8
+        c.add(new Cofre(Cofre.Tipo.oro));  //8
         c.add(new Muro());  //9
         c.add(new Camino());  //10
         c.add(new Camino());  //11
@@ -31,6 +31,7 @@ public class Main {
 
         Mapa mapa = new Mapa("Proba", 4,4);
         mapa.llenarMapa(c);
+        //mapa.mostrarMapa();;
         try {
             mapa.guardarMapa();
         }

@@ -51,15 +51,14 @@ public class Mapa {
         mapa.put("altura", altura);
         mapa.put("anchura", anchura);
 
-        List<String> list = new ArrayList<>();
+        JSONArray ja = new JSONArray();
         for(int i = 0; i<celdas.length; i++){
             for(int j = 0; j<celdas[0].length;j++){
-                list.add(celdas[i][j].getClass().getName());
+                ja.put(new JSONObject(celdas[i][j].toJSON()));
             }
         }
-        JSONArray ja = new JSONArray(list);
-        mapa.put("celdas", ja);
 
+        mapa.put("celdas", ja);
         PrintWriter pw = new PrintWriter(nombre+".txt");
         pw.write(mapa.toString());
         pw.close();
