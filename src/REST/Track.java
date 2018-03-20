@@ -1,4 +1,4 @@
-package src.REST;
+package REST;
 
 public class Track {
 

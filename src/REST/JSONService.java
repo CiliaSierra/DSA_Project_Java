@@ -1,4 +1,4 @@
-package src.REST;
+package REST;
 
 import javax.ws.rs.core.*;
 import javax.ws.*;
@@ -11,10 +11,9 @@ import java.util.List;
 @Path("/json")
 public class JSONService {
 
-    protected List<Track> tracks;
+    protected List<Track> tracks = new ArrayList<>();
 
     public JSONService() {
-        tracks = new ArrayList<>();
 
         Track t1 = new Track();
         t1.setTitle("Enter Sandman");

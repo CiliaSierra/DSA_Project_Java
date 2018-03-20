@@ -1,4 +1,4 @@
-package src.REST;
+package REST;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
