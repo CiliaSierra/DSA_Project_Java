@@ -1,5 +1,3 @@
-package src;
-
 public class Rio extends Celda {
 
     public String letra() {

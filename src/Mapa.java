@@ -1,5 +1,3 @@
-package src;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 

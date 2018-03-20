@@ -1,4 +1,3 @@
-package src;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static src.Mundo m = new src.Mundo();
+    public static Mundo m = new Mundo();
 
     public static void main(String[] args) {
 

@@ -1,5 +1,3 @@
-package src;
-
 public class Puerta extends Celda {
 
     Estado estado;
