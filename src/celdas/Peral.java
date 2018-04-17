@@ -1,3 +1,5 @@
+package celdas;
+
 public class Peral extends Arbol {
 
 

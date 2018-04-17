@@ -1,11 +1,11 @@
-package src;
+package banco;
 
 import java.util.LinkedList;
 
-public class Tienda extends Mapa{
+public class Tienda{
     private int monedas;
 
-    LinkedList<Pack> inventario = new LinkedList<Pack>();
+    LinkedList<banco.Pack> inventario = new LinkedList<banco.Pack>();
 
     //creo el constructor de tienda
     public Tienda(String nombre, int altura, int anchura) {
@@ -13,7 +13,7 @@ public class Tienda extends Mapa{
     }
 
     //creo los metodos
-    public void comprar (int dinero, Objeto obj){
+    public void comprar (int dinero, banco.Objeto obj){
         Usuario u = new Usuario("Sara","1234","sara@gmail.com",4, 65);
 
         if (dinero < u.getMonedas()) {

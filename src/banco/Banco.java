@@ -1,13 +1,18 @@
-package src;
+package banco;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Banco extends Mapa {
+public class Banco {
     List<Cuenta> cuentas = new ArrayList<>();
+
 
     //lista de clase de cuetas usuario,saldo
     public Banco(String nombre, int altura, int anchura) {
-        super(nombre, altura, anchura);
+
+        //super(nombre, altura, anchura);
+
+
     } //constructor
 
     //mostostrar saldo
@@ -25,31 +30,36 @@ public class Banco extends Mapa {
     public boolean guardarMonedas(int monedas, String titular) {
         for (int i = 0; i < cuentas.size(); i++) {
             if (cuentas.get(i).getTitular() == titular) {
-                cuentas.get(i).getSaldo() += monedas;
+                cuentas.get(i).afegirSaldo(monedas);
                 return true;
             }
-        return false ;
         }
-
+        return false ;
     }
 
     //sacar monedas
     public boolean sacarMonedas(int monedas, String titular) { //Añadir excepcion de saldo a 0
         for (int i = 0; i < cuentas.size(); i++) {
             if (cuentas.get(i).getTitular() == titular) {
-                cuentas.get(i).getSaldo() -= monedas;
+                cuentas.get(i).treureSaldo(monedas);
                 return true;
             }
-        return false;
         }
+        return false;
     }
 
     //crear una cuenta
-    public boolean crearCuenta(String tutilar){
+    public boolean crearCuenta(String titular){
         int posicion = cuentas.size();
         //comprobar que no hay dos titulares iguales
-            cuentas.get(posicion).setTitular(tutilar);
-            cuentas.get(posicion).setSaldo(0);
+        for(Cuenta cuenta : cuentas) {
+            if (cuenta.getTitular().equals(titular)){
+                return false;
+            }
+        }
+        cuentas.get(posicion).setTitular(titular);
+        cuentas.get(posicion).setSaldo(0);
+        return true;
     }
 }
 

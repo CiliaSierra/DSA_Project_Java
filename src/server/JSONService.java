@@ -1,7 +1,5 @@
-package REST;
+package server;
 
-import javax.ws.rs.core.*;
-import javax.ws.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

@@ -1,5 +1,6 @@
-public class Rio extends Celda {
+package celdas;
 
+public class Rio extends Celda {
     public String letra() {
         return "R";
     }

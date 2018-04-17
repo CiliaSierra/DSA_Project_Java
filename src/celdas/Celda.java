@@ -1,3 +1,5 @@
+package celdas;
+
 public abstract class Celda {
 
     public abstract String letra ();

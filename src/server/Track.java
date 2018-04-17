@@ -1,4 +1,4 @@
-package REST;
+package server;
 
 public class Track {
 

@@ -1,4 +1,6 @@
-package src;
+package banco;
+
+import banco.Banco;
 
 public class Cuenta extends Banco {
     private String titular;
@@ -19,6 +21,12 @@ public class Cuenta extends Banco {
     public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
+
+    public void afegirSaldo(int quantitat){
+        this.saldo += quantitat;
+    }
+
+    public void treureSaldo(int quantitat){this.saldo -= quantitat;}
 
     public void setTitular(String titular) {
         this.titular = titular;
