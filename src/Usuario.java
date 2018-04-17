@@ -6,17 +6,20 @@ public class Usuario {
 
     private String nombre;
     private String password;
-    public String email;
+    private String email;
     private int nivel;
+    private int monedas;
 
     private LinkedList<Pack> inventario = new LinkedList<Pack>();
     private static final int invSize = 10;  //Tamaño del inventario
     private static final int packCant = 30; //Cantidad de objeto maxima en pack
 
-    public Usuario(String nombre, String password, String email, int nivel){
+    public Usuario(String nombre, String password, String email, int nivel, int monedas){
         this.setNombre(nombre);
         this.setPassword(password);
+        this.setEmail(email);
         this.setNivel(nivel);
+        this.setMonedas(monedas);
     }
 
     @Override
@@ -43,6 +46,19 @@ public class Usuario {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+    public int getMonedas() {
+        return monedas;
+    }
+    public void setMonedas(int monedas) {
+        this.monedas = monedas;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     //Controlar Inventario
     public boolean invAdd(Objeto obj){
