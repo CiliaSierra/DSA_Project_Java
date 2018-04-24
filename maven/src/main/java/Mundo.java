@@ -39,7 +39,7 @@ public class Mundo {
     }
     private Objeto objFromNombre(Usuario u, String nombreObjeto){
         for(Pack pack : u.getInventario()){
-            if(pack.getObjeto().getNombre()==nombreObjeto){
+            if(pack.getObjeto().getNombre().equals(nombreObjeto)){
                 return pack.getObjeto();
             }
         }

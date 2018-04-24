@@ -6,6 +6,8 @@ import org.junit.Test;
 
 public class InventarioTest {
 
+
+
     @Test
     public void addObject(){
         Usuario u = new Usuario("Sergi", "123456","sergi@gmail.com", 0, 0);
@@ -17,6 +19,14 @@ public class InventarioTest {
         assertEquals(u.getInventario().size(), 1);
         u.invRemove(o,2);
         assertEquals(u.objectCount(), 0);
+    }
+
+    @Test
+    public void maxObject(){
+        Usuario u = new Usuario("Sergi", "123456","sergi@gmail.com", 0, 0);
+        Objeto o = new Objeto("Espada","Arma", "Afilada");
+        u.invAdd(o,Usuario.packMaxQuantity +1);
+        assertEquals(u.objectCount(),Usuario.packMaxQuantity);
     }
 
 }

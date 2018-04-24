@@ -13,8 +13,8 @@ public class Usuario {
     private int monedas;
 
     private LinkedList<Pack> inventario = new LinkedList<>();
-    private static final int invSize = 10;  //Tamaño del inventario
-    private static final int packCant = 30; //Cantidad de objeto maxima en un pack
+    public static final int inventorioMaxSize = 10;  //Tamaño del inventario
+    public static final int packMaxQuantity = 30; //Cantidad de objeto maxima en un pack
 
     public Usuario(String nombre, String password, String email, int nivel, int monedas){
         this.setNombre(nombre);
@@ -66,7 +66,7 @@ public class Usuario {
     @Deprecated
     public boolean invAdd(Objeto objeto){
         if(!contains(objeto)){
-            if (inventario.size() < invSize) {
+            if (inventario.size() < inventorioMaxSize) {
                 inventario.add(new Pack(1, objeto));
                 return true;
             }
@@ -74,7 +74,7 @@ public class Usuario {
         else {
             for(Pack pack : inventario){
                 if(pack.getObjeto() == objeto)
-                    if(pack.getCantidad()<packCant) {
+                    if(pack.getCantidad()< packMaxQuantity) {
                         pack.increaseCantidad();
                         return true;
                     }
@@ -84,22 +84,22 @@ public class Usuario {
     }
     public int invAdd(Objeto objeto, int cantidad){
         if(!contains(objeto)){
-            if (inventario.size() < invSize) {
-                if(cantidad < packCant){
+            if (inventario.size() < inventorioMaxSize) {
+                if(cantidad < packMaxQuantity){
                     inventario.add(new Pack(cantidad, objeto));
                     return cantidad;
                 }
                 else{
-                    inventario.add(new Pack(packCant, objeto));
-                    return packCant;
+                    inventario.add(new Pack(packMaxQuantity, objeto));
+                    return packMaxQuantity;
                 }
             }
         }
         else {
             for(Pack pack : inventario) {
                 if (pack.getObjeto() == objeto) {
-                    if (pack.getCantidad() + cantidad > packCant) {
-                        pack.increaseCantidad(packCant - pack.getCantidad());
+                    if (pack.getCantidad() + cantidad > packMaxQuantity) {
+                        pack.increaseCantidad(packMaxQuantity - pack.getCantidad());
                         return pack.getCantidad();
                     }
                     else{
