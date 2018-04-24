@@ -1,8 +1,9 @@
-import banco.Objeto;
-import banco.Pack;
+import jugador.Objeto;
+import jugador.Pack;
 
 import java.util.*;
 import celdas.*;
+import jugador.Usuario;
 
 public class Mundo {
 
@@ -38,8 +39,8 @@ public class Mundo {
     }
     private Objeto objFromNombre(Usuario u, String nombreObjeto){
         for(Pack pack : u.getInventario()){
-            if(pack.objeto.nombre==nombreObjeto){
-                return pack.objeto;
+            if(pack.getObjeto().getNombre()==nombreObjeto){
+                return pack.getObjeto();
             }
         }
         return null;        //Crear excepción nueva propia

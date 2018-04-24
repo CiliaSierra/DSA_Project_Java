@@ -1,11 +1,11 @@
-package banco;
+package jugador;
 
 public class Pack {
 
     private int cantidad;
-    private banco.Objeto objeto;
+    private Objeto objeto;
 
-    public Pack(int cantidad, banco.Objeto objeto){
+    public Pack(int cantidad, Objeto objeto){
         this.setCantidad(cantidad);
         this.setObjeto(objeto);
     }
@@ -18,11 +18,19 @@ public class Pack {
         this.cantidad = cantidad;
     }
 
-    public banco.Objeto getObjeto() {
+    public int increaseCantidad(){
+        return ++this.cantidad;
+    }
+
+    public int decreaseCantidad(){
+        return --this.cantidad;
+    }
+
+    public Objeto getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(banco.Objeto objeto) {
+    public void setObjeto(Objeto objeto) {
         this.objeto = objeto;
     }
 }

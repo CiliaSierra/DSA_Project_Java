@@ -1,19 +1,24 @@
 package banco;
 
+import jugador.Objeto;
+import jugador.Pack;
+import jugador.Usuario;
+
 import java.util.LinkedList;
 
+
 public class Tienda{
+
     private int monedas;
 
-    LinkedList<banco.Pack> inventario = new LinkedList<banco.Pack>();
+    LinkedList<Pack> inventario = new LinkedList<Pack>();
 
     //creo el constructor de tienda
-    public Tienda(String nombre, int altura, int anchura) {
-        super(nombre, altura, anchura);
+    public Tienda(){
     }
 
     //creo los metodos
-    public void comprar (int dinero, banco.Objeto obj){
+    public void comprar (int dinero, Objeto obj){
         Usuario u = new Usuario("Sara","1234","sara@gmail.com",4, 65);
 
         if (dinero < u.getMonedas()) {

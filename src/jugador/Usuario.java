@@ -1,5 +1,4 @@
-import banco.Objeto;
-import banco.Pack;
+package jugador;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -73,9 +72,9 @@ public class Usuario {
         }
         else {
             for(Pack pack : inventario){
-                if(pack.objeto == obj)
-                    if(pack.cantidad<packCant) {
-                        pack.cantidad++;
+                if(pack.getObjeto() == obj)
+                    if(pack.getCantidad()<packCant) {
+                        pack.increaseCantidad();
                         return true;
                     }
             }
@@ -84,9 +83,9 @@ public class Usuario {
     }
     public boolean invRemove(Objeto obj){
         for(Pack pack : inventario){
-             if(pack.objeto == obj){
-                 pack.cantidad--;
-                 if(pack.cantidad== 0)
+             if(pack.getObjeto() == obj){
+                 pack.decreaseCantidad();
+                 if(pack.getCantidad() == 0)
                      inventario.remove(obj);
                  return true;
                 }
@@ -95,7 +94,7 @@ public class Usuario {
     }
     public boolean contains(Object obj){
         for(Pack pack : inventario){
-            if(pack.objeto==obj)
+            if(pack.getObjeto() == obj)
                 return true;
         }
         return false;
