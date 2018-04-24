@@ -14,7 +14,7 @@ public class Usuario {
 
     private LinkedList<Pack> inventario = new LinkedList<>();
     private static final int invSize = 10;  //Tamaño del inventario
-    private static final int packCant = 30; //Cantidad de objeto maxima en pack
+    private static final int packCant = 30; //Cantidad de objeto maxima en un pack
 
     public Usuario(String nombre, String password, String email, int nivel, int monedas){
         this.setNombre(nombre);
@@ -63,16 +63,17 @@ public class Usuario {
 
 
     //Controlar Inventario
-    public boolean invAdd(Objeto obj){
-        if(!contains(obj)){
+    @Deprecated
+    public boolean invAdd(Objeto objeto){
+        if(!contains(objeto)){
             if (inventario.size() < invSize) {
-                inventario.add(new Pack(1, obj));
+                inventario.add(new Pack(1, objeto));
                 return true;
             }
         }
         else {
             for(Pack pack : inventario){
-                if(pack.getObjeto() == obj)
+                if(pack.getObjeto() == objeto)
                     if(pack.getCantidad()<packCant) {
                         pack.increaseCantidad();
                         return true;
@@ -81,16 +82,58 @@ public class Usuario {
         }
         return false;
     }
-    public boolean invRemove(Objeto obj){
+    public int invAdd(Objeto objeto, int cantidad){
+        if(!contains(objeto)){
+            if (inventario.size() < invSize) {
+                if(cantidad < packCant){
+                    inventario.add(new Pack(cantidad, objeto));
+                    return cantidad;
+                }
+                else{
+                    inventario.add(new Pack(packCant, objeto));
+                    return packCant;
+                }
+            }
+        }
+        else {
+            for(Pack pack : inventario) {
+                if (pack.getObjeto() == objeto) {
+                    if (pack.getCantidad() + cantidad > packCant) {
+                        pack.increaseCantidad(packCant - pack.getCantidad());
+                        return pack.getCantidad();
+                    }
+                    else{
+                        pack.increaseCantidad(cantidad);
+                        return cantidad;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+    @Deprecated
+    public boolean invRemove(Objeto objeto){
         for(Pack pack : inventario){
-             if(pack.getObjeto() == obj){
+             if(pack.getObjeto() == objeto){
                  pack.decreaseCantidad();
                  if(pack.getCantidad() == 0)
-                     inventario.remove(obj);
+                     inventario.remove(objeto);
                  return true;
                 }
             }
         return false;
+    }
+    public int invRemove(Objeto objeto, int cantidad){
+        int result = 0;
+        for(Pack pack : inventario){
+            if(pack.getObjeto() == objeto){
+                result = pack.decreaseCantidad(cantidad);
+                if(pack.getCantidad() == 0)
+                    inventario.remove(objeto);
+                return result;
+            }
+        }
+        return result;
     }
     public boolean contains(Object obj){
         for(Pack pack : inventario){
@@ -101,5 +144,12 @@ public class Usuario {
     } //Comprobar si el objeto esta en el invetario
     public List<Pack> getInventario(){
         return this.inventario;
+    }
+    public int objectCount(){
+        int i = 0;
+        for(Pack pack : getInventario()){
+            i += pack.getCantidad();
+        }
+        return i;
     }
 }
