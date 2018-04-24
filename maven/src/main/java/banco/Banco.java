@@ -3,7 +3,7 @@ package banco;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Banco {
+public class Banco { //lista de todas las cuentas de cada cliente
     List<Cuenta> cuentas = new ArrayList<>();
 
 
