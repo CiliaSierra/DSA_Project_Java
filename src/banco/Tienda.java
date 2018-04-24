@@ -11,7 +11,7 @@ public class Tienda{
 
     private int monedas;
 
-    LinkedList<Pack> inventario = new LinkedList<Pack>();
+    LinkedList<Pack> inventario = new LinkedList<>();
 
     //creo el constructor de tienda
     public Tienda(){

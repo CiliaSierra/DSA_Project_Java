@@ -20,10 +20,7 @@ public class Mundo {
         }
     }
     public boolean eliminarUsuario(String nombre){
-        if(usuarios.remove(nombre) == null){
-            return false;
-        }
-        return true;
+        return usuarios.remove(nombre) != null;
     }
     public Usuario consultarUsuario(String nombre){
         return usuarios.get(nombre);

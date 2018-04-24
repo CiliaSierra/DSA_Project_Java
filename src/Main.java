@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 import celdas.*;
 
 public class Main {
@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Celda> c = new ArrayList<Celda>();
+        List<Celda> c = new ArrayList<>();
 
         c.add(new Muro());  //1
         c.add(new Muro());  //2

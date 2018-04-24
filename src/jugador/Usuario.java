@@ -12,7 +12,7 @@ public class Usuario {
     private int nivel;
     private int monedas;
 
-    private LinkedList<Pack> inventario = new LinkedList<Pack>();
+    private LinkedList<Pack> inventario = new LinkedList<>();
     private static final int invSize = 10;  //Tamaño del inventario
     private static final int packCant = 30; //Cantidad de objeto maxima en pack
 

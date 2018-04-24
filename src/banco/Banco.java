@@ -18,9 +18,9 @@ public class Banco {
     //mostostrar saldo
     public int saldo(String titular) {
         int saldo = 0;
-        for (int i = 0; i < cuentas.size(); i++) {
-            if (cuentas.get(i).getTitular() == titular) {
-                saldo = cuentas.get(i).getSaldo();
+        for (Cuenta cuenta : cuentas) {
+            if (cuenta.getTitular() == titular) {
+                saldo = cuenta.getSaldo();
             }
         }
         return saldo;
@@ -28,9 +28,9 @@ public class Banco {
 
     //guardar monedas
     public boolean guardarMonedas(int monedas, String titular) {
-        for (int i = 0; i < cuentas.size(); i++) {
-            if (cuentas.get(i).getTitular() == titular) {
-                cuentas.get(i).afegirSaldo(monedas);
+        for (Cuenta cuenta : cuentas) {
+            if (cuenta.getTitular() == titular) {
+                cuenta.afegirSaldo(monedas);
                 return true;
             }
         }
@@ -39,9 +39,9 @@ public class Banco {
 
     //sacar monedas
     public boolean sacarMonedas(int monedas, String titular) { //Añadir excepcion de saldo a 0
-        for (int i = 0; i < cuentas.size(); i++) {
-            if (cuentas.get(i).getTitular() == titular) {
-                cuentas.get(i).treureSaldo(monedas);
+        for (Cuenta cuenta : cuentas) {
+            if (cuenta.getTitular() == titular) {
+                cuenta.treureSaldo(monedas);
                 return true;
             }
         }

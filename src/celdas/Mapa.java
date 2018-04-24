@@ -36,13 +36,14 @@ public class Mapa {
         return true;
     }
     public void mostrarMapa(){
-        for(int i = 0; i<celdas.length; i++){
-            for (int j=0; j<celdas[0].length;j++) {
-                    System.out.print(celdas[i][j].letra());
+        for (Celda[] celda : celdas) {
+            for (int j = 0; j < celdas[0].length; j++) {
+                System.out.print(celda[j].letra());
             }
             System.out.println();
         }
     }
+
     public void guardarMapa() throws IOException {
         JSONObject mapa = new JSONObject();
         mapa.put("nombre", nombre);
@@ -50,9 +51,9 @@ public class Mapa {
         mapa.put("anchura", anchura);
 
         JSONArray ja = new JSONArray();
-        for(int i = 0; i<celdas.length; i++){
-            for(int j = 0; j<celdas[0].length;j++){
-                ja.put(new JSONObject(celdas[i][j].toJSON()));
+        for (Celda[] celda : celdas) {
+            for (int j = 0; j < celdas[0].length; j++) {
+                ja.put(new JSONObject(celda[j].toJSON()));
             }
         }
 
