@@ -3,7 +3,7 @@ package celdas;
 public class Peral extends Arbol {
 
 
-    public String letra() {
+    public String getLetra() {
         return "p";
     }
 }

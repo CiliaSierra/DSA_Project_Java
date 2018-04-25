@@ -2,5 +2,5 @@ package celdas;
 
 public abstract class Arbol extends Planta {
 
-    public abstract String letra();
+    public abstract String getLetra();
 }

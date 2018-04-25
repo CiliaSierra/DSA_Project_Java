@@ -1,4 +1,6 @@
 import celdas.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,13 @@ public class Main {
 
         Mapa mapa = new Mapa("Proba", 4,4);
         mapa.llenarMapa(c);
+
+        ObjectMapper om = new ObjectMapper();
+        try {
+            System.out.println(om.writerWithView(Views.Normal.class).writeValueAsString(mapa));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         //mapa.mostrarMapa();;
         try {
             mapa.guardarMapa();

@@ -1,5 +1,6 @@
 package celdas;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,36 +13,44 @@ import java.util.logging.Logger;
 
 public class Mapa {
 
-    Celda[][] celdas;
-    String nombre;
-    int altura;
-    int anchura;
+    @JsonView(Views.Normal.class)
+    private Celda[][] celdas;
 
-    Logger logger = Logger.getLogger(Mapa.class.getName());
+    @JsonView(Views.Normal.class)
+    private String nombre;
+
+    @JsonView(Views.Normal.class)
+    private int altura;
+
+    @JsonView(Views.Normal.class)
+    private int anchura;
+
+    @JsonView(Views.NotNormal.class)
+    private Logger logger = Logger.getLogger(Mapa.class.getName());
 
     public Mapa(String nombre, int altura, int anchura){
-        this.nombre = nombre;
-        this.celdas = new Celda[altura][anchura];
-        this.altura = altura;
-        this.anchura = anchura;
+        this.setNombre(nombre);
+        this.setCeldas(new Celda[altura][anchura]);
+        this.setAltura(altura);
+        this.setAnchura(anchura);
     }
 
     public boolean llenarMapa(List<Celda> celdasArg){
-        if(celdas.length == altura*anchura){
-            logger.warning("El número de celdas no coincide con las dimensiones del mapa");
+        if(getCeldas().length == getAltura() * getAnchura()){
+            getLogger().warning("El número de celdas no coincide con las dimensiones del mapa");
             return false;
         }
-        for(int i = 0; i<altura; i++){
-            for(int j = 0; j<anchura; j++){
-                celdas[i][j] = celdasArg.get(i*anchura+j);
+        for(int i = 0; i< getAltura(); i++){
+            for(int j = 0; j< getAnchura(); j++){
+                getCeldas()[i][j] = celdasArg.get(i* getAnchura() +j);
             }
         }
         return true;
     }
     public void mostrarMapa(){
-        for (Celda[] celda : celdas) {
-            for (int j = 0; j < celdas[0].length; j++) {
-                System.out.print(celda[j].letra());
+        for (Celda[] celda : getCeldas()) {
+            for (int j = 0; j < getCeldas()[0].length; j++) {
+                System.out.print(celda[j].getLetra());
             }
             System.out.println();
         }
@@ -49,27 +58,62 @@ public class Mapa {
 
     public void guardarMapa() throws IOException {
         JSONObject mapa = new JSONObject();
-        mapa.put("nombre", nombre);
-        mapa.put("altura", altura);
-        mapa.put("anchura", anchura);
+        mapa.put("nombre", getNombre());
+        mapa.put("altura", getAltura());
+        mapa.put("anchura", getAnchura());
 
         JSONArray ja = new JSONArray();
-        for (Celda[] celda : celdas) {
-            for (int j = 0; j < celdas[0].length; j++) {
-                ja.put(new JSONObject(celda[j].toJSON()));
+        for (int i = 0; i < getCeldas().length; i++) {
+            for (int j = 0; j < getCeldas()[0].length; j++) {
+                ja.put(new JSONObject(getCeldas()[i][j].toJSON()));
             }
         }
 
         mapa.put("celdas", ja);
-        PrintWriter pw = new PrintWriter(nombre+".txt");
+        PrintWriter pw = new PrintWriter(getNombre() +".txt");
         pw.write(mapa.toString());
         pw.close();
     }
 
     public void leerMapa() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(nombre+".txt"));
+        BufferedReader br = new BufferedReader(new FileReader(getNombre() +".txt"));
         JSONObject jo = new JSONObject(br.read());
-        this.nombre = jo.getString("nombre");
-        this.anchura = jo.getInt("altura");
+        this.setNombre(jo.getString("nombre"));
+        this.setAnchura(jo.getInt("altura"));
+    }
+
+    public Celda[][] getCeldas() {
+        return celdas;
+    }
+
+    public void setCeldas(Celda[][] celdas) {
+        this.celdas = celdas;
+    }
+
+    //Getters y Setters
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public int getAltura() {
+        return altura;
+    }
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+    public int getAnchura() {
+        return anchura;
+    }
+    public void setAnchura(int anchura) {
+        this.anchura = anchura;
+    }
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
     }
 }

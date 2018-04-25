@@ -15,7 +15,7 @@ public class Cofre extends Celda {
 
     public enum Tipo {oro, plata, cobre}
 
-    public String letra() {
+    public String getLetra() {
         return "$";
     }
     public Cofre(Tipo tipo){

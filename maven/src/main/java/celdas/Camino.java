@@ -2,7 +2,7 @@ package celdas;
 
 public class Camino extends Celda {
 
-    public String letra() {
+    public String getLetra() {
         return "C";
     }
 }
