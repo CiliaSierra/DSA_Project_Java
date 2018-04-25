@@ -30,12 +30,12 @@ public class Mundo {
     }
 
     //objeto
-    public boolean añadirObjetoAUsuario(Usuario u, Objeto o){
-       return usuarios.get(u.getNombre()).invAdd(o);
+    public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad){
+       return usuarios.get(u.getNombre()).invAdd(o, cantidad);
     }
-    public boolean eliminarObjetoDeUsuario(Usuario u, String nombreObjeto){
+    public int eliminarObjetoDeUsuario(Usuario u, String nombreObjeto, int cantidad){
         Objeto obj = objFromNombre(u,nombreObjeto);
-        return u.invRemove(obj);
+        return u.invRemove(obj, cantidad);
     }
     private Objeto objFromNombre(Usuario u, String nombreObjeto){
         for(Pack pack : u.getInventario()){

@@ -63,25 +63,6 @@ public class Usuario {
 
 
     //Controlar Inventario
-    @Deprecated
-    public boolean invAdd(Objeto objeto){
-        if(!contains(objeto)){
-            if (inventario.size() < inventorioMaxSize) {
-                inventario.add(new Pack(1, objeto));
-                return true;
-            }
-        }
-        else {
-            for(Pack pack : inventario){
-                if(pack.getObjeto() == objeto)
-                    if(pack.getCantidad()< packMaxQuantity) {
-                        pack.increaseCantidad();
-                        return true;
-                    }
-            }
-        }
-        return false;
-    }
     public int invAdd(Objeto objeto, int cantidad){
         if(!contains(objeto)){
             if (inventario.size() < inventorioMaxSize) {
@@ -110,18 +91,6 @@ public class Usuario {
             }
         }
         return 0;
-    }
-    @Deprecated
-    public boolean invRemove(Objeto objeto){
-        for(Pack pack : inventario){
-             if(pack.getObjeto() == objeto){
-                 pack.decreaseCantidad();
-                 if(pack.getCantidad() == 0)
-                     inventario.remove(objeto);
-                 return true;
-                }
-            }
-        return false;
     }
     public int invRemove(Objeto objeto, int cantidad){
         int result = 0;

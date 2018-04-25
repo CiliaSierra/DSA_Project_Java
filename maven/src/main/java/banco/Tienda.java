@@ -22,7 +22,7 @@ public class Tienda{
         Usuario u = new Usuario("Sara","1234","sara@gmail.com",4, 65);
 
         if (dinero < u.getMonedas()) {
-            u.invAdd(obj); //al usuario le sumo el objeto
+            u.invAdd(obj,1); //al usuario le sumo el objeto
             u.setMonedas(u.getMonedas()-1); //al usuario le quito monedas
         }
     }
