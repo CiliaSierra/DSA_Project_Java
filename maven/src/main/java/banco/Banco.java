@@ -3,7 +3,7 @@ package banco;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Banco { //lista de todas las cuentas de cada cliente
+public class Banco {
     List<Cuenta> cuentas = new ArrayList<>();
 
 
@@ -19,7 +19,7 @@ public class Banco { //lista de todas las cuentas de cada cliente
     public int saldo(String titular) {
         int saldo = 0;
         for (Cuenta cuenta : cuentas) {
-            if (cuenta.getTitular().equals(titular)) {
+            if (cuenta.getTitular() == titular) {
                 saldo = cuenta.getSaldo();
             }
         }
@@ -29,7 +29,7 @@ public class Banco { //lista de todas las cuentas de cada cliente
     //guardar monedas
     public boolean guardarMonedas(int monedas, String titular) {
         for (Cuenta cuenta : cuentas) {
-            if (cuenta.getTitular().equals(titular)) {
+            if (cuenta.getTitular() == titular) {
                 cuenta.afegirSaldo(monedas);
                 return true;
             }
@@ -40,7 +40,7 @@ public class Banco { //lista de todas las cuentas de cada cliente
     //sacar monedas
     public boolean sacarMonedas(int monedas, String titular) { //Añadir excepcion de saldo a 0
         for (Cuenta cuenta : cuentas) {
-            if (cuenta.getTitular().equals(titular)) {
+            if (cuenta.getTitular() == titular) {
                 cuenta.treureSaldo(monedas);
                 return true;
             }
