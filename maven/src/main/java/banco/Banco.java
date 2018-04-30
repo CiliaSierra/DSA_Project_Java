@@ -1,12 +1,16 @@
 package banco;
 
+import banco.BancoInterfaz;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Banco {
-    List<Cuenta> cuentas = new ArrayList<>();
+public class Banco implements BancoInterfaz {
+    List<banco.Cuenta> cuentas = new ArrayList<>();
 
-
+    public Banco (List<banco.Cuenta> cuentas){
+        this.cuentas = cuentas;
+    }
     //lista de clase de cuetas usuario,saldo
     public Banco(String nombre, int altura, int anchura) {
 
@@ -18,7 +22,7 @@ public class Banco {
     //mostostrar saldo
     public int saldo(String titular) {
         int saldo = 0;
-        for (Cuenta cuenta : cuentas) {
+        for (banco.Cuenta cuenta : cuentas) {
             if (cuenta.getTitular() == titular) {
                 saldo = cuenta.getSaldo();
             }
@@ -28,7 +32,7 @@ public class Banco {
 
     //guardar monedas
     public boolean guardarMonedas(int monedas, String titular) {
-        for (Cuenta cuenta : cuentas) {
+        for (banco.Cuenta cuenta : cuentas) {
             if (cuenta.getTitular() == titular) {
                 cuenta.afegirSaldo(monedas);
                 return true;
@@ -39,7 +43,7 @@ public class Banco {
 
     //sacar monedas
     public boolean sacarMonedas(int monedas, String titular) { //Añadir excepcion de saldo a 0
-        for (Cuenta cuenta : cuentas) {
+        for (banco.Cuenta cuenta : cuentas) {
             if (cuenta.getTitular() == titular) {
                 cuenta.treureSaldo(monedas);
                 return true;
@@ -52,7 +56,7 @@ public class Banco {
     public boolean crearCuenta(String titular){
         int posicion = cuentas.size();
         //comprobar que no hay dos titulares iguales
-        for(Cuenta cuenta : cuentas) {
+        for(banco.Cuenta cuenta : cuentas) {
             if (cuenta.getTitular().equals(titular)){
                 return false;
             }
