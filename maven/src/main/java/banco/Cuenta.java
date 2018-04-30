@@ -4,12 +4,13 @@ public class Cuenta extends Banco { //por cada cliente una cuenta
     private String titular;
     private int saldo;
 
-    public Cuenta(String titular, int saldo){
-        this.titular = titular;
-        this.saldo = saldo;
-    }
     public Cuenta(String nombre, int altura, int anchura) {
         super(nombre, altura, anchura);
+    }
+
+   public Cuenta(String titular, int saldo){
+        this.titular = titular;
+        this.saldo = saldo;
     }
 
     public String getTitular() {
