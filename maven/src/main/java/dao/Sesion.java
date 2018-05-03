@@ -85,12 +85,20 @@ public class Sesion {
          return delete.toString();
     }
 
-    public static String dropDataBase(String databaseName){
+    public static String dropDataBase(String dataBaseName){
         StringBuffer consulta = new StringBuffer();
         consulta.append("DROP DATABASE ");
-        consulta.append(databaseName);
+        consulta.append(dataBaseName);
         consulta.append(";");
         return consulta.toString();
+    }
+
+    public static String createDatBase(String dataBaseName){
+        StringBuffer sb = new StringBuffer();
+        sb.append("CREATE DATABASE ");
+        sb.append(dataBaseName);
+        sb.append(";");
+        return sb.toString();
     }
 
     public static String createTable(Class clase){
@@ -101,12 +109,21 @@ public class Sesion {
         for(Field field : clase.getDeclaredFields()){
             consulta.append(field.getName());
             consulta.append(" ");
-            consulta.append(field.getType().getSimpleName());
+            consulta.append(javatoSqlTypes(field.getType().getSimpleName()));
             consulta.append(", ");
         }
         consulta.setLength(consulta.length()-2);    //Borrar la ultima coma
         consulta.append(");");
         return consulta.toString();
+    }
+
+    private static String javatoSqlTypes(String javaType){
+        switch (javaType){
+            case "String":
+                return "varchar";
+            default:
+                return javaType;
+        }
     }
 
 }

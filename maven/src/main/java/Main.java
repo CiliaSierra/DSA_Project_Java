@@ -1,6 +1,8 @@
 import celdas.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dao.Sesion;
+import jugador.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,12 @@ public class Main {
     public static Mundo m = new Mundo();
 
     public static void main(String[] args) {
+
+        System.out.println(Sesion.createTable(Usuario.class));
+
+
+
+
 
         List<Celda> c = new ArrayList<>();
 
