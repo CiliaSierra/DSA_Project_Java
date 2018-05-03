@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.Sesion;
 import jugador.Usuario;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,11 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println(Sesion.createTable(Usuario.class));
+        try {
+            System.out.println(new File(".").getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<Celda> c = new ArrayList<>();
 
@@ -37,18 +44,9 @@ public class Main {
 
         Mapa mapa = new Mapa("Proba", 4,4);
         mapa.llenarMapa(c);
-
-        ObjectMapper om = new ObjectMapper();
-        try {
-            System.out.println(om.writerWithView(Views.Normal.class).writeValueAsString(mapa));
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        //mapa.mostrarMapa();;
         try {
             mapa.guardarMapa();
-        }
-        catch (Exception e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
