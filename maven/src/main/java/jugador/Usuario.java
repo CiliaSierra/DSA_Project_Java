@@ -16,12 +16,18 @@ public class Usuario {
     public static final int inventorioMaxSize = 10;  //Tamaño del inventario
     public static final int packMaxQuantity = 30; //Cantidad de objeto maxima en un pack
 
+    //Constructores
+
     public Usuario(String nombre, String password, String email, int nivel, int monedas){
         this.setNombre(nombre);
         this.setPassword(password);
         this.setEmail(email);
         this.setNivel(nivel);
         this.setMonedas(monedas);
+    }
+
+    public Usuario(){
+        this.inventario = new LinkedList<>();
     }
 
     @Override
