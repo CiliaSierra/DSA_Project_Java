@@ -16,10 +16,6 @@ public class Main {
 
         System.out.println(Sesion.createTable(Usuario.class));
 
-
-
-
-
         List<Celda> c = new ArrayList<>();
 
         c.add(new Muro());  //1

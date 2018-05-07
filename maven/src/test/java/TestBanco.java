@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class TextBanco {
-    private final static Logger logger = Logger.getLogger(String.valueOf(TextBanco.class));
+public class TestBanco {
+    private final static Logger logger = Logger.getLogger(String.valueOf(TestBanco.class));
     //Inicializo las variables para el test
     private Cuenta cuenta1;
     private Cuenta cuenta2;

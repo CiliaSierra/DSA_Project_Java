@@ -29,7 +29,8 @@ public class Usuario {
     public Usuario(){
         this.inventario = new LinkedList<>();
     }
-
+    //lista de usurios
+    //public List<Usuario> listaUsuarios(){   }
     @Override
     public String toString(){
         return "Nombre: " + getNombre() + " Password: " + getPassword() + " Nivel: " + getNivel();

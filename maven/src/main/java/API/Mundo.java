@@ -5,10 +5,10 @@ import jugador.Objeto;
 import jugador.Pack;
 import jugador.Usuario;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static java.util.Collections.list;
+import static java.util.Collections.singletonList;
 
 public class Mundo {
 
@@ -30,7 +30,13 @@ public class Mundo {
     public Usuario consultarUsuario(String nombre){
         return usuarios.get(nombre);
     }
+    public List<Usuario> listaUsuarios (){
 
+        List<Usuario> user = new ArrayList<>();
+        //recoremos el HashMap de usuarios y vamos añadiendolo a las lista de usuarios
+        //user.add(usuarios.values());//Me devuelve una coleccion de los usuarios
+        return user;
+    }
     //objeto
     public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad){
        return usuarios.get(u.getNombre()).invAdd(o, cantidad);
