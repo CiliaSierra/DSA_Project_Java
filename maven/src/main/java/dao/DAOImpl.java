@@ -53,7 +53,7 @@ public class DAOImpl {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDb", "phpmyadmin@localhost", "phpmyadmin");
-            System.out.println("Connected to database");
+            System.out.println("Connected to database");//Utilitzar Logger
 
             return con;
         } catch (ClassNotFoundException e) {

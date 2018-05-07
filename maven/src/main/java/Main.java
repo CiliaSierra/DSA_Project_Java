@@ -15,7 +15,7 @@ public class Main {
     public static Mundo m = new Mundo();
 
     public static void main(String[] args) {
-
+        
         System.out.println(Sesion.createTable(Usuario.class));
         try {
             System.out.println(new File(".").getCanonicalPath());
@@ -49,5 +49,15 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        /*
+        Mapa m = new Mapa();
+        m.setNombre("Proba");
+        try {
+            m.cargarMapa();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(m.getCeldas());
+        */
     }
 }

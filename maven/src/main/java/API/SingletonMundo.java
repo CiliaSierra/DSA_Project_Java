@@ -2,9 +2,9 @@ package API;
 
 public class SingletonMundo {
     private static SingletonMundo instance;
-    private Singleton() {
+    /*private Singleton() {
         // Exists only to defeat instantiation.
-    }
+    }*/
     public static SingletonMundo getInstance() {
         if(instance == null) {
             instance = new SingletonMundo();

@@ -56,15 +56,13 @@ public class Banco implements BancoInterfaz {
 
     //crear una cuenta
     public boolean crearCuenta(String titular){
-        int posicion = cuentas.size();
         //comprobar que no hay dos titulares iguales
         for(banco.Cuenta cuenta : cuentas) {
             if (cuenta.getTitular().equals(titular)){
                 return false;
             }
         }
-        cuentas.get(posicion).setTitular(titular);
-        cuentas.get(posicion).setSaldo(0);
+        cuentas.add(new Cuenta(titular,0));
         return true;
     }
 }

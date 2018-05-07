@@ -33,6 +33,7 @@ public class Mapa {
         this.setAltura(altura);
         this.setAnchura(anchura);
     }
+    public Mapa(){}
 
     public boolean llenarMapa(List<Celda> celdasArg){
         if(getCeldas().length == getAltura() * getAnchura()){
@@ -66,6 +67,12 @@ public class Mapa {
         }
     }
 
+    public void cargarMapa() throws IOException{
+        ObjectMapper om = new ObjectMapper();
+        om.enableDefaultTyping(
+                ObjectMapper.DefaultTyping.OBJECT_AND_NON_CONCRETE);
+        om.readValue(new File("./maven/src/main/resources/Mapas/"+this.nombre+".txt"), Mapa.class);
+    }
     public void leerMapa() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(getNombre() +".txt"));
         JSONObject jo = new JSONObject(br.read());

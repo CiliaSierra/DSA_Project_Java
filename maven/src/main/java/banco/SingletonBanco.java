@@ -8,9 +8,9 @@ public class SingletonBanco {
 
     private static SingletonBanco instance; //Declaro la instancia
 
-    private Singleton() {//Constructor del singleton DEBE SER PRIVADO
+    /*private Singleton() {//Constructor del singleton DEBE SER PRIVADO
         // Exists only to defeat instantiation.
-    }
+    }*/
 
     public static SingletonBanco getInstance() {//Singleton Pattern
         if(instance == null) {
