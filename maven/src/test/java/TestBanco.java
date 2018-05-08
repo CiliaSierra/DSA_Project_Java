@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -15,7 +14,6 @@ public class TestBanco {
     private Cuenta cuenta1;
     private Cuenta cuenta2;
 
-    private List<Cuenta> cuentas;
     private BancoImpl banco;
 
     @Before
@@ -28,7 +26,6 @@ public class TestBanco {
     public void tearDown(){
         cuenta1 = null;
         cuenta2 = null;
-        cuentas = null;
         banco = null;
     }
     //testear crear cuenta, mostrar, sacar y guardar monedas
