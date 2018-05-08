@@ -2,7 +2,6 @@ package server;
 
 import API.MundoImpl;
 import banco.BancoImpl;
-
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,9 +14,7 @@ import javax.ws.rs.core.MediaType;
 public class ServicioRest {
 
     protected MundoImpl mundoImpl;
-    protected BancoImpl bancoImpl;
-
-    this.BancoImpl = Singleton.getInstance().getImpl();
+    protected BancoImpl bancoImpl = BancoImpl.getInstance();
 
     //Testing purposes "/Hello"
     @GET

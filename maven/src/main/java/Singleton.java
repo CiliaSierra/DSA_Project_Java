@@ -17,7 +17,7 @@ public class Singleton {
 
     //Todos los que van a utilizar este singleton PRIVADOS
     private MundoImpl mundoImpl = new MundoImpl();
-    private BancoImpl bancoImpl = new BancoImpl();
+    private BancoImpl bancoImpl = BancoImpl.getInstance();
 
     //Getters de los que vana utilizar este singleton
     public MundoImpl getMundoImpl() {

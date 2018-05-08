@@ -1,6 +1,4 @@
-package server;
-import banco.BancoImpl;
-import banco.Cuenta;
+import banco.*;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -22,12 +20,9 @@ public class TestBanco {
 
     @Before
     public void setUp(){
-        cuenta1 = new Cuenta("USER1",100);
-        cuenta2 = new Cuenta("USER2", 60);
-        cuentas = new ArrayList<>();
-        cuentas.add(cuenta1);
-        cuentas.add(cuenta2);
-        banco = new BancoImpl(cuentas);
+        banco = BancoImpl.getInstance();
+        banco.crearCuenta("USER1",100);
+        banco.crearCuenta("USER2", 60);
     }
     @After
     public void tearDown(){
