@@ -12,7 +12,7 @@ public class SingletonBanco {
         // Exists only to defeat instantiation.
     }*/
 
-    public static SingletonBanco getInstance() {//Singleton Pattern
+    public static SingletonBanco getInstance() {//Constructor del singleton DEBE SER PRIVADO
         if(instance == null) {
             instance = new SingletonBanco();
         }

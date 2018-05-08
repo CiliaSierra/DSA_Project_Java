@@ -1,7 +1,5 @@
-import API.Mundo;
+import API.MundoImpl;
 import celdas.*;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dao.Sesion;
 import jugador.Usuario;
 
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class Main {
 
-    public static Mundo m = new Mundo();
+    public static MundoImpl m = new MundoImpl();
 
     public static void main(String[] args) {
         
