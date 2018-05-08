@@ -14,13 +14,4 @@ public class MundoUsuario {
         return instance;
     }
 
-
-    public Usuario login(Usuario usuario) throws Exception {
-        try {
-            return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
-
 }

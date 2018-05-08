@@ -1,6 +1,7 @@
 package API;
 
 import celdas.Mapa;
+import dao.DAOImpl;
 import jugador.Objeto;
 import jugador.Pack;
 import jugador.Usuario;
@@ -26,6 +27,9 @@ public class MundoImpl implements MundoInterfaz{
     }
     public Usuario consultarUsuario(String nombre){
         return usuarios.get(nombre);
+    }
+    public Usuario login(String nombre, String password) throws Exception{
+        return DAOImpl.getInstance().selectUserByUsernameAndPw(nombre, password);
     }
     public List<Usuario> listaUsuarios (){
 

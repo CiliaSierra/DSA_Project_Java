@@ -13,6 +13,4 @@ public interface MundoInterfaz {
     List<Usuario> listaUsuarios ();
     int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad);
     int eliminarObjetoDeUsuario(Usuario u, String nombreObjeto, int cantidad);
-    Objeto objFromNombre(Usuario u, String nombreObjeto);
-
 }
