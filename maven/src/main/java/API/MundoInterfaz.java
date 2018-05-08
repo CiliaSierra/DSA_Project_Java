@@ -5,7 +5,7 @@ import jugador.Usuario;
 
 import java.util.List;
 
-public interface  Mundo {
+public interface MundoInterfaz {
 
     boolean crearUsuario(Usuario u);
     boolean eliminarUsuario(String nombre);

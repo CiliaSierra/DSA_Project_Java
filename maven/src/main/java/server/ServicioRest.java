@@ -1,5 +1,7 @@
 package server;
 
+import API.MundoImpl;
+import banco.BancoImpl;
 
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
@@ -11,6 +13,11 @@ import javax.ws.rs.core.MediaType;
 @Singleton //Lo necesitamos para decirle a jerser que use una unica instancia
 
 public class ServicioRest {
+
+    protected MundoImpl mundoImpl;
+    protected BancoImpl bancoImpl;
+
+    this.BancoImpl = Singleton.getInstance().getImpl();
 
     //Testing purposes "/Hello"
     @GET

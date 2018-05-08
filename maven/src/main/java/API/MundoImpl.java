@@ -7,10 +7,7 @@ import jugador.Usuario;
 
 import java.util.*;
 
-import static java.util.Collections.list;
-import static java.util.Collections.singletonList;
-
-public class MundoImpl implements Mundo {
+public class MundoImpl implements MundoInterfaz{
 
     public Map<String, Usuario> usuarios = new HashMap<>();
     List<Mapa> mapas = new ArrayList<>();

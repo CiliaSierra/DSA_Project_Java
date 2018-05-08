@@ -5,16 +5,16 @@ import banco.BancoInterfaz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Banco implements BancoInterfaz {
+public class BancoImpl implements BancoInterfaz {
     List<Cuenta> cuentas = new ArrayList<>();
 
-    public Banco (List<banco.Cuenta> cuentas){
+    public BancoImpl(List<banco.Cuenta> cuentas){
         this.cuentas = cuentas;
     }
-    public Banco () {}
+    public BancoImpl() {}
 
     //lista de clase de cuetas usuario,saldo
-    public Banco(String nombre, int altura, int anchura) {
+    public BancoImpl(String nombre, int altura, int anchura) {
 
         //super(nombre, altura, anchura);
 

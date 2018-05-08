@@ -1,5 +1,5 @@
 package server;
-import banco.Banco;
+import banco.BancoImpl;
 import banco.Cuenta;
 
 import org.junit.After;
@@ -18,7 +18,7 @@ public class TestBanco {
     private Cuenta cuenta2;
 
     private List<Cuenta> cuentas;
-    private Banco banco;
+    private BancoImpl banco;
 
     @Before
     public void setUp(){
@@ -27,7 +27,7 @@ public class TestBanco {
         cuentas = new ArrayList<>();
         cuentas.add(cuenta1);
         cuentas.add(cuenta2);
-        banco = new Banco(cuentas);
+        banco = new BancoImpl(cuentas);
     }
     @After
     public void tearDown(){

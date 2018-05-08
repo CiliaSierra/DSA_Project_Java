@@ -1,6 +1,6 @@
 package banco;
 
-public class Cuenta extends Banco { //por cada cliente una cuenta
+public class Cuenta extends BancoImpl { //por cada cliente una cuenta
     private String titular;
     private int saldo;
 
