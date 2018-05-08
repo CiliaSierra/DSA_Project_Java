@@ -1,6 +1,7 @@
 package API;
 
 import celdas.Mapa;
+import dao.DAOImpl;
 import jugador.Objeto;
 import jugador.Pack;
 import jugador.Usuario;
@@ -10,7 +11,7 @@ import java.util.*;
 import static java.util.Collections.list;
 import static java.util.Collections.singletonList;
 
-public class Mundo {
+public class MundoImpl {
 
     public Map<String, Usuario> usuarios = new HashMap<>();
     List<Mapa> mapas = new ArrayList<>();
