@@ -1,7 +1,5 @@
 package API;
 
-import dao.DAOImpl;
-import jugador.Usuario;
 import org.apache.log4j.Logger;
 
 public class MundoUsuario {

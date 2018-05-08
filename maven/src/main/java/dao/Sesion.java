@@ -32,8 +32,7 @@ public class Sesion {
         Method m = obj.getClass().getDeclaredMethod("getName", null);
         Object o = m.invoke(obj, null);
         if (o instanceof String ) {
-            String s = (String )o;
-            return s;
+            return (String )o;
         }
         return null;
     }
