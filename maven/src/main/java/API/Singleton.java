@@ -1,8 +1,12 @@
-import API.MundoImpl;
+package API;
+
 import banco.BancoImpl;
+import org.apache.log4j.Logger;
 
 public class Singleton {
-    private static Singleton instance;
+
+    final static Logger logger = Logger.getLogger(Singleton.class);
+    private static Singleton instance = null;
 
     private Singleton() {
         // Exists only to defeat instantiation.
@@ -14,6 +18,7 @@ public class Singleton {
         }
         return instance;
     }
+
 
     //Todos los que van a utilizar este singleton PRIVADOS
     private MundoImpl mundoImpl = new MundoImpl();

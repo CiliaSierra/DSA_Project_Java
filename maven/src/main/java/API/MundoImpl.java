@@ -1,13 +1,24 @@
 package API;
 
 import celdas.Mapa;
+import dao.DAOImpl;
 import jugador.Objeto;
 import jugador.Pack;
 import jugador.Usuario;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 public class MundoImpl implements MundoInterfaz{
+
+    public Usuario login(Usuario usuario) throws Exception {
+        try {
+            return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
 
     public Map<String, Usuario> usuarios = new HashMap<>();
     List<Mapa> mapas = new ArrayList<>();
@@ -42,7 +53,7 @@ public class MundoImpl implements MundoInterfaz{
         Objeto obj = objFromNombre(u,nombreObjeto);
         return u.invRemove(obj, cantidad);
     }
-    private Objeto objFromNombre(Usuario u, String nombreObjeto){
+    public Objeto objFromNombre(Usuario u, String nombreObjeto){
         for(Pack pack : u.getInventario()){
             if(pack.getObjeto().getNombre().equals(nombreObjeto)){
                 return pack.getObjeto();

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface MundoInterfaz {
 
+    Usuario login(Usuario usuario);
     boolean crearUsuario(Usuario u);
     boolean eliminarUsuario(String nombre);
     Usuario consultarUsuario(String nombre);
