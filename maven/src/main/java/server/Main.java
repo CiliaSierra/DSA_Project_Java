@@ -37,7 +37,7 @@ public class Main {
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
 
 
-        //Keep server on untill input is intered
+        //Keep server on until input is intered
         System.in.read();
         server.shutdown();
     }

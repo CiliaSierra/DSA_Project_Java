@@ -21,9 +21,4 @@ public class Cofre extends Celda {
     public Cofre(Tipo tipo){
         this.setTipo(tipo);
     }
-
-    @Override
-    public String toJSON(){
-        return "{\"nombre\":\""+this.getClass().getSimpleName()+"\",\"tipo\":\""+ getTipo() +"\"}";
-    }
 }

@@ -29,8 +29,8 @@ public class Sesion {
 
     private static String getValue (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException{
 
-        Method m = obj.getClass().getDeclaredMethod("getName", null);
-        Object o = m.invoke(obj, null);
+        Method m = obj.getClass().getDeclaredMethod("getName");
+        Object o = m.invoke(obj);
         if (o instanceof String ) {
             return (String )o;
         }

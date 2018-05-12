@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 
 public class ServicioRest {
 
-    protected MundoImpl mundoImpl;
     protected BancoImpl bancoImpl = BancoImpl.getInstance();
 
     //Testing purposes "/Hello"
