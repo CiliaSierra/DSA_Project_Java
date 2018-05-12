@@ -1,20 +1,34 @@
 package jugador;
 
+import celdas.Views;
+import com.fasterxml.jackson.annotation.JsonView;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class Usuario {
 
+    @JsonView(Views.Normal.class)
     private String nombre;
+    @JsonView(Views.Normal.class)
     private String password;
+    @JsonView(Views.Normal.class)
     private String email;
+    @JsonView(Views.Normal.class)
     private int nivel;
+    @JsonView(Views.Normal.class)
     private int monedas;
 
+    @JsonView(Views.NotNormal.class)
     private LinkedList<Pack> inventario = new LinkedList<>();
+    @JsonView(Views.NotNormal.class)
     public static final int inventorioMaxSize = 10;  //Tamaño del inventario
+    @JsonView(Views.NotNormal.class)
     public static final int packMaxQuantity = 30; //Cantidad de objeto maxima en un pack
+
 
     //Constructores
 
@@ -29,8 +43,6 @@ public class Usuario {
     public Usuario(){
         this.inventario = new LinkedList<>();
     }
-    //lista de usurios
-    //public List<Usuario> listaUsuarios(){   }
     @Override
     public String toString(){
         return "Nombre: " + getNombre() + " Password: " + getPassword() + " Nivel: " + getNivel();
@@ -49,6 +61,12 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
     public int getNivel() {
         return nivel;
     }
@@ -61,12 +79,7 @@ public class Usuario {
     public void setMonedas(int monedas) {
         this.monedas = monedas;
     }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
 
     //Controlar Inventario

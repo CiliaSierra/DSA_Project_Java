@@ -1,12 +1,8 @@
 package banco;
 
-public class Cuenta extends BancoImpl { //por cada cliente una cuenta
+public class Cuenta{ //por cada cliente una cuenta
     private String titular;
     private int saldo;
-
-    public Cuenta(String nombre, int altura, int anchura) {
-        super(nombre, altura, anchura);
-    }
 
    public Cuenta(String titular, int saldo){
         this.titular = titular;

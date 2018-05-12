@@ -9,7 +9,10 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 
-public class MundoImpl implements MundoInterfaz{
+import static java.util.Collections.list;
+import static java.util.Collections.singletonList;
+
+public class MundoImpl {
 
     public Usuario login(Usuario usuario) throws Exception {
         try {
@@ -37,6 +40,9 @@ public class MundoImpl implements MundoInterfaz{
     }
     public Usuario consultarUsuario(String nombre){
         return usuarios.get(nombre);
+    }
+    public Usuario login(String nombre, String password) throws Exception{
+        return DAOImpl.getInstance().selectUserByUsernameAndPw(nombre, password);
     }
     public List<Usuario> listaUsuarios (){
 

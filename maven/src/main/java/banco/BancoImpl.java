@@ -7,11 +7,20 @@ import java.util.List;
 
 public class BancoImpl implements BancoInterfaz {
     List<Cuenta> cuentas = new ArrayList<>();
+    private static BancoImpl bancoImpl;
+
+    public static BancoImpl getInstance(){
+        if(bancoImpl == null)
+            return new BancoImpl();
+        else
+            return bancoImpl;
+    }
+
+    private BancoImpl(){}
 
     public BancoImpl(List<banco.Cuenta> cuentas){
         this.cuentas = cuentas;
     }
-    public BancoImpl() {}
 
     //lista de clase de cuetas usuario,saldo
     public BancoImpl(String nombre, int altura, int anchura) {
@@ -54,8 +63,12 @@ public class BancoImpl implements BancoInterfaz {
         return false;
     }
 
-    //crear una cuenta
+    //crear una cuenta sin saldo
     public boolean crearCuenta(String titular){
+        return crearCuenta(titular,0);
+    }
+    //crear cuenta con saldo
+    public boolean crearCuenta(String titular, int saldo){
         //comprobar que no hay dos titulares iguales
         for(banco.Cuenta cuenta : cuentas) {
             if (cuenta.getTitular().equals(titular)){

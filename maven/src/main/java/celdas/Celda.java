@@ -1,7 +1,5 @@
 package celdas;
 
-import com.fasterxml.jackson.annotation.*;
-
 
 /*@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
@@ -13,9 +11,5 @@ import com.fasterxml.jackson.annotation.*;
 public abstract class Celda {
 
     public abstract String getLetra();
-
-    public String toJSON(){
-        return "{\"nombre\":\""+this.getClass().getSimpleName() +"\"}";
-    }
 
 }

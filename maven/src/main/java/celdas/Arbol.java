@@ -1,6 +1,9 @@
 package celdas;
 
-public abstract class Arbol extends Planta {
+public class Arbol extends Celda {
 
-    public abstract String getLetra();
+    @Override
+    public String getLetra(){
+        return "a";
+    }
 }

@@ -29,11 +29,10 @@ public class Sesion {
 
     private static String getValue (Object obj, String key) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException{
 
-        Method m = obj.getClass().getDeclaredMethod("getName", null);
-        Object o = m.invoke(obj, null);
+        Method m = obj.getClass().getDeclaredMethod("getName");
+        Object o = m.invoke(obj);
         if (o instanceof String ) {
-            String s = (String )o;
-            return s;
+            return (String )o;
         }
         return null;
     }

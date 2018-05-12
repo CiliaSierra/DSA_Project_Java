@@ -1,8 +1,10 @@
 package celdas;
 
-public class Arbusto extends Planta {
+public class Arbusto extends Celda {
 
-    public String getLetra() {
+    @Override
+    public String getLetra()
+    {
         return "a";
     }
 }
