@@ -12,7 +12,7 @@ import java.util.*;
 import static java.util.Collections.list;
 import static java.util.Collections.singletonList;
 
-public class MundoImpl {
+public class MundoImpl implements MundoInterfaz {
 
     public Usuario login(Usuario usuario) throws Exception {
         try {

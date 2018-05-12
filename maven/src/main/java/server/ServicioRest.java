@@ -19,6 +19,7 @@ import static API.Singleton.getInstance;
 public class ServicioRest {
 
     MundoImpl mundoImpl = API.Singleton.getInstance().getMundoImpl();
+    BancoImpl bancoImpl =  API.Singleton.getInstance().getBancoImpl();
 
     //Testing purposes "/Hello"
     @GET
@@ -83,13 +84,29 @@ public class ServicioRest {
     }
 
     //FUNCIONES  de BancoInterfaz
+    @GET
+    @Path("/saldo")
+    @Produces(MediaType.TEXT_PLAIN)
+    public  int saldo(String titular) {
+        return bancoImpl.saldo(titular);
+    }
+
     @POST
     @Path("/{id}/guardarMonedas")
     public Boolean guardarMonedas(@PathParam("id") int monedas, String titular) {
-        return getInstance().guardarMonedas(monedas, titular);
+        return bancoImpl.guardarMonedas(monedas, titular);
     }
 
+    @POST
+    @Path("/{id}/sacarMonedas")
+    public Boolean sacarMonedas(@PathParam("id") int monedas, String titular) {
+        return bancoImpl.sacarMonedas(monedas, titular);
+    }
 
-
+    @POST
+    @Path("/{id}/sacarMonedas")
+    public Boolean crearCuenta(@PathParam("id") String titular) {
+        return bancoImpl.crearCuenta(titular);
+    }
 }
 
