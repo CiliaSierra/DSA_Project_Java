@@ -36,6 +36,15 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
+    public boolean deleteUser(Usuario usuario) throws Exception {
+        try {
+            DAOImpl.getInstance().delete(usuario);
+            return true;
+        }
+        catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 
     //usuario
     public boolean crearUsuario(Usuario u){

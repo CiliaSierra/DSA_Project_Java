@@ -59,6 +59,23 @@ public class DAOImpl {
         }
     }
 
+    public void delete(Object object) throws Exception {
+        try {
+            String query = getDeleteQuery(object);
+            Connection con = getConnection();
+
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            int position = 1;
+            int primaryKey = getPrimaryKeyParameter(object);
+            addPrimaryKeyParameter(preparedStatement, position, primaryKey);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            con.close();
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
     // Specific
 
         //Usuario
@@ -187,6 +204,14 @@ public class DAOImpl {
         return query.toString();
     }
 
+    private String getDeleteQuery(Object object) {
+        StringBuilder query = new StringBuilder("DELETE FROM ");
+        query.append(object.getClass().getSimpleName());
+        query.append(" WHERE id=?");
+
+        return query.toString();
+    }
+
     private void addClassFieldsParameters(Object object, PreparedStatement pstm) throws Exception {
         int i = 1;
         try {
@@ -202,6 +227,11 @@ public class DAOImpl {
 
     }
 
+    private void addPrimaryKeyParameter(PreparedStatement pstm, int position, int primaryKey) throws Exception {
+        pstm.setObject(position, primaryKey);
+    }
+
+
     private Object getMethodObjectResultant(Object object, Method method, Field field) throws Exception {
         Object methodObjectResulted = null;
         try {
@@ -213,6 +243,22 @@ public class DAOImpl {
             }
             return methodObjectResulted;
         } catch (InvocationTargetException | IllegalAccessException e) {
+            throw new Exception(e);
+        }
+
+    }
+
+    private int getPrimaryKeyParameter(Object object) throws Exception {
+        Method method;
+        int id = 0;
+
+        try {
+            method = object.getClass().getMethod(getGetterName("id"));
+            Object methodObjectResulted = method.invoke(object);
+            id = Integer.parseInt(methodObjectResulted.toString());
+
+            return id;
+        } catch (Exception e) {
             throw new Exception(e);
         }
 
