@@ -5,16 +5,46 @@ import dao.DAOImpl;
 import jugador.Objeto;
 import jugador.Pack;
 import jugador.Usuario;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 import static java.util.Collections.list;
 import static java.util.Collections.singletonList;
 
-public class MundoImpl {
+public class MundoImpl implements MundoInterfaz {
+
+
 
     public Map<String, Usuario> usuarios = new HashMap<>();
     List<Mapa> mapas = new ArrayList<>();
+
+
+    public Usuario login(Usuario usuario) throws Exception {
+        try {
+            return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public Usuario register(Usuario usuario) throws Exception {
+        try {
+            return DAOImpl.getInstance().insertUser(usuario);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public boolean deleteUser(Usuario usuario) throws Exception {
+        try {
+            DAOImpl.getInstance().delete(usuario);
+            return true;
+        }
+        catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 
     //usuario
     public boolean crearUsuario(Usuario u){
@@ -49,7 +79,7 @@ public class MundoImpl {
         Objeto obj = objFromNombre(u,nombreObjeto);
         return u.invRemove(obj, cantidad);
     }
-    private Objeto objFromNombre(Usuario u, String nombreObjeto){
+    public Objeto objFromNombre(Usuario u, String nombreObjeto){
         for(Pack pack : u.getInventario()){
             if(pack.getObjeto().getNombre().equals(nombreObjeto)){
                 return pack.getObjeto();
