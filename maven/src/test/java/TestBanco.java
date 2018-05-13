@@ -1,39 +1,31 @@
-package server;
-import banco.Banco;
-import banco.Cuenta;
+import banco.*;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class TextBanco {
-    private final static Logger logger = Logger.getLogger(String.valueOf(TextBanco.class));
+public class TestBanco {
+    private final static Logger logger = Logger.getLogger(String.valueOf(TestBanco.class));
     //Inicializo las variables para el test
     private Cuenta cuenta1;
     private Cuenta cuenta2;
 
-    private List<Cuenta> cuentas;
-    private Banco banco;
+    private BancoImpl banco;
 
     @Before
     public void setUp(){
-        cuenta1 = new Cuenta("USER1",100);
-        cuenta2 = new Cuenta("USER2", 60);
-        cuentas = new ArrayList<>();
-        cuentas.add(cuenta1);
-        cuentas.add(cuenta2);
-        banco = new Banco(cuentas);
+        banco = BancoImpl.getInstance();
+        banco.crearCuenta("USER1",100);
+        banco.crearCuenta("USER2", 60);
     }
     @After
     public void tearDown(){
         cuenta1 = null;
         cuenta2 = null;
-        cuentas = null;
         banco = null;
     }
     //testear crear cuenta, mostrar, sacar y guardar monedas

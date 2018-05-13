@@ -20,7 +20,7 @@ public class Main {
         // create a resource config that scans for JAX-RS resources and providers
         // in edu.upc.dsa package
         final ResourceConfig rc = new ResourceConfig().packages("server");
-
+        rc.register(new CORSFilter());
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
@@ -37,7 +37,7 @@ public class Main {
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
 
 
-        //Keep server on untill input is intered
+        //Keep server on until input is intered
         System.in.read();
         server.shutdown();
     }

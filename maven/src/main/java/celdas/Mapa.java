@@ -1,13 +1,11 @@
 package celdas;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.json.JSONArray;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -34,6 +32,7 @@ public class Mapa {
         this.setAltura(altura);
         this.setAnchura(anchura);
     }
+    public Mapa(){}
 
     public boolean llenarMapa(List<Celda> celdasArg){
         if(getCeldas().length == getAltura() * getAnchura()){
@@ -57,24 +56,22 @@ public class Mapa {
     }
 
     public void guardarMapa() throws IOException {
-        JSONObject mapa = new JSONObject();
-        mapa.put("nombre", getNombre());
-        mapa.put("altura", getAltura());
-        mapa.put("anchura", getAnchura());
 
-        JSONArray ja = new JSONArray();
-        for (int i = 0; i < getCeldas().length; i++) {
-            for (int j = 0; j < getCeldas()[0].length; j++) {
-                ja.put(new JSONObject(getCeldas()[i][j].toJSON()));
-            }
+        ObjectMapper om = new ObjectMapper();
+        try {
+            om.writerWithView(Views.Normal.class).writeValue(
+                    new File("./maven/src/main/resources/Mapas/"+this.nombre+".txt"),this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-
-        mapa.put("celdas", ja);
-        PrintWriter pw = new PrintWriter(getNombre() +".txt");
-        pw.write(mapa.toString());
-        pw.close();
     }
 
+    public void cargarMapa() throws IOException{
+        ObjectMapper om = new ObjectMapper();
+        om.enableDefaultTyping(
+                ObjectMapper.DefaultTyping.OBJECT_AND_NON_CONCRETE);
+        om.readValue(new File("./maven/src/main/resources/Mapas/"+this.nombre+".txt"), Mapa.class);
+    }
     public void leerMapa() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(getNombre() +".txt"));
         JSONObject jo = new JSONObject(br.read());

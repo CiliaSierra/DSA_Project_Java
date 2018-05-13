@@ -19,31 +19,27 @@ public class DAOImpl {
 
     // Specific
 
-    public Object selectByUsernameAndPw(Object object, String username, String password) throws Exception {
-        try {
-            Connection con = getConnection();
-            String query = getSelectWithUsernameAndPwQuery(object);
+    public Object selectByUsernameAndPw(Object object, String username, String password) throws Exception{
+        Connection con = getConnection();
+        String query = getSelectWithUsernameAndPwQuery(object);
 
-            PreparedStatement preparedStatement = con.prepareStatement(query);
-            preparedStatement.setObject(1, username);
-            preparedStatement.setObject(2, password);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        PreparedStatement preparedStatement = con.prepareStatement(query);
+        preparedStatement.setObject(1, username);
+        preparedStatement.setObject(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 
-            while (resultSet.next()) {
-                setFieldsFromResultSet(resultSet, resultSetMetaData, object);
-            }
-            resultSet.beforeFirst();
-            if (!resultSet.next()) {
-                object = null;
-            }
-            preparedStatement.close();
-            con.close();
-
-            return object;
-        } catch (Exception e) {
-            throw new Exception(e);
+        while (resultSet.next()) {
+            setFieldsFromResultSet(resultSet, resultSetMetaData, object);
         }
+        resultSet.beforeFirst();
+        if (!resultSet.next()) {
+            object = null;
+        }
+        preparedStatement.close();
+        con.close();
+
+        return object;
     }
 
     private Connection getConnection() throws SQLException, Exception {
@@ -53,7 +49,7 @@ public class DAOImpl {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDb", "phpmyadmin@localhost", "phpmyadmin");
-            System.out.println("Connected to database");
+            System.out.println("Connected to database");//Utilitzar Logger
 
             return con;
         } catch (ClassNotFoundException e) {
