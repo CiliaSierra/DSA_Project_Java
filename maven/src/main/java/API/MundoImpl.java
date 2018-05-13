@@ -14,6 +14,12 @@ import static java.util.Collections.singletonList;
 
 public class MundoImpl implements MundoInterfaz {
 
+
+
+    public Map<String, Usuario> usuarios = new HashMap<>();
+    List<Mapa> mapas = new ArrayList<>();
+
+
     public Usuario login(Usuario usuario) throws Exception {
         try {
             return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
@@ -22,9 +28,14 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
+    public Usuario register(Usuario usuario) throws Exception {
+        try {
+            return DAOImpl.getInstance().insertUser(usuario);
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
 
-    public Map<String, Usuario> usuarios = new HashMap<>();
-    List<Mapa> mapas = new ArrayList<>();
 
     //usuario
     public boolean crearUsuario(Usuario u){
