@@ -2,17 +2,20 @@ package celdas;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 public class Mapa {
 
     @JsonView(Views.Normal.class)
-    private Celda[][] celdas;
+    private ArrayList<ArrayList<Celda>> celdas = new ArrayList<ArrayList<Celda>>();
 
     @JsonView(Views.Normal.class)
     private String nombre;
@@ -28,39 +31,30 @@ public class Mapa {
 
     public Mapa(String nombre, int altura, int anchura){
         this.setNombre(nombre);
-        this.setCeldas(new Celda[altura][anchura]);
         this.setAltura(altura);
         this.setAnchura(anchura);
     }
     public Mapa(){}
 
-    public boolean llenarMapa(List<Celda> celdasArg){
-        if(getCeldas().length == getAltura() * getAnchura()){
-            getLogger().warning("El número de celdas no coincide con las dimensiones del mapa");
-            return false;
-        }
-        for(int i = 0; i< getAltura(); i++){
-            for(int j = 0; j< getAnchura(); j++){
-                getCeldas()[i][j] = celdasArg.get(i* getAnchura() +j);
-            }
-        }
-        return true;
-    }
     public void mostrarMapa(){
-        for (Celda[] celda : getCeldas()) {
-            for (int j = 0; j < getCeldas()[0].length; j++) {
-                System.out.print(celda[j].getLetra());
+        for (List<Celda> celda : getCeldas()) {
+            for (Celda c : celda) {
+                System.out.print(c.getLetra());
             }
             System.out.println();
         }
     }
 
     public void guardarMapa() throws IOException {
-
+        File f = new File("./maven/src/main/resources/Mapas/");
+        if (!f.exists()) {
+            f.createNewFile();
+            logger.info("File with name: " + this.nombre + ".txt created for map.");
+        }
         ObjectMapper om = new ObjectMapper();
         try {
             om.writerWithView(Views.Normal.class).writeValue(
-                    new File("./maven/src/main/resources/Mapas/"+this.nombre+".txt"),this);
+                    new File("./maven/src/main/resources/Mapas/" + this.nombre + ".txt"), this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -68,23 +62,20 @@ public class Mapa {
 
     public void cargarMapa() throws IOException{
         ObjectMapper om = new ObjectMapper();
-        om.enableDefaultTyping(
-                ObjectMapper.DefaultTyping.OBJECT_AND_NON_CONCRETE);
-        om.readValue(new File("./maven/src/main/resources/Mapas/"+this.nombre+".txt"), Mapa.class);
+        SimpleModule sm = new SimpleModule("CeldaDeserializer", new Version(1,0,0,null,null,null));
+        sm.addDeserializer(Celda.class, new CeldaDeserializer());
+        om.registerModule(sm);
+        Mapa m = om.readValue(new File("./maven/src/main/resources/Mapas/"+this.nombre+".txt"), Mapa.class);
+        this.nombre = m.nombre;
+        this.celdas = m.celdas;
+        this.altura = m.altura;
+        this.anchura = m.anchura;
     }
     public void leerMapa() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(getNombre() +".txt"));
         JSONObject jo = new JSONObject(br.read());
         this.setNombre(jo.getString("nombre"));
         this.setAnchura(jo.getInt("altura"));
-    }
-
-    public Celda[][] getCeldas() {
-        return celdas;
-    }
-
-    public void setCeldas(Celda[][] celdas) {
-        this.celdas = celdas;
     }
 
     //Getters y Setters
@@ -112,5 +103,13 @@ public class Mapa {
 
     public void setLogger(Logger logger) {
         this.logger = logger;
+    }
+
+    public ArrayList<ArrayList<Celda>> getCeldas() {
+        return celdas;
+    }
+
+    public void setCeldas(ArrayList<ArrayList<Celda>> celdas) {
+        this.celdas = celdas;
     }
 }

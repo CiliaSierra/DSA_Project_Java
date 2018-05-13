@@ -12,4 +12,6 @@ public abstract class Celda {
 
     public abstract String getLetra();
 
+    public abstract String getNombre();
+
 }

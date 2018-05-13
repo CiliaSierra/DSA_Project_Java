@@ -1,5 +1,7 @@
 package celdas;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 public class Cofre extends Celda {
 
 
@@ -15,10 +17,21 @@ public class Cofre extends Celda {
 
     public enum Tipo {oro, plata, cobre}
 
+    @Override
+    @JsonView(Views.NotNormal.class)
     public String getLetra() {
         return "$";
     }
+
+    @Override
+    @JsonView(Views.Normal.class)
+    public String getNombre() {
+        return "Cofre";
+    }
+
     public Cofre(Tipo tipo){
         this.setTipo(tipo);
     }
+
+    public Cofre(){}
 }
