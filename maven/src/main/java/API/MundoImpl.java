@@ -14,10 +14,21 @@ import static java.util.Collections.singletonList;
 
 public class MundoImpl implements MundoInterfaz {
 
+    private static MundoImpl mundoImpl;
+
+    private MundoImpl(){}
+
+    public static MundoImpl getInstance(){
+        if(mundoImpl == null) {
+            mundoImpl = new MundoImpl();
+            mundoImpl.setMapas(Mapa.cargarMapas());
+        }
+        return mundoImpl;
+    }
 
 
     public Map<String, Usuario> usuarios = new HashMap<>();
-    List<Mapa> mapas = new ArrayList<>();
+    private List<Mapa> mapas = new ArrayList<>();
 
 
     public Usuario login(Usuario usuario) throws Exception {
@@ -86,5 +97,13 @@ public class MundoImpl implements MundoInterfaz {
             }
         }
         return null;        //Crear excepción nueva propia
+    }
+
+    public List<Mapa> getMapas() {
+        return mapas;
+    }
+
+    public void setMapas(List<Mapa> mapas) {
+        this.mapas = mapas;
     }
 }

@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 public class Main {
 
-    public static MundoImpl m = new MundoImpl();
+    public static MundoImpl m = MundoImpl.getInstance();
 
     public static void main(String[] args) {
 
@@ -62,7 +62,7 @@ public class Main {
         Mapa m = new Mapa();
         m.setNombre("Proba");
         try {
-            m.cargarMapa();
+            m.cargar();
         } catch (IOException e) {
             e.printStackTrace();
         }

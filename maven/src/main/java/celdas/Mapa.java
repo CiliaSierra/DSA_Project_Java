@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class Mapa {
@@ -60,7 +61,7 @@ public class Mapa {
         }
     }
 
-    public void cargarMapa() throws IOException{
+    public void cargar() throws IOException{
         ObjectMapper om = new ObjectMapper();
         SimpleModule sm = new SimpleModule("CeldaDeserializer", new Version(1,0,0,null,null,null));
         sm.addDeserializer(Celda.class, new CeldaDeserializer());
@@ -71,6 +72,28 @@ public class Mapa {
         this.altura = m.altura;
         this.anchura = m.anchura;
     }
+
+    public static Mapa cargarMapa(String nombreMapa){
+        Mapa m = new Mapa(nombreMapa,0,0);
+        try {
+            m.cargar();
+        } catch (IOException e) {
+            return null;
+        }
+        return m;
+    }
+
+    public static List<Mapa> cargarMapas(){
+        List<Mapa> result = new ArrayList<>();
+        File f = new File("./maven/src/main/resources/Mapas/");
+        for(File file : Objects.requireNonNull(f.listFiles())){
+            String fileName = file.getName();
+            fileName = fileName.substring(0,fileName.lastIndexOf('.'));
+            result.add(Mapa.cargarMapa(fileName));
+        }
+        return result;
+    }
+
     public void leerMapa() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(getNombre() +".txt"));
         JSONObject jo = new JSONObject(br.read());
