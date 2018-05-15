@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 public class Cofre extends Celda {
 
-
+    @JsonView(Views.Normal.class)
     private Tipo tipo;
 
+    @JsonView(Views.Normal.class)
     public Tipo getTipo() {
         return tipo;
     }
