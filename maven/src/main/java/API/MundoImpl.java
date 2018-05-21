@@ -81,22 +81,7 @@ public class MundoImpl implements MundoInterfaz {
         //user.add(usuarios.values());//Me devuelve una coleccion de los usuarios
         return user;
     }
-    //objeto
-    public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad){
-       return usuarios.get(u.getNombre()).invAdd(o, cantidad);
-    }
-    public int eliminarObjetoDeUsuario(Usuario u, String nombreObjeto, int cantidad){
-        Objeto obj = objFromNombre(u,nombreObjeto);
-        return u.invRemove(obj, cantidad);
-    }
-    public Objeto objFromNombre(Usuario u, String nombreObjeto){
-        for(Pack pack : u.getInventario()){
-            if(pack.getObjeto().getNombre().equals(nombreObjeto)){
-                return pack.getObjeto();
-            }
-        }
-        return null;        //Crear excepción nueva propia
-    }
+
 
     public List<Mapa> getMapas() {
         return mapas;

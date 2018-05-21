@@ -18,6 +18,5 @@ public interface MundoInterfaz {
     boolean eliminarUsuario(String nombre);
     Usuario consultarUsuario(String nombre);
     List<Usuario> listaUsuarios ();
-    int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad);
-    int eliminarObjetoDeUsuario(Usuario u, String nombreObjeto, int cantidad);
+
 }
