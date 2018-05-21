@@ -31,6 +31,8 @@ public class MundoImpl implements MundoInterfaz {
     private List<Mapa> mapas = new ArrayList<>();
 
 
+
+
     public Usuario login(Usuario usuario) throws Exception {
         try {
             return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
@@ -71,9 +73,6 @@ public class MundoImpl implements MundoInterfaz {
     }
     public Usuario consultarUsuario(String nombre){
         return usuarios.get(nombre);
-    }
-    public Usuario login(String nombre, String password) throws Exception{
-        return DAOImpl.getInstance().selectUserByUsernameAndPw(nombre, password);
     }
     public List<Usuario> listaUsuarios (){
 
