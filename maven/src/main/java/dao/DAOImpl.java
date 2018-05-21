@@ -9,10 +9,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import org.apache.log4j.Logger;
 
 
 
 public class DAOImpl {
+
+    final static Logger logger = Logger.getLogger(DAOImpl.class);
 
     private static DAOImpl instance = null;
 
@@ -24,12 +27,13 @@ public class DAOImpl {
 
     private Connection getConnection() throws Exception {
 
-        //com.mysql.cj.jdbc.Driver, lo detecta automaticamente
-        //DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myDb", "phpmyadmin@localhost", "phpmyadmin");
-            System.out.println("Connected to database");//Utilitzar Logger
+            Connection con = DriverManager.getConnection("147.83.7.203", "dsa0", "Mazinger72");
+
+            logger.info("Conectado a la base de datos");
+
 
             return con;
         } catch (ClassNotFoundException e) {
