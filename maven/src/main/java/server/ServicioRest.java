@@ -98,22 +98,22 @@ public class ServicioRest {
 
     @POST
     @Path("/{id}/guardarMonedas")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Boolean guardarMonedas(@PathParam("id") int monedas, String titular) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Boolean guardarMonedas(@PathParam("id") int monedas, @FormParam("titular") String titular) {
         return bancoImpl.guardarMonedas(monedas, titular);
     }
 
     @POST
     @Path("/{id}/sacarMonedas")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Boolean sacarMonedas(@PathParam("id") int monedas, String titular) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Boolean sacarMonedas(@PathParam("id") int monedas, @FormParam("titular") String titular) {
         return bancoImpl.sacarMonedas(monedas, titular);
     }
 
     @POST
-    @Path("/{id}/sacarMonedas")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Boolean crearCuenta(@PathParam("id") String titular) {
+    @Path("/crearCuenta")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Boolean crearCuenta(@FormParam("titular") String titular) {
         return bancoImpl.crearCuenta(titular);
     }
 }
