@@ -10,7 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-//import static API.Singleton.getInstance;
+import static API.Singleton.getInstance;
 
 
 @Path("/funciones")

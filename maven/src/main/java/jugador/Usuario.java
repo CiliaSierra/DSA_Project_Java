@@ -41,6 +41,11 @@ public class Usuario {
         this.Obj4=0;
     }
 
+    public Usuario(String nombre, String password, String email){
+        //funcio per que en les proves on no es posa un id el codi no peti
+        new Usuario(1, nombre,password,email);
+    }
+
     public Usuario(){
 
      }
