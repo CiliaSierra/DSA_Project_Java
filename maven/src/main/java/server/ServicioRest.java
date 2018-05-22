@@ -10,7 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-import static API.Singleton.getInstance;
+//import static API.Singleton.getInstance;
 
 
 @Path("/funciones")
@@ -41,44 +41,49 @@ public class ServicioRest {
 
     @POST
     @Path("/crearUsuario")
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean crearUsuario(Usuario u) {
         return mundoImpl.crearUsuario(u);
     }
 
     @POST
     @Path("/eliminarUsuario")
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean eliminarUsuario(String nombre) {
         return mundoImpl.eliminarUsuario(nombre);
     }
 
     @GET
     @Path("/consultarUsuario")
+    @Produces(MediaType.APPLICATION_JSON)
     public Usuario consultarUsuario(String nombre) {
         return mundoImpl.consultarUsuario(nombre);
     }
 
     @GET
     @Path("/listaUsuarios")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
         return mundoImpl.listaUsuarios();
     }
 
     @POST
     @Path("/añadirObjetoAUsuario")
+    @Produces(MediaType.APPLICATION_JSON)
     public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad) {
         return mundoImpl.añadirObjetoAUsuario(u, o, cantidad);
     }
 
     @POST
     @Path("/eliminarObjetoDeUsuario")
+    @Produces(MediaType.APPLICATION_JSON)
     public int eliminarObjetoDeUsuario(Usuario u, String nombreObjeto, int cantidad) {
         return mundoImpl.eliminarObjetoDeUsuario(u, nombreObjeto, cantidad);
     }
 
     @GET
     @Path("/objFromNombre")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Objeto objFromNombre(Usuario u, String nombreObjeto) {
         return mundoImpl.objFromNombre(u, nombreObjeto);
     }
@@ -86,25 +91,28 @@ public class ServicioRest {
     //FUNCIONES  de BancoInterfaz
     @GET
     @Path("/saldo")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public  int saldo(String titular) {
         return bancoImpl.saldo(titular);
     }
 
     @POST
     @Path("/{id}/guardarMonedas")
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean guardarMonedas(@PathParam("id") int monedas, String titular) {
         return bancoImpl.guardarMonedas(monedas, titular);
     }
 
     @POST
     @Path("/{id}/sacarMonedas")
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean sacarMonedas(@PathParam("id") int monedas, String titular) {
         return bancoImpl.sacarMonedas(monedas, titular);
     }
 
     @POST
     @Path("/{id}/sacarMonedas")
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean crearCuenta(@PathParam("id") String titular) {
         return bancoImpl.crearCuenta(titular);
     }
