@@ -35,8 +35,14 @@ public class ServicioRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario login(Usuario u) {
-        Usuario us = mundoImpl.login(u);
-        return us;
+        Usuario us = null;
+        try {
+            us = mundoImpl.login(u);
+            return us;
+        } catch (Exception e) {
+
+            return null;
+        }
     }
 
     @POST

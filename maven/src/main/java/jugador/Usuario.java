@@ -12,133 +12,108 @@ import java.util.List;
 public class Usuario {
 
     @JsonView(Views.Normal.class)
+    private int id;
+    @JsonView(Views.Normal.class)
     private String nombre;
     @JsonView(Views.Normal.class)
     private String password;
     @JsonView(Views.Normal.class)
     private String email;
     @JsonView(Views.Normal.class)
-    private int nivel;
+    private int Obj1;
     @JsonView(Views.Normal.class)
-    private int monedas;
-
-    @JsonView(Views.NotNormal.class)
-    private LinkedList<Pack> inventario = new LinkedList<>();
-    @JsonView(Views.NotNormal.class)
-    public static final int inventorioMaxSize = 10;  //Tamaño del inventario
-    @JsonView(Views.NotNormal.class)
-    public static final int packMaxQuantity = 30; //Cantidad de objeto maxima en un pack
-
+    private int Obj2;
+    @JsonView(Views.Normal.class)
+    private int Obj3;
+    @JsonView(Views.Normal.class)
+    private int Obj4;
 
     //Constructores
 
-    public Usuario(String nombre, String password, String email, int nivel, int monedas){
+    public Usuario(int id, String nombre, String password, String email){
+        this.setId(id);
         this.setNombre(nombre);
         this.setPassword(password);
         this.setEmail(email);
-        this.setNivel(nivel);
-        this.setMonedas(monedas);
+        this.Obj1=0;
+        this.Obj2=0;
+        this.Obj3=0;
+        this.Obj4=0;
     }
 
     public Usuario(){
-        this.inventario = new LinkedList<>();
-    }
+
+     }
+
     @Override
     public String toString(){
-        return "Nombre: " + getNombre() + " Password: " + getPassword() + " Nivel: " + getNivel();
+        return "Nombre: " + getNombre() + " Password: " + getPassword();
     }
 
     //Getters y Setters
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    public int getNivel() {
-        return nivel;
-    }
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
-    }
-    public int getMonedas() {
-        return monedas;
-    }
-    public void setMonedas(int monedas) {
-        this.monedas = monedas;
+
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public int getObj1() {
+        return Obj1;
+    }
 
-    //Controlar Inventario
-    public int invAdd(Objeto objeto, int cantidad){
-        if(!contains(objeto)){
-            if (inventario.size() < inventorioMaxSize) {
-                if(cantidad < packMaxQuantity){
-                    inventario.add(new Pack(cantidad, objeto));
-                    return cantidad;
-                }
-                else{
-                    inventario.add(new Pack(packMaxQuantity, objeto));
-                    return packMaxQuantity;
-                }
-            }
-        }
-        else {
-            for(Pack pack : inventario) {
-                if (pack.getObjeto() == objeto) {
-                    if (pack.getCantidad() + cantidad > packMaxQuantity) {
-                        pack.increaseCantidad(packMaxQuantity - pack.getCantidad());
-                        return pack.getCantidad();
-                    }
-                    else{
-                        pack.increaseCantidad(cantidad);
-                        return cantidad;
-                    }
-                }
-            }
-        }
-        return 0;
+    public void setObj1(int obj1) {
+        Obj1 = obj1;
     }
-    public int invRemove(Objeto objeto, int cantidad){
-        int result = 0;
-        for(Pack pack : inventario){
-            if(pack.getObjeto() == objeto){
-                result = pack.decreaseCantidad(cantidad);
-                if(pack.getCantidad() == 0)
-                    inventario.remove(objeto);
-                return result;
-            }
-        }
-        return result;
+
+    public int getObj2() {
+        return Obj2;
     }
-    public boolean contains(Object obj){
-        for(Pack pack : inventario){
-            if(pack.getObjeto() == obj)
-                return true;
-        }
-        return false;
-    } //Comprobar si el objeto esta en el invetario
-    public List<Pack> getInventario(){
-        return this.inventario;
+
+    public void setObj2(int obj2) {
+        Obj2 = obj2;
     }
-    public int objectCount(){
-        int i = 0;
-        for(Pack pack : getInventario()){
-            i += pack.getCantidad();
-        }
-        return i;
+
+    public int getObj3() {
+        return Obj3;
     }
+
+    public void setObj3(int obj3) {
+        Obj3 = obj3;
+    }
+
+    public int getObj4() {
+        return Obj4;
+    }
+
+    public void setObj4(int obj4) {
+        Obj4 = obj4;
+    }
+
 }

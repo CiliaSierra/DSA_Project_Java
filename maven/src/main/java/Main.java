@@ -16,39 +16,41 @@ import java.util.stream.Stream;
 
 public class Main {
 
-    public static MundoImpl m = new MundoImpl();
+    public static MundoImpl m = MundoImpl.getInstance();
 
     public static void main(String[] args) {
 
-        System.out.println(Sesion.createTable(Usuario.class));
-        try {
-            System.out.println(new File(".").getCanonicalPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         //Declaro las celdas y las inicializo
-        List<Celda> c = new ArrayList<>();
+        ArrayList<ArrayList<Celda>> c = new ArrayList<ArrayList<Celda>>();
+        ArrayList<Celda> c1 = new ArrayList<>();
+        c1.add(new Muro());  //1
+        c1.add(new Muro());  //2
+        c1.add(new Muro());  //3
+        c1.add(new Muro());  //4
+        ArrayList<Celda> c2 = new ArrayList<>();
+        c2.add(new Rio());  //5
+        c2.add(new Rio());  //6
+        c2.add(new Rio());  //7
+        c2.add(new Cofre(Cofre.Tipo.oro));  //8
+        ArrayList<Celda> c3 = new ArrayList<>();
+        c3.add(new Muro());  //9
+        c3.add(new Camino());  //10
+        c3.add(new Camino());  //11
+        c3.add(new Muro());  //12
+        ArrayList<Celda> c4 = new ArrayList<>();
+        c4.add(new Muro());  //13
+        c4.add(new Muro());  //14
+        c4.add(new Muro());  //15
+        c4.add(new Muro());  //16
+        c.add(c1);
+        c.add(c2);
+        c.add(c3);
+        c.add(c4);
 
-        c.add(new Muro());  //1
-        c.add(new Muro());  //2
-        c.add(new Muro());  //3
-        c.add(new Muro());  //4
-        c.add(new Rio());  //5
-        c.add(new Rio());  //6
-        c.add(new Rio());  //7
-        c.add(new Cofre(Cofre.Tipo.oro));  //8
-        c.add(new Muro());  //9
-        c.add(new Camino());  //10
-        c.add(new Camino());  //11
-        c.add(new Muro());  //12
-        c.add(new Muro());  //13
-        c.add(new Muro());  //14
-        c.add(new Muro());  //15
-        c.add(new Muro());  //16
 
         Mapa mapa = new Mapa("Proba", 4,4);
-        mapa.llenarMapa(c);
+        mapa.setCeldas(c);
+        mapa.mostrarMapa();
 
         ObjectMapper om = new ObjectMapper();
         try {
@@ -56,16 +58,15 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
+
         Mapa m = new Mapa();
         m.setNombre("Proba");
         try {
-            m.cargarMapa();
+            m.cargar();
         } catch (IOException e) {
             e.printStackTrace();
         }
-         System.out.println(m.getCeldas());
-        */
+
 
        ObjectMapper objectMapper = new ObjectMapper();
 
