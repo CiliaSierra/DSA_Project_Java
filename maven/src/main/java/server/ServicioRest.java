@@ -73,7 +73,7 @@ public class ServicioRest {
         return mundoImpl.listaUsuarios();
     }
 
-    @POST
+    /*@POST
     @Path("/añadirObjetoAUsuario")
     @Produces(MediaType.APPLICATION_JSON)
     public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad) {
@@ -92,7 +92,7 @@ public class ServicioRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Objeto objFromNombre(Usuario u, String nombreObjeto) {
         return mundoImpl.objFromNombre(u, nombreObjeto);
-    }
+    }*/
 
     //FUNCIONES  de BancoInterfaz
     @GET
