@@ -28,7 +28,7 @@ public class ServicioRest {
     public String getIt() {
         return "Got it!";
     }
-
+    /*
     //FUNCIONES de MundoInterfaz
     @POST
     @Path("/userLogin")
@@ -59,6 +59,7 @@ public class ServicioRest {
 
     @GET
     @Path("/consultarUsuario")
+    @Consumes(MediaType.TEXT_PLAIN)
     public Usuario consultarUsuario(String nombre) {
         return mundoImpl.consultarUsuario(nombre);
     }
@@ -72,8 +73,8 @@ public class ServicioRest {
 
     @POST
     @Path("/añadirObjetoAUsuario")
-    public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad) {
-        return mundoImpl.añadirObjetoAUsuario(u, o, cantidad);
+    public int añadirObjetoAUsuario(String usuario, Objeto o, int cantidad) {
+        return mundoImpl.añadirObjetoAUsuario(mundoImpl.consultarUsuario(usuario), o, cantidad);
     }
 
     @POST
@@ -105,7 +106,8 @@ public class ServicioRest {
 
     @POST
     @Path("/{id}/sacarMonedas")
-    public Boolean sacarMonedas(@PathParam("id") int monedas, String titular) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Boolean sacarMonedas(@PathParam("id") int monedas,@FormParam("titular") String titular) {
         return bancoImpl.sacarMonedas(monedas, titular);
     }
 
@@ -114,5 +116,6 @@ public class ServicioRest {
     public Boolean crearCuenta(@PathParam("id") String titular) {
         return bancoImpl.crearCuenta(titular);
     }
+    */
 }
 

@@ -18,12 +18,14 @@ public class Tienda{
     }
 
     //creo los metodos
+    /*
     public void comprar (int dinero, Objeto obj){
-        Usuario u = new Usuario("Sara","1234","sara@gmail.com",4, 65);
+        Usuario u = new Usuario("Sara","1234","sara@gmail.com");
 
         if (dinero < u.getMonedas()) {
             u.invAdd(obj,1); //al usuario le sumo el objeto
             u.setMonedas(u.getMonedas()-1); //al usuario le quito monedas
         }
     }
+    */
 }

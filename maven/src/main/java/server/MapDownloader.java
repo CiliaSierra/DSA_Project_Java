@@ -7,10 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -30,9 +27,10 @@ public class MapDownloader {
     }
 
     @GET
-    @Path("/getbyname/{name}")
+    @Path("/getbyname")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMap(@PathParam("name") String nombremapa){
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String getMap(@QueryParam("nombremapa") String nombremapa){
         Mapa m = Mapa.cargarMapa(nombremapa);
         ObjectMapper om = new ObjectMapper();
         String result;

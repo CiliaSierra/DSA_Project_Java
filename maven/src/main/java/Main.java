@@ -72,8 +72,8 @@ public class Main {
 
         //Creo los Usuarios
         List<Usuario> listaUsuers = Stream.of(
-                new Usuario("Sara","123456","sara@email",5,5),
-                new Usuario("Cilia", "1111", "cilia@email",6,75))
+                new Usuario("Sara","123456","sara@email"),
+                new Usuario("Cilia", "1111", "cilia@email"))
                 .collect(Collectors.toList());
 
         String arrayToJson = null;
