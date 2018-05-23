@@ -1,0 +1,1 @@
+{"celdas":[[{"nombre":"Muro"},{"nombre":"Muro"},{"nombre":"Muro"},{"nombre":"Muro"}],[{"nombre":"Rio"},{"nombre":"Rio"},{"nombre":"Rio"},{"tipo":"oro","nombre":"Cofre"}],[{"nombre":"Muro"},{"nombre":"Camino"},{"nombre":"Camino"},{"nombre":"Muro"}],[{"nombre":"Muro"},{"nombre":"Muro"},{"nombre":"Muro"},{"nombre":"Muro"}]],"nombre":"Proba","altura":4,"anchura":4}
