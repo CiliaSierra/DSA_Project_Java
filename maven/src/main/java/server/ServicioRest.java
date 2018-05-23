@@ -13,26 +13,27 @@ import java.util.List;
 import static API.Singleton.getInstance;
 
 
-@Path("/funciones")
+@Path("funciones/")
 @Singleton //Lo necesitamos para decirle a jerser que use una unica instancia
 
 public class ServicioRest {
-
-    MundoImpl mundoImpl = API.Singleton.getInstance().getMundoImpl();
+    protected MundoImpl  mundoImpl;
+    public ServicioRest(){ mundoImpl = API.MundoImpl.getInstance();};
     BancoImpl bancoImpl =  API.Singleton.getInstance().getBancoImpl();
 
     //Testing purposes "/Hello"
     @GET
-    @Path("/Hello")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Path("Hello/")
+    @Produces(MediaType.APPLICATION_JSON)
     public String getIt() {
-        return "Got it!";
+        String men = "bdfg";
+        return men;
     }
 
     //FUNCIONES de MundoInterfaz
     //cambiarla para enviar nombre y contraseña y que me devuelba boolean si o no
     @POST
-    @Path("/userLogin")
+    @Path("userLogin/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Usuario login(Usuario u) {
@@ -46,24 +47,24 @@ public class ServicioRest {
     }
 
     @POST
-    @Path("/crearUsuario")
+    @Path("crearUsuario/")
     @Produces(MediaType.APPLICATION_JSON)
     public Boolean crearUsuario(Usuario u) {
         return mundoImpl.crearUsuario(u);
     }
 
     @POST
-    @Path("/eliminarUsuario")
+    @Path("eliminarUsuario/")
     @Produces(MediaType.APPLICATION_JSON)
     public Boolean eliminarUsuario(String nombre) {
         return mundoImpl.eliminarUsuario(nombre);
     }
 
     @GET
-    @Path("/consultarUsuario/{nombre}/{pass}")
+    @Path("consultarUsuario/{usuario}/{pass}/")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean consultarUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
-        String contraseña = mundoImpl.consultarUsuario(nombre);
+    public Boolean consultarUsuario(@PathParam("usuario") String usuario, @PathParam("pass") String pass) {
+        String contraseña = mundoImpl.consultarUsuario(usuario);
         boolean res = false;
         if (contraseña == pass)
         { res = true; }
@@ -71,7 +72,7 @@ public class ServicioRest {
     }
 
     @GET
-    @Path("/listaUsuarios")
+    @Path("listaUsuarios/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
         return mundoImpl.listaUsuarios();
@@ -99,10 +100,10 @@ public class ServicioRest {
     }*/
 
     //FUNCIONES  de BancoInterfaz
-    @GET
+    @POST
     @Path("/saldo")
-    @Produces(MediaType.APPLICATION_JSON)
-    public  int saldo(String titular) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int saldo(@FormParam("titular") String titular) {
         return bancoImpl.saldo(titular);
     }
 
