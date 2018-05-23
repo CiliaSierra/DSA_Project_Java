@@ -12,9 +12,9 @@ import java.util.ResourceBundle;
 public class ServerStart {
     // Base URI the Grizzly HTTP server will listen on
     public static final String BASE_URI = "http://"
-        + ResourceBundle.getBundle("intenetconf").getString("ip")
+        + ResourceBundle.getBundle("internetconf").getString("ip")
         +":"
-        + ResourceBundle.getBundle("internetconfig").getString("port")
+        + ResourceBundle.getBundle("internetconf").getString("port")
         + "/myapp/";
 
     /**
