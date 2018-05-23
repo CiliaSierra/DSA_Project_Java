@@ -7,10 +7,15 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ResourceBundle;
 
 public class ServerStart {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://192.168.43.152:8080/myapp/";
+    public static final String BASE_URI = "http://"
+        + ResourceBundle.getBundle("intenetconf").getString("ip")
+        +":"
+        + ResourceBundle.getBundle("internetconfig").getString("port")
+        + "/myapp/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
