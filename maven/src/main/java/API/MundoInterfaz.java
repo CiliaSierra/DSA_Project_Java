@@ -16,7 +16,7 @@ public interface MundoInterfaz {
 
     boolean crearUsuario(Usuario u);
     boolean eliminarUsuario(String nombre);
-    Usuario consultarUsuario(String nombre);
+    String consultarUsuario(String nombre);
     List<Usuario> listaUsuarios ();
 
 }

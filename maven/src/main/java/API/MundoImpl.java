@@ -71,8 +71,8 @@ public class MundoImpl implements MundoInterfaz {
     public boolean eliminarUsuario(String nombre){
         return usuarios.remove(nombre) != null;
     }
-    public Usuario consultarUsuario(String nombre){
-        return usuarios.get(nombre);
+    public String consultarUsuario(String nombre){
+        return usuarios.get(nombre).getPassword();
     }
     public List<Usuario> listaUsuarios (){
 

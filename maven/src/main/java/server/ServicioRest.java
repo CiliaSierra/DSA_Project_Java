@@ -30,6 +30,7 @@ public class ServicioRest {
     }
 
     //FUNCIONES de MundoInterfaz
+    //cambiarla para enviar nombre y contraseña y que me devuelba boolean si o no
     @POST
     @Path("/userLogin")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +41,6 @@ public class ServicioRest {
             us = mundoImpl.login(u);
             return us;
         } catch (Exception e) {
-
             return null;
         }
     }
@@ -60,10 +60,14 @@ public class ServicioRest {
     }
 
     @GET
-    @Path("/consultarUsuario")
+    @Path("/consultarUsuario/{nombre}/{pass}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Usuario consultarUsuario(String nombre) {
-        return mundoImpl.consultarUsuario(nombre);
+    public Boolean consultarUsuario(@PathParam("nombre") String nombre, @PathParam("pass") String pass) {
+        String contraseña = mundoImpl.consultarUsuario(nombre);
+        boolean res = false;
+        if (contraseña == pass)
+        { res = true; }
+        return res;
     }
 
     @GET
