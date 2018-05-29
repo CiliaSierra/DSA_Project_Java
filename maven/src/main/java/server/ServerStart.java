@@ -30,6 +30,11 @@ public class ServerStart {
         // exposing the Jersey application at BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
+    /**
+     * Main method.
+     * @param args
+     * @throws IOException
+     */
 
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();

@@ -2,6 +2,7 @@ package server;
 
 import API.MundoImpl;
 import banco.BancoImpl;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import jugador.Objeto;
 import jugador.Usuario;
 
@@ -13,22 +14,32 @@ import java.util.List;
 import static API.Singleton.getInstance;
 
 
-@Path("funciones/")
+@Path("/funciones")
 @Singleton //Lo necesitamos para decirle a jerser que use una unica instancia
 
 public class ServicioRest {
     protected MundoImpl  mundoImpl;
     public ServicioRest(){ mundoImpl = API.MundoImpl.getInstance();};
     BancoImpl bancoImpl =  API.Singleton.getInstance().getBancoImpl();
-
+    String men; //alamcenamiento de la respuesta al la web
     //Testing purposes "/Hello"
     @GET
-    @Path("Hello/")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/Hello")
+    @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
-        String men = "bdfg";
+        men = "Hello ";
         return men;
     }
+    @GET
+    @Path("/consultarUsuario")
+    @Produces({MediaType.TEXT_PLAIN})
+    public boolean consultarUsuario(@PathParam("usuario") String usuario, @PathParam("pass") String pass) {
+        String contraseña = mundoImpl.consultarUsuario(usuario);
+        boolean res = false;
+        if (contraseña == pass)
+        res = true;
+        return res;
+        }
 
     //FUNCIONES de MundoInterfaz
     //cambiarla para enviar nombre y contraseña y que me devuelba boolean si o no
@@ -60,16 +71,6 @@ public class ServicioRest {
         return mundoImpl.eliminarUsuario(nombre);
     }
 
-    @GET
-    @Path("consultarUsuario/{usuario}/{pass}/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Boolean consultarUsuario(@PathParam("usuario") String usuario, @PathParam("pass") String pass) {
-        String contraseña = mundoImpl.consultarUsuario(usuario);
-        boolean res = false;
-        if (contraseña == pass)
-        { res = true; }
-        return res;
-    }
 
     @GET
     @Path("listaUsuarios/")
@@ -101,28 +102,28 @@ public class ServicioRest {
 
     //FUNCIONES  de BancoInterfaz
     @POST
-    @Path("/saldo")
+    @Path("saldo/")
     @Consumes(MediaType.APPLICATION_JSON)
     public int saldo(@FormParam("titular") String titular) {
         return bancoImpl.saldo(titular);
     }
 
     @POST
-    @Path("/{id}/guardarMonedas")
+    @Path("{id}/guardarMonedas/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean guardarMonedas(@PathParam("id") int monedas, @FormParam("titular") String titular) {
         return bancoImpl.guardarMonedas(monedas, titular);
     }
 
     @POST
-    @Path("/{id}/sacarMonedas")
+    @Path("{id}/sacarMonedas/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean sacarMonedas(@PathParam("id") int monedas, @FormParam("titular") String titular) {
         return bancoImpl.sacarMonedas(monedas, titular);
     }
 
     @POST
-    @Path("/crearCuenta")
+    @Path("crearCuenta/")
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean crearCuenta(@FormParam("titular") String titular) {
         return bancoImpl.crearCuenta(titular);
