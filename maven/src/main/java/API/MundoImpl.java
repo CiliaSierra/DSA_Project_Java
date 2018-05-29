@@ -21,7 +21,7 @@ public class MundoImpl implements MundoInterfaz {
     public static MundoImpl getInstance(){
         if(mundoImpl == null) {
             mundoImpl = new MundoImpl();
-            mundoImpl.setMapas(Mapa.cargarMapas());
+
         }
         return mundoImpl;
     }
@@ -38,6 +38,16 @@ public class MundoImpl implements MundoInterfaz {
             return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
         } catch (Exception e) {
             throw new Exception(e);
+        }
+    }
+
+    public boolean loginBool(Usuario usuario){
+        try{
+            login(usuario);
+            return true;
+        }
+        catch (Exception e){
+            return  false;
         }
     }
 

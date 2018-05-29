@@ -133,9 +133,6 @@ public class DAOImpl {
         }
     }
 
-
-
-
     private void setFieldsFromResultSet(ResultSet resultSet, ResultSetMetaData resultSetMetaData, Object object) throws Exception {
         for (int i = 1; i <= resultSetMetaData.getColumnCount(); i++) {
             String columnType = resultSetMetaData.getColumnTypeName(i);
@@ -234,7 +231,6 @@ public class DAOImpl {
     private void addPrimaryKeyParameter(PreparedStatement pstm, int position, int primaryKey) throws Exception {
         pstm.setObject(position, primaryKey);
     }
-
 
     private Object getMethodObjectResultant(Object object, Method method, Field field) throws Exception {
         Object methodObjectResulted = null;
