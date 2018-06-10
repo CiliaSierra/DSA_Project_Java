@@ -22,6 +22,7 @@ public class ServicioRest {
     public ServicioRest(){ mundoImpl = API.MundoImpl.getInstance();};
     BancoImpl bancoImpl =  API.Singleton.getInstance().getBancoImpl();
     String men; //alamcenamiento de la respuesta al la web
+
     //Testing purposes "/Hello"
     @GET
     @Path("/Hello")
@@ -30,53 +31,52 @@ public class ServicioRest {
         men = "Hello ";
         return men;
     }
-    @GET
-    @Path("/consultarUsuario")
-    @Produces({MediaType.TEXT_PLAIN})
-    public boolean consultarUsuario(@PathParam("usuario") String usuario, @PathParam("pass") String pass) {
-        String contraseña = mundoImpl.consultarUsuario(usuario);
-        boolean res = false;
-        if (contraseña == pass)
-        res = true;
-        return res;
-        }
 
     //FUNCIONES de MundoInterfaz
-    //cambiarla para enviar nombre y contraseña y que me devuelba boolean si o no
-    @POST
-    @Path("userLogin/")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Usuario login(Usuario u) {
-        Usuario us = null;
-        try {
-            us = mundoImpl.login(u);
-            return us;
-        } catch (Exception e) {
-            return null;
-        }
+    @GET
+    @Path("/consultarUsuario")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
+
+        String password = mundoImpl.consultarUsuario(user);
+
+      if (user.equals("user") && pass.equals("123") )//consulta al dao null point exception
+            men = "logeado correctamnte";
+      else
+          men = "Contenido erroneo";
+
+        return men;
     }
 
-    @POST
-    @Path("crearUsuario/")
+    @GET
+    @Path("/crearUsuario")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean crearUsuario(Usuario u) {
+    public Boolean crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email) {
+        Usuario u = new Usuario(user,pass,email);
         return mundoImpl.crearUsuario(u);
     }
 
     @POST
-    @Path("eliminarUsuario/")
+    @Path("/eliminarUsuario")
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean eliminarUsuario(String nombre) {
-        return mundoImpl.eliminarUsuario(nombre);
+    public Boolean eliminarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
+        //comprobar contraseña
+        return mundoImpl.eliminarUsuario(user);
     }
 
 
     @GET
-    @Path("listaUsuarios/")
+    @Path("/listaUsuarios")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
         return mundoImpl.listaUsuarios();
+    }
+
+    @GET
+    @Path("/listaObjetos")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Integer> listaObjetos (@QueryParam("user") String user) {
+        return mundoImpl.listaObjetos(user);
     }
 
     /*@POST
@@ -102,28 +102,28 @@ public class ServicioRest {
 
     //FUNCIONES  de BancoInterfaz
     @POST
-    @Path("saldo/")
+    @Path("/saldo")
     @Consumes(MediaType.APPLICATION_JSON)
     public int saldo(@FormParam("titular") String titular) {
         return bancoImpl.saldo(titular);
     }
 
     @POST
-    @Path("{id}/guardarMonedas/")
+    @Path("/guardarMonedas")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean guardarMonedas(@PathParam("id") int monedas, @FormParam("titular") String titular) {
+    public Boolean guardarMonedas(@QueryParam("id") int monedas, @FormParam("titular") String titular) {
         return bancoImpl.guardarMonedas(monedas, titular);
     }
 
     @POST
-    @Path("{id}/sacarMonedas/")
+    @Path("/sacarMonedas")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean sacarMonedas(@PathParam("id") int monedas, @FormParam("titular") String titular) {
+    public Boolean sacarMonedas(@QueryParam("id") int monedas, @FormParam("titular") String titular) {
         return bancoImpl.sacarMonedas(monedas, titular);
     }
 
     @POST
-    @Path("crearCuenta/")
+    @Path("/crearCuenta")
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean crearCuenta(@FormParam("titular") String titular) {
         return bancoImpl.crearCuenta(titular);

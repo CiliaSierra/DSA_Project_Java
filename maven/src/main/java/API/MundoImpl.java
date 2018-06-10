@@ -28,10 +28,8 @@ public class MundoImpl implements MundoInterfaz {
 
 
     public Map<String, Usuario> usuarios = new HashMap<>();
+
     private List<Mapa> mapas = new ArrayList<>();
-
-
-
 
     public Usuario login(Usuario usuario) throws Exception {
         try {
@@ -78,12 +76,15 @@ public class MundoImpl implements MundoInterfaz {
             return true;
         }
     }
+
     public boolean eliminarUsuario(String nombre){
         return usuarios.remove(nombre) != null;
     }
+
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
     }
+
     public List<Usuario> listaUsuarios (){
 
         List<Usuario> user = new ArrayList<>();
@@ -92,6 +93,14 @@ public class MundoImpl implements MundoInterfaz {
         return user;
     }
 
+    public List<Integer> listaObjetos(String user){
+        List<Integer> obj = new ArrayList<>();
+        obj.add(usuarios.get(user).getObj1());
+        obj.add(usuarios.get(user).getObj2());
+        obj.add(usuarios.get(user).getObj3());
+        obj.add(usuarios.get(user).getObj4());
+        return obj;
+    }
 
     public List<Mapa> getMapas() {
         return mapas;
