@@ -18,7 +18,7 @@ public class MapDownloader {
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
     public String getList(){
-        List<Mapa> mapaList = MundoImpl.getInstance().getMapas();
+        List<Mapa> mapaList = Mapa.cargarMapas();
         JSONArray ja = new JSONArray();
         for(Mapa m : mapaList){
             ja.put(m.getNombre());
@@ -41,5 +41,4 @@ public class MapDownloader {
         }
         return result;
     }
-    
 }

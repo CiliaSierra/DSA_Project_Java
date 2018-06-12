@@ -30,6 +30,7 @@ public class Mapa {
     @JsonView(Views.NotNormal.class)
     private Logger logger = Logger.getLogger(Mapa.class.getName());
 
+
     public Mapa(String nombre, int altura, int anchura){
         this.setNombre(nombre);
         this.setAltura(altura);
@@ -86,10 +87,12 @@ public class Mapa {
     public static List<Mapa> cargarMapas(){
         List<Mapa> result = new ArrayList<>();
         File f = new File("./maven/src/main/resources/Mapas/");
-        for(File file : Objects.requireNonNull(f.listFiles())){
-            String fileName = file.getName();
-            fileName = fileName.substring(0,fileName.lastIndexOf('.'));
-            result.add(Mapa.cargarMapa(fileName));
+        if(f.listFiles() != null){
+            for (File file : f.listFiles()) {
+                String fileName = file.getName();
+                fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+                result.add(Mapa.cargarMapa(fileName));
+            }
         }
         return result;
     }

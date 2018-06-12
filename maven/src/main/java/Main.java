@@ -41,7 +41,7 @@ public class Main {
         c3.add(new Muro());  //12
         ArrayList<Celda> c4 = new ArrayList<>();
         c4.add(new Muro());  //13
-        c4.add(new Muro());  //14
+        c4.add(new Muro());  //14   
         c4.add(new Muro());  //15
         c4.add(new Muro());  //16
         c.add(c1);

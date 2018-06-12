@@ -5,9 +5,12 @@ import banco.BancoImpl;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jugador.Objeto;
 import jugador.Usuario;
+import org.json.JSONObject;
+
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import static API.Singleton.getInstance;
 
@@ -31,8 +34,8 @@ public class ServicioRest {
     }
 
     //FUNCIONES de MundoInterfaz
-    @GET
-    @Path("/consultarUsuario") //LOGUIN
+    @GET    //Cal canviar a POST
+    @Path("/consultarUsuario") //LOGIN
     @Produces(MediaType.APPLICATION_JSON)
     public String consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
        // String password = mundoImpl.consultarUsuario(user);
@@ -44,21 +47,35 @@ public class ServicioRest {
         return men;
     }
 
-    @GET
+    @GET    //Cal canviar a POST
     @Path("/crearUsuario") //REGISTRARSE
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Boolean crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email) {
         Usuario u = new Usuario(user,pass,email);
         return mundoImpl.crearUsuario(u);
     }
 
-    @GET
+    //Exemple per retornar una resposta
+    @POST
+    @Path("/crearUsuario2")
+    public Response register(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email){
+        Usuario u = new Usuario(user,pass,email);
+        if(mundoImpl.crearUsuario(u))
+            return Response.status(201).build();//Login Correcte
+        return Response.status(403).build();//Login Incorrecte
+
+    }
+    //En cas que es vulgui retornar algo en la resposta (cal afegir @Produces)
+    //Response.status(200).entity(objecte.toString).build();
+
+    @GET       //Cal canviar a post
     @Path("/cambiarPass") //CAMBIAR PASS
     @Produces(MediaType.APPLICATION_JSON)
     public String cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
         return mundoImpl.cambiarPass(user,pass);
     }
-    @POST
+
+    @POST       //Cal canviar a DELETE
     @Path("/eliminarUsuario") //ELIMINAR USER
     @Produces(MediaType.APPLICATION_JSON)
     public Boolean eliminarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
