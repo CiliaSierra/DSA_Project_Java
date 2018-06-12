@@ -5,12 +5,10 @@ import banco.BancoImpl;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import jugador.Objeto;
 import jugador.Usuario;
-
 import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
-
 import static API.Singleton.getInstance;
 
 
@@ -34,12 +32,10 @@ public class ServicioRest {
 
     //FUNCIONES de MundoInterfaz
     @GET
-    @Path("/consultarUsuario")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/consultarUsuario") //LOGUIN
+    @Produces(MediaType.APPLICATION_JSON)
     public String consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
-
-        String password = mundoImpl.consultarUsuario(user);
-
+       // String password = mundoImpl.consultarUsuario(user);
       if (user.equals("user") && pass.equals("123") )//consulta al dao null point exception
             men = "logeado correctamnte";
       else
@@ -49,37 +45,45 @@ public class ServicioRest {
     }
 
     @GET
-    @Path("/crearUsuario")
+    @Path("/crearUsuario") //REGISTRARSE
     @Produces(MediaType.APPLICATION_JSON)
     public Boolean crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email) {
         Usuario u = new Usuario(user,pass,email);
         return mundoImpl.crearUsuario(u);
     }
 
+    @GET
+    @Path("/cambiarPass") //CAMBIAR PASS
+    @Produces(MediaType.APPLICATION_JSON)
+    public String cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
+        return mundoImpl.cambiarPass(user,pass);
+    }
     @POST
-    @Path("/eliminarUsuario")
+    @Path("/eliminarUsuario") //ELIMINAR USER
     @Produces(MediaType.APPLICATION_JSON)
     public Boolean eliminarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
-        //comprobar contraseña
-        return mundoImpl.eliminarUsuario(user);
+        if (pass.equals(mundoImpl.consultarUsuario(user))) {
+            return mundoImpl.eliminarUsuario(user);
+        }
+        else
+            return false;
     }
 
-
     @GET
-    @Path("/listaUsuarios")
+    @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
         return mundoImpl.listaUsuarios();
     }
 
     @GET
-    @Path("/listaObjetos")
+    @Path("/listaObjetos") //LIST OBJET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Integer> listaObjetos (@QueryParam("user") String user) {
         return mundoImpl.listaObjetos(user);
     }
-
-    /*@POST
+    /*
+    @POST
     @Path("/añadirObjetoAUsuario")
     @Produces(MediaType.APPLICATION_JSON)
     public int añadirObjetoAUsuario(Usuario u, Objeto o, int cantidad) {
@@ -104,28 +108,28 @@ public class ServicioRest {
     @POST
     @Path("/saldo")
     @Consumes(MediaType.APPLICATION_JSON)
-    public int saldo(@FormParam("titular") String titular) {
+    public int saldo(@QueryParam("titular") String titular) {
         return bancoImpl.saldo(titular);
     }
 
     @POST
     @Path("/guardarMonedas")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean guardarMonedas(@QueryParam("id") int monedas, @FormParam("titular") String titular) {
+    public Boolean guardarMonedas(@QueryParam("id") int monedas, @QueryParam("titular") String titular) {
         return bancoImpl.guardarMonedas(monedas, titular);
     }
 
     @POST
     @Path("/sacarMonedas")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean sacarMonedas(@QueryParam("id") int monedas, @FormParam("titular") String titular) {
+    public Boolean sacarMonedas(@QueryParam("id") int monedas, @QueryParam("titular") String titular) {
         return bancoImpl.sacarMonedas(monedas, titular);
     }
 
     @POST
     @Path("/crearCuenta")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Boolean crearCuenta(@FormParam("titular") String titular) {
+    public Boolean crearCuenta(@QueryParam("titular") String titular) {
         return bancoImpl.crearCuenta(titular);
     }
 }

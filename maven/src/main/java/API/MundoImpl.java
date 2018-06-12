@@ -21,11 +21,9 @@ public class MundoImpl implements MundoInterfaz {
     public static MundoImpl getInstance(){
         if(mundoImpl == null) {
             mundoImpl = new MundoImpl();
-
         }
         return mundoImpl;
     }
-
 
     public Map<String, Usuario> usuarios = new HashMap<>();
 
@@ -83,6 +81,15 @@ public class MundoImpl implements MundoInterfaz {
 
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
+    }
+
+    public String cambiarPass(String nombre, String pass){
+        if (pass.equals(usuarios.get(nombre).getPassword()))
+            return "Contaseña igual a la anterior";
+        else {
+            usuarios.get(nombre).setPassword(pass);
+            return "Contraseña cambiada";
+        }
     }
 
     public List<Usuario> listaUsuarios (){
