@@ -22,6 +22,8 @@ public class Usuario {
     @JsonView(Views.Normal.class)
     private String imagen;
     @JsonView(Views.Normal.class)
+    private int ultimaposicion;
+    @JsonView(Views.Normal.class)
     private int Obj1;
     @JsonView(Views.Normal.class)
     private int Obj2;
@@ -32,12 +34,13 @@ public class Usuario {
 
     //Constructores
 
-    public Usuario(int id, String nombre, String password, String email, String imagen){
+    public Usuario(int id, String nombre, String password, String email, String imagen, int ultimaposicion){
         this.setId(id);
         this.setNombre(nombre);
         this.setPassword(password);
         this.setEmail(email);
         this.setImagen(imagen);
+        this.setUltimaposicion(ultimaposicion);
         this.Obj1=0;
         this.Obj2=0;
         this.Obj3=0;
@@ -46,7 +49,7 @@ public class Usuario {
 
     public Usuario(String nombre, String password, String email){
         //funcio per que en les proves on no es posa un id el codi no peti
-        new Usuario(1, nombre,password,email,imagen);
+        new Usuario(1, nombre,password,email,imagen,ultimaposicion);
     }
 
     public Usuario(){
@@ -59,6 +62,46 @@ public class Usuario {
     }
 
     //Getters y Setters
+
+    public int getObj1() {
+        return Obj1;
+    }
+
+    public void setObj1(int obj1) {
+        Obj1 = obj1;
+    }
+
+    public int getObj2() {
+        return Obj2;
+    }
+
+    public void setObj2(int obj2) {
+        Obj2 = obj2;
+    }
+
+    public int getObj3() {
+        return Obj3;
+    }
+
+    public void setObj3(int obj3) {
+        Obj3 = obj3;
+    }
+
+    public int getObj4() {
+        return Obj4;
+    }
+
+    public void setObj4(int obj4) {
+        Obj4 = obj4;
+    }
+
+    public int getUltimaposicion() {
+        return ultimaposicion;
+    }
+
+    public void setUltimaposicion(int ultimaposicion) {
+        this.ultimaposicion = ultimaposicion;
+    }
 
     public String getImagen() {
         return imagen;
@@ -100,36 +143,5 @@ public class Usuario {
         this.id = id;
     }
 
-    public int getObj1() {
-        return Obj1;
-    }
-
-    public void setObj1(int obj1) {
-        Obj1 = obj1;
-    }
-
-    public int getObj2() {
-        return Obj2;
-    }
-
-    public void setObj2(int obj2) {
-        Obj2 = obj2;
-    }
-
-    public int getObj3() {
-        return Obj3;
-    }
-
-    public void setObj3(int obj3) {
-        Obj3 = obj3;
-    }
-
-    public int getObj4() {
-        return Obj4;
-    }
-
-    public void setObj4(int obj4) {
-        Obj4 = obj4;
-    }
 
 }
