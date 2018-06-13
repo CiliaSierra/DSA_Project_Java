@@ -47,6 +47,14 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
+    public boolean logInSara(String nombre, String pass){
+        if(pass.equals(usuarios.get(nombre).getPassword())){
+            return true;
+        }
+        else
+            return false;
+    }
+
     public Usuario register(Usuario usuario) throws Exception {
         try {
             return DAOImpl.getInstance().insertUser(usuario);
