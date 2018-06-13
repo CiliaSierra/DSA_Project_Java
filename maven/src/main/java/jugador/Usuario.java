@@ -20,6 +20,8 @@ public class Usuario {
     @JsonView(Views.Normal.class)
     private String email;
     @JsonView(Views.Normal.class)
+    private String imagen;
+    @JsonView(Views.Normal.class)
     private int Obj1;
     @JsonView(Views.Normal.class)
     private int Obj2;
@@ -30,11 +32,12 @@ public class Usuario {
 
     //Constructores
 
-    public Usuario(int id, String nombre, String password, String email){
+    public Usuario(int id, String nombre, String password, String email, String imagen){
         this.setId(id);
         this.setNombre(nombre);
         this.setPassword(password);
         this.setEmail(email);
+        this.setImagen(imagen);
         this.Obj1=0;
         this.Obj2=0;
         this.Obj3=0;
@@ -43,7 +46,7 @@ public class Usuario {
 
     public Usuario(String nombre, String password, String email){
         //funcio per que en les proves on no es posa un id el codi no peti
-        new Usuario(1, nombre,password,email);
+        new Usuario(1, nombre,password,email,imagen);
     }
 
     public Usuario(){
@@ -56,6 +59,14 @@ public class Usuario {
     }
 
     //Getters y Setters
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     public String getNombre() {
         return nombre;
