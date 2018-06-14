@@ -68,21 +68,24 @@ public class ServicioRest {
     //En cas que es vulgui retornar algo en la resposta (cal afegir @Produces)
     //Response.status(200).entity(objecte.toString).build();
 
-    @GET       //Cal canviar a post
+    /*@GET       //Cal canviar a post
     @Path("/cambiarPass") //CAMBIAR PASS
     @Produces(MediaType.APPLICATION_JSON)
     public String cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
         return mundoImpl.cambiarPass(user,pass);
-    }
-
-   /* @POST
-    @Path("/cambiarPass2")
-    public Response cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
-
-        if(mundoImpl.cambiarPass(user,pass))
-            return Response.status(201).build();//Canvi Correcte
-        return Response.status(403).build();//Canvi Incorrecte
     }*/
+
+    @POST
+    @Path("/cambiarPass2")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
+        String r = mundoImpl.cambiarPass(user,pass);
+
+        if( r == "Contaseña igual a la anterior" || r == "Contraseña cambiada" || r == "Nombre de usuario incorrecto")
+            return Response.status(200).entity(r).build();//Canvi Correcte
+        else
+        return Response.status(403).build();//Canvi Incorrecte
+    }
 
     @POST       //Cal canviar a DELETE
     @Path("/eliminarUsuario") //ELIMINAR USER
