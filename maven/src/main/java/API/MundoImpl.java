@@ -92,7 +92,7 @@ public class MundoImpl implements MundoInterfaz {
     }
 
     public boolean cambiarPass(String nombre, String pass){
-
+        if (usuarios.get(nombre)!=null) {
             if (pass.equals(usuarios.get(nombre).getPassword()))
                 return false;//contraseña igual a la anterior
 
@@ -100,6 +100,9 @@ public class MundoImpl implements MundoInterfaz {
                 usuarios.get(nombre).setPassword(pass);
                 return true;//contraseña cambiada correctamente
             }
+        }
+        else
+            return false;
 
     }
 
