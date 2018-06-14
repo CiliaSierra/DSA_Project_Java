@@ -92,12 +92,19 @@ public class MundoImpl implements MundoInterfaz {
     }
 
     public String cambiarPass(String nombre, String pass){
-        if (pass.equals(usuarios.get(nombre).getPassword()))
-            return "Contaseña igual a la anterior";
-        else {
-            usuarios.get(nombre).setPassword(pass);
-            return "Contraseña cambiada";
+        if (usuarios.get(nombre) != null) {
+
+            if (pass.equals(usuarios.get(nombre).getPassword()))
+                return "Contaseña igual a la anterior";
+
+            else {
+                usuarios.get(nombre).setPassword(pass);
+                return "Contraseña cambiada";
+            }
         }
+
+        else
+            return "Nombre de usuario incorrecto";
     }
 
     public List<Usuario> listaUsuarios (){

@@ -19,9 +19,9 @@ public class TestUsuario {
     @Before
     public void setUp(){
         mundo = MundoImpl.getInstance();
-        usuario1 = new Usuario(2,"Carlos", "123456789", "carlos@gmail.com" );
-        usuario2 = new Usuario(3,"Pedro", "123456789", "pedro@gmail.com" );
-        usuario3 = new Usuario(4,"Martina", "123456789", "martina@gmail.com" );
+        usuario1 = new Usuario(2,"Carlos", "123456789", "carlos@gmail.com", "imagen1",2);
+        usuario2 = new Usuario(3,"Pedro", "123456789", "pedro@gmail.com","imagen2",3 );
+        usuario3 = new Usuario(4,"Martina", "123456789", "martina@gmail.com","imagen3",1);
 
         mundo.crearUsuario(usuario1);
         mundo.crearUsuario(usuario2);
@@ -61,6 +61,27 @@ public class TestUsuario {
         logger.info("Test: Log in usuario");
         boolean res = mundo.logInSara("Pedro", "123456789");
         Assert.assertEquals(true,res);
+    }
+
+    @Test
+    public void cambiarPass(){
+        logger.info("Test: Cambiando password usuario");
+        String res = mundo.cambiarPass("Carlos", "123456789");
+        Assert.assertEquals("Contaseña igual a la anterior",res);
+    }
+
+    @Test
+    public void cambiarPass2(){
+        logger.info("Test: Cambiando password usuario");
+        String res = mundo.cambiarPass("Pedro", "123");
+        Assert.assertEquals("Contraseña cambiada",res);
+    }
+
+    @Test
+    public void cambiarPass3(){
+        logger.info("Test: Cambiando password usuario");
+        String res = mundo.cambiarPass("Sara", "123456789");
+        Assert.assertEquals("Nombre de usuario incorrecto",res);
     }
 
 }

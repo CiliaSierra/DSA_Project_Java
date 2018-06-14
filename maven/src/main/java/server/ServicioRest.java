@@ -25,7 +25,7 @@ public class ServicioRest {
     String men; //alamcenamiento de la respuesta al la web
 
     //Testing purposes "/Hello"
-    @GET
+    @GET //http://localhost:8080/myapp/funciones/Hello
     @Path("/Hello")
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
@@ -35,7 +35,7 @@ public class ServicioRest {
 
     //FUNCIONES de MundoInterfaz
     @GET    //Cal canviar a POST
-    @Path("/consultarUsuario") //LOGIN
+    @Path("/consultarUsuario") //LOGIN ... http://localhost:8080/myapp/funciones/consultarUsuario?user=user&pass=123
     @Produces(MediaType.APPLICATION_JSON)
     public String consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
        // String password = mundoImpl.consultarUsuario(user);
@@ -48,7 +48,7 @@ public class ServicioRest {
     }
 
     @GET    //Cal canviar a POST
-    @Path("/crearUsuario") //REGISTRARSE
+    @Path("/crearUsuario") //REGISTRARSE... http://localhost:8080/myapp/funciones/crearUsuario?user=user&pass=123&email=usuario@gmail.com
     @Produces(MediaType.TEXT_PLAIN)
     public Boolean crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email) {
         Usuario u = new Usuario(user,pass,email);
@@ -74,6 +74,15 @@ public class ServicioRest {
     public String cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
         return mundoImpl.cambiarPass(user,pass);
     }
+
+   /* @POST
+    @Path("/cambiarPass2")
+    public Response cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
+
+        if(mundoImpl.cambiarPass(user,pass))
+            return Response.status(201).build();//Canvi Correcte
+        return Response.status(403).build();//Canvi Incorrecte
+    }*/
 
     @POST       //Cal canviar a DELETE
     @Path("/eliminarUsuario") //ELIMINAR USER
