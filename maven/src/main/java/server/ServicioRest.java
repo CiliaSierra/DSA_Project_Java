@@ -34,68 +34,61 @@ public class ServicioRest {
     }
 
     //FUNCIONES de MundoInterfaz
-    @GET    //Cal canviar a POST
-    @Path("/consultarUsuario") //LOGIN ... http://localhost:8080/myapp/funciones/consultarUsuario?user=user&pass=123
+    @POST
+    @Path("/consultarUsuario") //LOGIN
     @Produces(MediaType.APPLICATION_JSON)
-    public String consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
-       // String password = mundoImpl.consultarUsuario(user);
-      if (user.equals("user") && pass.equals("123") )//consulta al dao null point exception
-            men = "logeado correctamnte";
+    public Response consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
+       String password = mundoImpl.consultarUsuario(user);
+      if (pass.equals(password) )//consulta al dao null point exception
+          return Response.status(200).build();//Login Correcte;
       else
-          men = "Contenido erroneo";
+          return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
 
-        return men;
     }
 
-    @GET    //Cal canviar a POST
-    @Path("/crearUsuario") //REGISTRARSE... http://localhost:8080/myapp/funciones/crearUsuario?user=user&pass=123&email=usuario@gmail.com
-    @Produces(MediaType.TEXT_PLAIN)
-    public Boolean crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email) {
-        Usuario u = new Usuario(user,pass,email);
-        return mundoImpl.crearUsuario(u);
+    @POST
+    @Path("/crearUsuario") //REGISTRARSE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("pass2") String pass2, @QueryParam("email") String email) {
+       if (pass.equals(pass2)) {
+           Usuario u = new Usuario(user, pass, email);
+           if (mundoImpl.crearUsuario(u))
+               return Response.status(201).build();//Register realizado correcte
+           else
+               return Response.status(403).build();//Register realizado incorrecte
+       }
+       else
+           return Response.status(400).build();//Las contraseñas no coiciden
     }
 
     //Exemple per retornar una resposta
-    @POST
-    @Path("/crearUsuario2")
-    public Response register(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("email") String email){
-        Usuario u = new Usuario(user,pass,email);
-        if(mundoImpl.crearUsuario(u))
-            return Response.status(201).build();//Login Correcte
-        return Response.status(403).build();//Login Incorrecte
 
-    }
-    //En cas que es vulgui retornar algo en la resposta (cal afegir @Produces)
-    //Response.status(200).entity(objecte.toString).build();
-
-    /*@GET       //Cal canviar a post
+    @POST      //Cal canviar a post
     @Path("/cambiarPass") //CAMBIAR PASS
     @Produces(MediaType.APPLICATION_JSON)
-    public String cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
-        return mundoImpl.cambiarPass(user,pass);
-    }*/
-
-    @POST
-    @Path("/cambiarPass2")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass){
-        String r = mundoImpl.cambiarPass(user,pass);
-
-        if( r == "Contaseña igual a la anterior" || r == "Contraseña cambiada" || r == "Nombre de usuario incorrecto")
-            return Response.status(200).entity(r).build();//Canvi Correcte
-        else
-        return Response.status(403).build();//Canvi Incorrecte
-    }
-
-    @POST       //Cal canviar a DELETE
-    @Path("/eliminarUsuario") //ELIMINAR USER
-    @Produces(MediaType.APPLICATION_JSON)
-    public Boolean eliminarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
-        if (pass.equals(mundoImpl.consultarUsuario(user))) {
-            return mundoImpl.eliminarUsuario(user);
+    public Response cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass, @QueryParam("pass2") String pass2){
+        if (pass.equals(pass2)){
+            if( mundoImpl.cambiarPass(user,pass))
+                return Response.status(200).build();//Contraseña cambiada adecuadamente
+            else
+                return Response.status(403).build();//Error al cambiar contraseña
         }
         else
-            return false;
+            return Response.status(400).build();//las contraseñas no coiciden
+    }
+
+    @DELETE
+    @Path("/eliminarUsuario") //ELIMINAR USER
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
+        if (pass.equals(mundoImpl.consultarUsuario(user))) {
+            if (mundoImpl.eliminarUsuario(user))
+                return Response.status(200).build();//User eliminado con exito
+            else
+                return Response.status(403).build();//user no se ha podido eliminar
+        }
+        else
+           return Response.status(400).build();//la contaseña enviada no concuerda con la del user
     }
 
     @GET
