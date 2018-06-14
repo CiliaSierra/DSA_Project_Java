@@ -67,21 +67,21 @@ public class TestUsuario {
     public void cambiarPass(){
         logger.info("Test: Cambiando password usuario");
         boolean res = mundo.cambiarPass("Carlos", "123456789");
-        Assert.assertEquals("Contaseña igual a la anterior",res);
+        Assert.assertEquals(false,res);
     }
 
     @Test
     public void cambiarPass2(){
         logger.info("Test: Cambiando password usuario");
         boolean res = mundo.cambiarPass("Pedro", "123");
-        Assert.assertEquals("Contraseña cambiada",res);
+        Assert.assertEquals(true,res);
     }
 
     @Test
     public void cambiarPass3(){
         logger.info("Test: Cambiando password usuario");
         boolean res = mundo.cambiarPass("Sara", "123456789");
-        Assert.assertEquals("Nombre de usuario incorrecto",res);
+        Assert.assertEquals(false,res);
     }
 
 }
