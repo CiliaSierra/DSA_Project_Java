@@ -49,16 +49,16 @@ public class ServicioRest {
     @POST
     @Path("/crearUsuario") //REGISTRARSE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass,@QueryParam("pass2") String pass2, @QueryParam("email") String email) {
-       if (pass.equals(pass2)) {
+    public Response crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass/*,@QueryParam("pass2") String pass2*/, @QueryParam("email") String email) {
+      // if (pass.equals(pass2)) {
            Usuario u = new Usuario(user, pass, email);
            if (mundoImpl.crearUsuario(u))
                return Response.status(201).build();//Register realizado correcte
            else
                return Response.status(403).build();//Register realizado incorrecte
-       }
-       else
-           return Response.status(400).build();//Las contraseñas no coiciden
+      // }
+     //  else
+        //   return Response.status(400).build();//Las contraseñas no coiciden
     }
 
     //Exemple per retornar una resposta
@@ -87,6 +87,7 @@ public class ServicioRest {
             else
                 return Response.status(403).build();//user no se ha podido eliminar
         }
+
         else
            return Response.status(400).build();//la contaseña enviada no concuerda con la del user
     }
