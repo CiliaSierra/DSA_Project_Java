@@ -22,14 +22,6 @@ public class BancoImpl implements BancoInterfaz {
         this.cuentas = cuentas;
     }
 
-    //lista de clase de cuetas usuario,saldo
-    public BancoImpl(String nombre, int altura, int anchura) {
-
-        //super(nombre, altura, anchura);
-
-
-    } //constructor
-
     //mostostrar saldo
     public int saldo(String titular) {
         int saldo = 0;

@@ -37,9 +37,9 @@ public class ServicioRest {
     @POST
     @Path("/consultarUsuario") //LOGIN
     @Produces(MediaType.APPLICATION_JSON)
-    public Response consultarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
-       String password = mundoImpl.consultarUsuario(user);
-      if (pass.equals(password) )//consulta al dao null point exception
+    public Response consultarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) {
+       //String password = mundoImpl.consultarUsuario(user);
+      if (pass.equals("pass") )//consulta al dao null point exception
           return Response.status(200).build();//Login Correcte;
       else
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
@@ -49,8 +49,8 @@ public class ServicioRest {
     @POST
     @Path("/crearUsuario") //REGISTRARSE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response crearUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass/*,@QueryParam("pass2") String pass2*/, @QueryParam("email") String email) {
-      // if (pass.equals(pass2)) {
+    public Response crearUsuario(@FormParam("user") String user, @FormParam("pass") String pass,@FormParam("pass2") String pass2, @FormParam("email") String email) {
+     //if (pass.equals(pass2)) {
            Usuario u = new Usuario(user, pass, email);
            if (mundoImpl.crearUsuario(u))
                return Response.status(201).build();//Register realizado correcte
@@ -66,7 +66,7 @@ public class ServicioRest {
     @POST      //Cal canviar a post
     @Path("/cambiarPass") //CAMBIAR PASS
     @Produces(MediaType.APPLICATION_JSON)
-    public Response cambiarPass(@QueryParam("user") String user,@QueryParam("pass") String pass, @QueryParam("pass2") String pass2){
+    public Response cambiarPass(@FormParam("user") String user,@FormParam("pass") String pass, @FormParam("pass2") String pass2){
         if (pass.equals(pass2)){
             if( mundoImpl.cambiarPass(user,pass))
                 return Response.status(200).build();//Contraseña cambiada adecuadamente
@@ -80,7 +80,7 @@ public class ServicioRest {
     @DELETE
     @Path("/eliminarUsuario") //ELIMINAR USER
     @Produces(MediaType.APPLICATION_JSON)
-    public Response eliminarUsuario(@QueryParam("user") String user, @QueryParam("pass") String pass) {
+    public Response eliminarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) {
         if (pass.equals(mundoImpl.consultarUsuario(user))) {
             if (mundoImpl.eliminarUsuario(user))
                 return Response.status(200).build();//User eliminado con exito

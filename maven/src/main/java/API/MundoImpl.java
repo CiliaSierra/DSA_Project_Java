@@ -2,15 +2,10 @@ package API;
 
 import celdas.Mapa;
 import dao.DAOImpl;
-import jugador.Objeto;
-import jugador.Pack;
 import jugador.Usuario;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
-import static java.util.Collections.list;
-import static java.util.Collections.singletonList;
 
 public class MundoImpl implements MundoInterfaz {
 
