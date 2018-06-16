@@ -46,12 +46,12 @@ public class ServicioRest {
 
     }
 
-    @POST
+    @POST //CILIA HE BORRADO EL OTRO QUE HABIA, NO SE SI TU LO UTILIZABAS me acabo de dar cuenta
     @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
     public Response register(Usuario user) throws SQLException  {
         boolean result = mundoImpl.registerBool(user);
-        if (result)
+        if (result == true)
             return Response.status(201).entity(result).build();//Register realizado correcte
         else
             return Response.status(409).entity(result).build();//Register realizado incorrecte
@@ -59,7 +59,7 @@ public class ServicioRest {
     }
 
 
-    @POST      //Cal canviar a post
+    @POST
     @Path("/cambiarPass") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
     @Produces(MediaType.APPLICATION_JSON)
     public Response cambiarPass(@FormParam("user") String user,@FormParam("pass") String pass, @FormParam("pass2") String pass2){

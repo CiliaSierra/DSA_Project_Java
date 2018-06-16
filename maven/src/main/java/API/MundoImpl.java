@@ -65,7 +65,7 @@ public class MundoImpl implements MundoInterfaz {
             return true;
         }
         catch (Exception e){
-            return  false;
+            return false;
         }
     }
 
