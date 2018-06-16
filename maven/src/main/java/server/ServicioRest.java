@@ -38,16 +38,36 @@ public class ServicioRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response consultarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) throws Exception {
         Usuario usuario = new Usuario(user,pass);
-        //String password = mundoImpl.consultarUsuario(user);
       if (mundoImpl.loginBool(usuario))//consulta al dao null point exception   pass.equals("pass")
           return Response.status(200).build();//Login Correcte;
       else
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
-
+    }
+    @POST
+    @Path("/consultarUsuario2") //LOGIN
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultarUsuario(Usuario usuario) throws SQLException {
+        boolean result = mundoImpl.loginBool(usuario);
+        if (result)//consulta al dao null point exception   pass.equals("pass")
+            return Response.status(200).entity(result).build();//Login Correcte;
+        else
+            return Response.status(403).entity(result).build();//Login Incorrecte (las contraseñas no coiciden)
     }
 
     @POST
     @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response register(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
+       Usuario usuario = new Usuario(user,pass,email);
+        boolean result = mundoImpl.registerBool(usuario);
+        if (result) {
+            return Response.status(201).entity(result).build();//Register realizado correcte
+        } else
+            return Response.status(409).entity(result).build();//Register realizado incorrecte
+
+    }
+    @POST
+    @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
     public Response register(Usuario user) throws SQLException  {
         boolean result = mundoImpl.registerBool(user);
@@ -64,13 +84,25 @@ public class ServicioRest {
     @Produces(MediaType.APPLICATION_JSON)
     public Response cambiarPass(@FormParam("user") String user,@FormParam("pass") String pass, @FormParam("pass2") String pass2){
         if (pass.equals(pass2)){
-            if( mundoImpl.cambiarPass(user,pass))
-                return Response.status(200).build();//Contraseña cambiada adecuadamente
+            boolean result = mundoImpl.cambiarPass(user,pass);
+            if( result)
+                return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente
             else
-                return Response.status(403).build();//Error al cambiar contraseña
+                return Response.status(403).entity(result).build();//Error al cambiar contraseña
         }
         else
             return Response.status(400).build();//las contraseñas no coiciden
+    }
+    @POST      //Cal canviar a post
+    @Path("/cambiarPass2") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response cambiarPass(Usuario usuario) {
+            boolean result = mundoImpl.cambiarPass(usuario);
+            if( result)
+                return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente
+            else
+                return Response.status(403).entity(result).build();//Error al cambiar contraseña
+
     }
 
     @DELETE

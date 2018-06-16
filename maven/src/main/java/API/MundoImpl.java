@@ -51,6 +51,11 @@ public class MundoImpl implements MundoInterfaz {
             return false;
     }
 
+    @Override
+    public boolean cambiarPass(String nombre, String pass) {
+        return false;
+    }
+
     public Usuario register(Usuario usuario) throws Exception {     //REGISTRO EN LA BASE DE DATOS
         try {
             return DAOImpl.getInstance().insertUser(usuario);
@@ -115,13 +120,13 @@ public class MundoImpl implements MundoInterfaz {
         return usuarios.get(nombre).getPassword();
     }
 
-    public boolean cambiarPass(String nombre, String pass){         //CAMBAIR PASS HASH MAP ¿BASE DE DATOS?
-        if (usuarios.get(nombre)!=null) {
-            if (pass.equals(usuarios.get(nombre).getPassword()))
+    public boolean cambiarPass(Usuario user){         //CAMBAIR PASS HASH MAP ¿BASE DE DATOS?
+        if (usuarios.get(user.getNombre())!=null) {
+            if (user.getPassword().equals(usuarios.get(user.getNombre()).getPassword()))
                 return false;//contraseña igual a la anterior
 
             else {
-                usuarios.get(nombre).setPassword(pass);
+                usuarios.get(user.getNombre()).setPassword(user.getPassword());
                 return true;//contraseña cambiada correctamente
             }
         }
