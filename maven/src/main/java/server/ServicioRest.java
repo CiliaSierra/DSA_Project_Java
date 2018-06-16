@@ -46,67 +46,18 @@ public class ServicioRest {
 
     }
 
-//    @POST
-//    @Path("/crearUsuario") //REGISTRARSE
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response crearUsuario(@FormParam("user") String user, @FormParam("pass") String pass,@FormParam("pass2") String pass2, @FormParam("email") String email) {
-//     //if (pass.equals(pass2)) {
-//           Usuario u = new Usuario(user, pass, email);
-//           if (mundoImpl.crearUsuario(u))
-//               return Response.status(201).build();//Register realizado correcte
-//           else
-//               return Response.status(403).build();//Register realizado incorrecte
-//      // }
-//     //  else
-//        //   return Response.status(400).build();//Las contraseñas no coiciden
-//    }
-
-   /* @POST
-    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/map/crearUsuario/
-    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Produces(MediaType.TEXT_PLAIN)
     public Response register(Usuario user) throws SQLException  {
         boolean result = mundoImpl.registerBool(user);
         if (result)
             return Response.status(201).entity(result).build();//Register realizado correcte
         else
-            //"User already exists"
-            result = false;
             return Response.status(409).entity(result).build();//Register realizado incorrecte
-
-    }*/
-
-    @POST
-    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/map/crearUsuario/
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response register(Usuario user) throws SQLException  {
-        boolean result = true; //mundoImpl.registerBool(user);
-        //if (result)
-            return Response.status(201).entity(result).build();//Register realizado correcte
-       // else
-            //"User already exists"
-            //result = false;
-       // return Response.status(409).entity(result).build();//Register realizado incorrecte
 
     }
 
-
-//    @POST
-//    @Path("/crearUsuario2") //REGISTRARSE
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Boolean crearUsuario(@ Usuario u /*@FormParam("user") String user, @FormParam("pass") String pass,@FormParam("pass2") String pass2, @FormParam("email") String email*/) {
-//
-//        //Usuario u = new Usuario(user, pass, email);
-//        if (mundoImpl.crearUsuario(u)) {
-//            Response.status(201).build();
-//            return true;//Register realizado correcte
-//        }
-//        else{
-//            Response.status(403).build();
-//            return false;//Register realizado incorrecte
-//        }
-//    }
-
-    //Exemple per retornar una resposta
 
     @POST      //Cal canviar a post
     @Path("/cambiarPass") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
@@ -136,12 +87,13 @@ public class ServicioRest {
 
     }
 
-    @GET
+   /* @GET //FALTA ARREGLAR CILIA
     @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
+
         return mundoImpl.listaUsuarios();
-    }
+    }*/
 
     @GET
     @Path("/listaObjetos") //LIST OBJET
