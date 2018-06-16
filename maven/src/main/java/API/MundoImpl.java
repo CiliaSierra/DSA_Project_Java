@@ -3,6 +3,7 @@ package API;
 import celdas.Mapa;
 import dao.DAOImpl;
 import jugador.Usuario;
+import org.eclipse.persistence.mappings.converters.ConverterClass;
 
 import java.util.*;
 
@@ -20,7 +21,7 @@ public class MundoImpl implements MundoInterfaz {
         return mundoImpl;
     }
 
-    public Map<String, Usuario> usuarios = new HashMap<>();
+    public Map<String, Usuario> usuarios = new HashMap<String, Usuario>();
 
     private List<Mapa> mapas = new ArrayList<>();
 
@@ -50,13 +51,13 @@ public class MundoImpl implements MundoInterfaz {
             return false;
     }
 
-    public Usuario register(Usuario usuario) throws Exception {
+    public Usuario register(Usuario usuario) throws Exception {     //REGISTRO EN LA BASE DE DATOS
         try {
             return DAOImpl.getInstance().insertUser(usuario);
         } catch (Exception e) {
             throw new Exception(e);
         }
-    }
+    }       //REGISTRAR BASE DE DATOS
 
     public boolean registerBool(Usuario usuario){
         try{
@@ -68,7 +69,26 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
-        public boolean deleteUser(Usuario usuario) throws Exception {
+    public boolean crearUsuario(Usuario usuario) throws Exception{  //CREAR USUARIO EN EL HASHMAP
+        try{
+            if(usuarios.containsKey(usuario.getNombre()))
+                return false; //ya hay un ususarios creado con ese nombre
+            else {
+                usuarios.put(usuario.getNombre(), usuario);
+                return true;
+            }
+        }
+        catch (Exception e) {
+            throw new Exception(e);
+        }
+
+    }       //REGISTRAR HASHMAP
+    @Override
+    public boolean eliminarUsuario(String nombre) {
+        return false;
+    }
+
+    public boolean deleteUser(Usuario usuario) throws Exception {     //ELIMINAR DE LA BASE DE DATOS
         try {
             DAOImpl.getInstance().delete(usuario);
             return true;
@@ -78,25 +98,24 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
-    //usuario
-    public boolean crearUsuario(Usuario u){
-        if(usuarios.containsKey(u.getNombre()))
-            return false;
-        else{
-            usuarios.put(u.getNombre(), u);
-            return true;
+    public boolean eliminarUsuario(Usuario usuario) throws Exception{  //ELIMINAR DEL HASHMAP
+        try {
+            if (usuarios.get(usuario.getNombre()).getPassword().equals(usuario.getPassword())){
+                return usuarios.remove(usuario.getNombre())!=null;
+            }
+            else
+                return false;
         }
-    }
-
-    public boolean eliminarUsuario(String nombre){
-        return usuarios.remove(nombre) != null;
+        catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
     }
 
-    public boolean cambiarPass(String nombre, String pass){
+    public boolean cambiarPass(String nombre, String pass){         //CAMBAIR PASS HASH MAP ¿BASE DE DATOS?
         if (usuarios.get(nombre)!=null) {
             if (pass.equals(usuarios.get(nombre).getPassword()))
                 return false;//contraseña igual a la anterior
@@ -111,11 +130,13 @@ public class MundoImpl implements MundoInterfaz {
 
     }
 
-    public List<Usuario> listaUsuarios (){
-
-        List<Usuario> user = new ArrayList<>();
-        //recoremos el HashMap de usuarios y vamos añadiendolo a las lista de usuarios
-        //user.add(usuarios.values());//Me devuelve una coleccion de los usuarios
+    public List<Object> listaUsuarios (){
+        List<Object> user = new ArrayList<>();
+        Iterator iterator = usuarios.keySet().iterator();
+        while(iterator.hasNext()){
+            Object key = iterator.next();
+            user.add(key);
+        }
         return user;
     }
 

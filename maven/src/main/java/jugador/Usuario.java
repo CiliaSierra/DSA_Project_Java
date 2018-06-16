@@ -78,6 +78,9 @@ public class Usuario implements Serializable {
         this.Obj4=0;
     }
 
+    public Usuario (String nombre, String pass){
+        new Usuario(0,nombre,pass,null,null,0);
+    }
     public Usuario(String nombre, String password, String email){
         //funcio per que en les proves on no es posa un id el codi no peti
         new Usuario(1, nombre,password,email,imagen,ultimaposicion);

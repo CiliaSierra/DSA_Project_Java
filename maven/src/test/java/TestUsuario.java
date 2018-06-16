@@ -17,7 +17,7 @@ public class TestUsuario {
     private MundoImpl mundo;
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
         mundo = MundoImpl.getInstance();
         usuario1 = new Usuario(2,"Carlos", "123456789", "carlos@gmail.com", "imagen1",2);
         usuario2 = new Usuario(3,"Pedro", "123456789", "pedro@gmail.com","imagen2",3 );
@@ -36,7 +36,7 @@ public class TestUsuario {
     }
 
     @Test
-    public void crearUsuario(){
+    public void crearUsuario() throws Exception {
         logger.info("Test: Creando usuario");
         boolean res = mundo.crearUsuario(usuario3);
         Assert.assertEquals(true,res);

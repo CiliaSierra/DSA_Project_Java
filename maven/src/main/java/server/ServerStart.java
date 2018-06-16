@@ -30,10 +30,10 @@ public class ServerStart {
         // exposing the Jersey application at BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
-    /**
-     * Main method.
-     * @param args
-     * @throws IOException
+    /*
+      Main method.
+      @param args
+      @throws IOException
      */
 
     public static void main(String[] args) throws IOException {
@@ -42,10 +42,8 @@ public class ServerStart {
         StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./public/");
         server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
 
-
         System.out.println(String.format("Jersey app started with WADL available at "
                 + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
-
 
         //Keep server on until input is intered
         System.in.read();
