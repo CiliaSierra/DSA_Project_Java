@@ -45,7 +45,7 @@ public class ServicioRest {
     }
     @POST
     @Path("/consultarUsuario2") //LOGIN
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response consultarUsuario(Usuario usuario) throws SQLException {
         boolean result = mundoImpl.loginBool(usuario);
         if (result)//consulta al dao null point exception   pass.equals("pass")
@@ -55,7 +55,7 @@ public class ServicioRest {
     }
 
     @POST //CILIA HE BORRADO EL OTRO QUE HABIA, NO SE SI TU LO UTILIZABAS me acabo de dar cuenta
-    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
     public Response register(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
        Usuario usuario = new Usuario(user,pass,email);
@@ -66,18 +66,6 @@ public class ServicioRest {
             return Response.status(409).entity(result).build();//Register realizado incorrecte
 
     }
-    @POST
-    @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response register(Usuario user) throws SQLException  {
-        boolean result = mundoImpl.registerBool(user);
-        if (result == true)
-            return Response.status(201).entity(result).build();//Register realizado correcte
-        else
-            return Response.status(409).entity(result).build();//Register realizado incorrecte
-
-    }
-
 
     @POST
     @Path("/cambiarPass") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
@@ -93,7 +81,8 @@ public class ServicioRest {
         else
             return Response.status(400).build();//las contraseñas no coiciden
     }
-    @POST      //Cal canviar a post
+
+    @POST
     @Path("/cambiarPass2") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
     @Produces(MediaType.APPLICATION_JSON)
     public Response cambiarPass(Usuario usuario) {
@@ -119,7 +108,7 @@ public class ServicioRest {
 
     }
 
-   /* @GET //FALTA ARREGLAR CILIA
+    /*@GET //FALTA ARREGLAR CILIA
     @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
