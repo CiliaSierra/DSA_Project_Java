@@ -15,9 +15,9 @@ public interface MundoInterfaz {
 
     boolean logInSara(String nombre, String pass);
     boolean cambiarPass(String nombre, String pass);
-    boolean crearUsuario(Usuario u);
+    boolean crearUsuario(Usuario u) throws Exception;
     boolean eliminarUsuario(String nombre);
     String consultarUsuario(String nombre);
-    List<Usuario> listaUsuarios ();
+    List<Object> listaUsuarios ();
 
 }
