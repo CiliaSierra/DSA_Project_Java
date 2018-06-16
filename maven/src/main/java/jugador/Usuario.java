@@ -2,34 +2,65 @@ package jugador;
 
 import celdas.Views;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.Expose;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.io.Serializable;
 
 
-public class Usuario {
-
+public class Usuario implements Serializable {
     @JsonView(Views.Normal.class)
+    @SerializedName("id")
+    @Expose
     private int id;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("nombre")
+    @Expose
     private String nombre;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("password")
+    @Expose
     private String password;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("email")
+    @Expose
     private String email;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("imagen")
+    @Expose
     private String imagen;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("ultimaposicion")
+    @Expose
     private int ultimaposicion;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("Obj1")
+    @Expose
     private int Obj1;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("Obj2")
+    @Expose
     private int Obj2;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("Obj3")
+    @Expose
     private int Obj3;
+
     @JsonView(Views.Normal.class)
+    @SerializedName("Obj4")
+    @Expose
     private int Obj4;
 
     //Constructores

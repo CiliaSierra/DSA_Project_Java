@@ -10,6 +10,7 @@ public interface MundoInterfaz {
     Usuario login(Usuario usuario) throws Exception;
 
     Usuario register(Usuario usuario) throws Exception;
+    boolean registerBool(Usuario usuario) throws Exception;
 
     boolean deleteUser(Usuario usuario) throws Exception;
 
