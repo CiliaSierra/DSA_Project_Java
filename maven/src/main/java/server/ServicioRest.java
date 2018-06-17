@@ -54,7 +54,20 @@ public class ServicioRest {
             return Response.status(403).entity(result).build();//Login Incorrecte (las contraseñas no coiciden)
     }
 
-    @POST //CILIA HE BORRADO EL OTRO QUE HABIA, NO SE SI TU LO UTILIZABAS me acabo de dar cuenta
+    @POST
+    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response crearUsuario(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
+        Usuario usuario = new Usuario(user,pass,email);
+        boolean result = mundoImpl.registerBool(usuario);
+        if (result) {
+            return Response.status(201).build();//Register realizado correcte
+        } else
+            return Response.status(403).build();//Register realizado incorrecte
+
+    }
+
+    @POST
     @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
     public Response register(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
