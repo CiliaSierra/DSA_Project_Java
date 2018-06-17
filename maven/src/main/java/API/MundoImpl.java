@@ -145,10 +145,15 @@ public class MundoImpl implements MundoInterfaz {
         return user;
     }
 
-    /*public List<Usuario> listaUsuarioSara(){ //HACER AQUI LA FUNCION DE ENCONTRAR TODOS LOS USUARIOS
-        List <Usuario> listau = Usuario.findAll();
-        return listau;
-    }*/
+    public List<Usuario> listaUsuario(){ //HACER AQUI LA FUNCION DE ENCONTRAR TODOS LOS USUARIOS
+        List <Usuario> lista = new ArrayList<>();
+        for (int i =0; i<usuarios.size();i++){
+            boolean res = lista.add(usuarios.get(i));
+
+        }
+
+        return lista;
+    }
 
     public List<Integer> listaObjetos(String user){
         List<Integer> obj = new ArrayList<>();

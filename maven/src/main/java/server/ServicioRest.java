@@ -121,13 +121,12 @@ public class ServicioRest {
 
     }
 
-    /*@GET //FALTA ARREGLAR CILIA
+    @GET //FALTA ARREGLAR CILIA
     @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
-
-        return mundoImpl.listaUsuarios();
-    }*/
+        return mundoImpl.listaUsuario();
+    }
 
     @GET
     @Path("/listaObjetos") //LIST OBJET
