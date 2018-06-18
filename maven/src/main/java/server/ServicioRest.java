@@ -43,11 +43,12 @@ public class ServicioRest {
       else
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
     }
-    @POST
+    @POST //Sin DAO
     @Path("/consultarUsuario2") //LOGIN
     @Produces(MediaType.TEXT_PLAIN)
     public Response consultarUsuario(Usuario usuario) throws SQLException {
-        boolean result = mundoImpl.loginBool(usuario);
+        Usuario u = usuario;
+        boolean result = mundoImpl.logInSara(u.getEmail(), u.getPassword());
         if (result)//consulta al dao null point exception   pass.equals("pass")
             return Response.status(200).entity(result).build();//Login Correcte;
         else
@@ -67,12 +68,24 @@ public class ServicioRest {
 
     }
 
-    @POST
+//    @POST //Sin DAO
+//    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+//    @Produces(MediaType.TEXT_PLAIN)
+//    public Response register(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
+//       Usuario usuario = new Usuario(user,pass,email);
+//        boolean result = mundoImpl.crearUsuario(usuario);
+//        if (result) {
+//            return Response.status(201).entity(result).build();//Register realizado correcte
+//        } else
+//            return Response.status(409).entity(result).build();//Register realizado incorrecte
+//
+//    }
+
+    @POST //Sin DAO
     @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
-    public Response register(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
-       Usuario usuario = new Usuario(user,pass,email);
-        boolean result = mundoImpl.registerBool(usuario);
+    public Response register(Usuario usuario) throws Exception  {
+        boolean result = mundoImpl.crearUsuario(usuario);
         if (result) {
             return Response.status(201).entity(result).build();//Register realizado correcte
         } else
@@ -83,23 +96,21 @@ public class ServicioRest {
     @POST
     @Path("/cambiarPass") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
     @Produces(MediaType.APPLICATION_JSON)
-    public Response cambiarPass(@FormParam("user") String user,@FormParam("pass") String pass, @FormParam("pass2") String pass2){
-        if (pass.equals(pass2)){
+    public Response cambiarPass(@FormParam("user") String user,@FormParam("pass") String pass){
             boolean result = mundoImpl.cambiarPass(user,pass);
             if( result)
                 return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente
             else
                 return Response.status(403).entity(result).build();//Error al cambiar contraseña
-        }
-        else
-            return Response.status(400).build();//las contraseñas no coiciden
     }
 
     @POST
     @Path("/cambiarPass2") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response cambiarPass(Usuario usuario) {
-            boolean result = mundoImpl.cambiarPass(usuario);
+        Usuario u = usuario;
+        boolean result = mundoImpl.cambiarPass(u.getNombre(),u.getPassword());
+
             if( result)
                 return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente
             else
@@ -121,12 +132,27 @@ public class ServicioRest {
 
     }
 
-    @GET //FALTA ARREGLAR CILIA
+    @GET
     @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)
     public List<Usuario> listaUsuarios () {
         return mundoImpl.listaUsuario();
     }
+
+    @POST
+    @Path("/unUsuario") //LIST de un usuario si me llega un USER
+    @Produces(MediaType.APPLICATION_JSON) //@Produces(MediaType.TEXT_PLAIN)
+    public Usuario unUsuario (Usuario usuario) throws Exception {
+        return mundoImpl.unUsuario(usuario);
+    }
+
+    /*@GET
+    @Path("/unUsuario/{idemail}") //LIST de un usuario si me llega un USER
+    @Produces(MediaType.APPLICATION_JSON) //@Produces(MediaType.TEXT_PLAIN)
+    public Usuario unUsuario (@Path("idemail") String idemail) {
+        return mundoImpl.unUsuario2(idemail);
+    }*/
+
 
     @GET
     @Path("/listaObjetos") //LIST OBJET

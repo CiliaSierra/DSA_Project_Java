@@ -43,8 +43,8 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
-    public boolean logInSara(String nombre, String pass){
-        if(pass.equals(usuarios.get(nombre).getPassword())){
+    public boolean logInSara(String email, String pass){
+        if(pass.equals(usuarios.get(email).getPassword())){
             return true;
         }
         else
@@ -153,6 +153,22 @@ public class MundoImpl implements MundoInterfaz {
         }
 
         return lista;
+    }
+
+    public Usuario unUsuario(Usuario user){
+
+        String idemail = user.getEmail();
+
+        Usuario u = usuarios.get(idemail);
+
+        return u;
+    }
+
+    public Usuario unUsuario2(String idemail){
+
+        Usuario u = usuarios.get(idemail);
+
+        return u;
     }
 
     public List<Integer> listaObjetos(String user){
