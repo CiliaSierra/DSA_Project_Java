@@ -17,6 +17,7 @@ import java.util.List;
 
 public class ServicioRest {
     protected MundoImpl  mundoImpl;
+    String usuarioslog;
     public ServicioRest(){
         mundoImpl = API.MundoImpl.getInstance();
     }
@@ -36,8 +37,9 @@ public class ServicioRest {
     @POST
     @Path("/consultarUsuario") //LOGIN
     @Produces(MediaType.APPLICATION_JSON)
-    public Response consultarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) throws Exception {
+    public Response consultarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) {
         Usuario usuario = new Usuario(user,pass);
+        usuarioslog = user;
       if (mundoImpl.loginBool(usuario))//consulta al dao null point exception   pass.equals("pass")
           return Response.status(200).build();//Login Correcte;
       else
@@ -58,8 +60,9 @@ public class ServicioRest {
     @POST
     @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
-    public Response crearUsuario(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
+    public Response crearUsuario(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email)   {
         Usuario usuario = new Usuario(user,pass,email);
+        usuarioslog=user;
         boolean result = mundoImpl.registerBool(usuario);
         if (result) {
             return Response.status(201).build();//Register realizado correcte
