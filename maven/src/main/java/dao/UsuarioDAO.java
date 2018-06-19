@@ -27,10 +27,11 @@ public class UsuarioDAO {
 
     private Connection getConnection() throws Exception {
 
+        String jdbc = "jdbc:mysql://147.83.7.203:22/juego";
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("147.83.7.203", "dsa0", "Mazinger72");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(jdbc, "dsa0", "Mazinger72");
 
             logger.info("Conectado a la base de datos");
 
@@ -41,7 +42,7 @@ public class UsuarioDAO {
         }
     }
 
-    public Usuario selectUserByUsernameAndPw(String username, String password) throws Exception {
+    public Usuario selectUserByUsernameAndPw(String email, String password) throws Exception {
 
         Usuario u = new Usuario();
         Connection con = getConnection();
@@ -52,7 +53,7 @@ public class UsuarioDAO {
             String query = "SELECT * FROM Usuario WHERE email=? AND password=? ";
 
             st = con.prepareStatement(query);
-            st.setObject(1, username);
+            st.setObject(1, email);
             st.setObject(2, password);
 
             rs = st.executeQuery();
