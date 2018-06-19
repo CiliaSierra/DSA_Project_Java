@@ -2,6 +2,7 @@ package API;
 
 import celdas.Mapa;
 import dao.DAOImpl;
+import dao.UsuarioDAO;
 import jugador.Usuario;
 import org.eclipse.persistence.mappings.converters.ConverterClass;
 
@@ -29,6 +30,15 @@ public class MundoImpl implements MundoInterfaz {
         try {
             return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
         } catch (Exception e) {
+            throw new Exception(e);
+        }
+    }
+
+    public Usuario login2 (Usuario usuario) throws Exception {
+        try {
+            return UsuarioDAO.getInstance().selectUserByUsernameAndPw(usuario.getEmail(), usuario.getPassword());
+        }
+        catch (Exception e){
             throw new Exception(e);
         }
     }
