@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es-ES"
+<head>
+	<!--Para para el registro de un nuevo Usuario-->
+	<title> Sing Up </title>
+	<meta charset="utf-8">	
+</head>
+<body background="fondo.jpg">
+
+	<H2><font size = 10 color="Brown"> <tt> <u> REMEMBER </u> </tt> </font> </H2>
+	<img src= "logo.png" float=left width="128" height="128">
+	<H4> <font color="white"> Welcome to Remember!<br>On this game you will have to try your <br> best in order to find all the pieces of <br> your own story, to try to remember. <br>Fill the information and let the adventure begin </font> </H4>
+	<form action="http://192.168.0.14:8080/myapp/funciones/crearUsuario" method= "POST">
+
+	<label for="Usuario:"> <font color="gray"> Email:</font></label>
+	<input type="text" name = "ususario" id="usuario"> 
+	<br><br>
+	<label for="Email:"> <font color="gray"> User:</font></label>
+	<input type="text" name = "email" id="email"> 
+	<br><br>
+	<label for="Password:"> <font color="gray"> Password:</font></label>
+	<input type="password" name = "pass" id="pass"> 
+	<br><br>
+	<label for="Password:"> <font color="gray"> Password:</font></label>
+	<input type="password" name = "pass2" id="pass2"> 
+	<br><br>
+	
+	<input type="submit" value="Sing Up" style='width:90px; height:30px'/>
+	</form>
+	<br>
+	<a href="Login.html">Menu </a>
+</body>
+</html>

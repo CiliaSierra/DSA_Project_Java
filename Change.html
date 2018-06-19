@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es-ES"
+<head>
+	<!--Para para el cambio de contraseña-->
+	<title> Change pass </title>
+	<meta charset="utf-8">
+</head>
+<body background="fondo.jpg">
+
+	<H2><font size = 10 color="Brown"> <tt> <u> REMEMBER </u> </tt> </font> </H2>
+	<img src= "logo.png" float=left width="128" height="128">
+	<H4> <font color="white"> In order to change you password <br>you will need to fill all the following information.</font> </H4>
+
+	<form action="http://192.168.1.47:8080/myapp/funciones/cambiarPass" method= "POST">
+	<label for="Usuario:"><font color="gray"> Email:</font></label>
+	<input type="text" name = "user" id="user"> 
+	<br><br>
+	<label for="Password:"><font color="gray">Nueva Password:</font></label>
+	<input type="password" name = "pass" id="pass"> 
+	<br><br>
+	<label for="Password:"><font color="gray">Repite Password:</font></label>
+	<input type="password" name = "pass2" id="pass2"> 
+	<br><br>
+	<input type="submit" value="Change" style='width:90px; height:30px'>
+	</form>
+<hr>
+</body>
+</html>
