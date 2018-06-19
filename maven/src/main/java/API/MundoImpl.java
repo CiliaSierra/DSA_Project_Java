@@ -169,7 +169,6 @@ public class MundoImpl implements MundoInterfaz {
         List <Usuario> lista = new ArrayList<>();
         for (int i =0; i<usuarios.size();i++){
             boolean res = lista.add(usuarios.get(i));
-
         }
 
         return lista;

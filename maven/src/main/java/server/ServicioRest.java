@@ -48,9 +48,9 @@ public class ServicioRest {
 
     @POST
     @Path("/consultarUsuario3") //Login nuevo UsuarioDAO
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response consultarusuario3 (@FormParam("email") String email, @FormParam("pass") String pass)  {
-        Usuario usuario = new Usuario(email,pass);
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response consultarusuario3 (Usuario usuario)  {
+        //Usuario usuario = new Usuario(email,pass);
 
         if (mundoImpl.loginBool2(usuario)) {
             return Response.status(200).build();
@@ -65,7 +65,7 @@ public class ServicioRest {
     @Produces(MediaType.TEXT_PLAIN)
     public Response consultarUsuario(Usuario usuario) throws SQLException {
         Usuario u = usuario;
-        boolean result = mundoImpl.logInSara(u.getEmail(), u.getPassword());
+        boolean result = mundoImpl.loginBool(u/*u.getEmail(), u.getPassword()*/);
         if (result)//consulta al dao null point exception   pass.equals("pass")
             return Response.status(200).entity(result).build();//Login Correcte;
         else
