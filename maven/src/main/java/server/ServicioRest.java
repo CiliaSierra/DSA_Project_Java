@@ -49,8 +49,7 @@ public class ServicioRest {
     @POST
     @Path("/consultarUsuario3") //Login nuevo UsuarioDAO
     @Produces(MediaType.APPLICATION_JSON)
-    public Response consultarusuario3 (@FormParam("email") String email, @FormParam("pass") String pass)  {
-        Usuario usuario = new Usuario(email,pass);
+    public Response consultarusuario3 (Usuario usuario)  {
 
         if (mundoImpl.loginBool2(usuario)) {
             return Response.status(200).build();
