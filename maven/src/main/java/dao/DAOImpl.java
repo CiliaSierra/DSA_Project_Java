@@ -91,6 +91,7 @@ public class DAOImpl {
         PreparedStatement preparedStatement = con.prepareStatement(query);
         preparedStatement.setObject(1, username);
         preparedStatement.setObject(2, password);
+
         ResultSet resultSet = preparedStatement.executeQuery();
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
 

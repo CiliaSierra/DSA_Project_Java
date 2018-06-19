@@ -78,10 +78,6 @@ public class Usuario implements Serializable {
         this.Obj4=0;
     }
 
-    public Usuario (String nombre, String pass){
-        new Usuario(id+1,""+nombre,""+pass,null,null,0);
-    }
-
     public Usuario(String nombre, String password, String email){
         //funcio per que en les proves on no es posa un id el codi no peti
         new Usuario(id+0, ""+ nombre, ""+password,""+email,null,0);
@@ -91,6 +87,13 @@ public class Usuario implements Serializable {
     public Usuario(){
 
      }
+
+    public Usuario (String email, String password){
+
+        this.setEmail(email);
+        this.setPassword(password);
+
+    }
 
     @Override
     public String toString(){
