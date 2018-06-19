@@ -43,6 +43,16 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
+    public boolean loginBool2 (Usuario usuario){
+        try{
+            login2(usuario);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
     public boolean loginBool(Usuario usuario){
         try{
             login(usuario);

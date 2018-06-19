@@ -45,6 +45,21 @@ public class ServicioRest {
       else
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
     }
+
+    @POST
+    @Path("/consultarUsuario3") //Login nuevo UsuarioDAO
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultarusuario3 (@FormParam("email") String email, @FormParam("pass") String pass)  {
+        Usuario usuario = new Usuario(email,pass);
+
+        if (mundoImpl.loginBool2(usuario)) {
+            return Response.status(200).build();
+        }
+        else {
+            return Response.status(400).build();
+        }
+    }
+
     @POST //Sin DAO
     @Path("/consultarUsuario2") //LOGIN
     @Produces(MediaType.TEXT_PLAIN)
