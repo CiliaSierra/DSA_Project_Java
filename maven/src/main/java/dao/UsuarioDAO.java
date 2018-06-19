@@ -27,11 +27,11 @@ public class UsuarioDAO {
 
     private Connection getConnection() throws Exception {
 
-        String jdbc = "jdbc:mysql://147.83.7.203:22/juego";
+        String jdbc = "jdbc:mysql://147.83.7.203:3306/juego";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(jdbc, "dsa0", "Mazinger72");
+            Connection con = DriverManager.getConnection(jdbc, "EETACDSA0", "eetacdsa0");
 
             logger.info("Conectado a la base de datos");
 
