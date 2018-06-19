@@ -36,7 +36,7 @@ public class DAOImpl {
 
 
             return con;
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new Exception(e);
         }
     }
@@ -107,15 +107,6 @@ public class DAOImpl {
         return object;
     }
 
-    private String getSelectWithUsernameAndPwQuery(Object object) {
-        StringBuilder query = new StringBuilder("SELECT * FROM ");
-        query.append(object.getClass().getSimpleName());
-        query.append(" WHERE name=?");
-        query.append(" AND password=?");
-
-        return query.toString();
-    }
-
     public Usuario selectUserByUsernameAndPw(String username, String password) throws Exception {
         Usuario u = new Usuario();
         try {
@@ -123,6 +114,15 @@ public class DAOImpl {
         } catch (Exception e) {
             throw new Exception(e);
         }
+    }
+
+    private String getSelectWithUsernameAndPwQuery(Object object) {
+        StringBuilder query = new StringBuilder("SELECT * FROM ");
+        query.append(object.getClass().getSimpleName());
+        query.append(" WHERE nombre=?");
+        query.append(" AND password=?");
+
+        return query.toString();
     }
 
     public Usuario insertUser(Usuario usuario) throws Exception {
