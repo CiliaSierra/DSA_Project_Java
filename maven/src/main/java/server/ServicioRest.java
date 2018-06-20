@@ -35,37 +35,23 @@ public class ServicioRest {
 
     //FUNCIONES de MundoInterfaz
     @POST
-    @Path("/consultarUsuario") //LOGIN
+    @Path("/consultarUsuario") //Login WEB
     @Produces(MediaType.APPLICATION_JSON)
     public Response consultarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) {
         Usuario usuario = new Usuario(user,pass);
         usuarioslog = user;
-      if (mundoImpl.loginBool(usuario))//consulta al dao null point exception   pass.equals("pass")
+      if (mundoImpl.loginBool2(usuario))//consulta al dao null point exception   pass.equals("pass")
           return Response.status(200).build();//Login Correcte;
       else
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
     }
 
     @POST
-    @Path("/consultarUsuario3") //Login nuevo UsuarioDAO
+    @Path("/consultarUsuario3") //Login Android
     @Produces(MediaType.TEXT_PLAIN)
-    public Response consultarusuario3 (Usuario usuario)  {
-        //Usuario usuario = new Usuario(email,pass);
+    public Response consultarusuario3 (Usuario usuario) throws SQLException {
 
-        if (mundoImpl.loginBool2(usuario)) {
-            return Response.status(200).build();
-        }
-        else {
-            return Response.status(400).build();
-        }
-    }
-
-    @POST //Sin DAO
-    @Path("/consultarUsuario2") //LOGIN
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response consultarUsuario(Usuario usuario) throws SQLException {
-        Usuario u = usuario;
-        boolean result = mundoImpl.loginBool(u/*u.getEmail(), u.getPassword()*/);
+        boolean result = mundoImpl.loginBool2(usuario);
         if (result)//consulta al dao null point exception   pass.equals("pass")
             return Response.status(200).entity(result).build();//Login Correcte;
         else
@@ -73,16 +59,28 @@ public class ServicioRest {
     }
 
     @POST
-    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
-    public Response crearUsuario(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email)   {
+    public Response register2(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
         Usuario usuario = new Usuario(user,pass,email);
         usuarioslog=user;
-        boolean result = mundoImpl.registerBool(usuario);
+        boolean result = mundoImpl.register(usuario);
         if (result) {
             return Response.status(201).build();//Register realizado correcte
         } else
             return Response.status(403).build();//Register realizado incorrecte
+
+    }
+
+    @POST //Register Android
+    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response register(Usuario usuario) throws Exception  {
+        boolean result = mundoImpl.register(usuario);
+        if (result) {
+            return Response.status(201).entity(result).build();//Register realizado correcte
+        } else
+            return Response.status(409).entity(result).build();//Register realizado incorrecte
 
     }
 
@@ -100,9 +98,9 @@ public class ServicioRest {
 //    }
 
     @POST //Sin DAO
-    @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Path("/crearUsuario0") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
     @Produces(MediaType.TEXT_PLAIN)
-    public Response register(Usuario usuario) throws Exception  {
+    public Response registerSinDAO(Usuario usuario) throws Exception  {
         boolean result = mundoImpl.crearUsuario(usuario);
         if (result) {
             return Response.status(201).entity(result).build();//Register realizado correcte

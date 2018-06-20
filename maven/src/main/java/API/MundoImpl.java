@@ -26,13 +26,7 @@ public class MundoImpl implements MundoInterfaz {
 
     private List<Mapa> mapas = new ArrayList<>();
 
-    public Usuario login(Usuario usuario) throws Exception {
-        try {
-            return DAOImpl.getInstance().selectUserByUsernameAndPw(usuario.getNombre(), usuario.getPassword());
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
+
 
     public Usuario login2 (Usuario usuario) throws Exception {
         try {
@@ -53,15 +47,6 @@ public class MundoImpl implements MundoInterfaz {
         }
     }
 
-    public boolean loginBool(Usuario usuario){
-        try{
-            login(usuario);
-            return true;
-        }
-        catch (Exception e){
-            return  false;
-        }
-    }
 
     public boolean logInSara(String email, String pass){
         if(pass.equals(usuarios.get(email).getPassword())){
@@ -76,23 +61,17 @@ public class MundoImpl implements MundoInterfaz {
         return false;
     }
 
-    public Usuario register(Usuario usuario) throws Exception {     //REGISTRO EN LA BASE DE DATOS
-        try {
-            return DAOImpl.getInstance().insertUser(usuario);
-        } catch (Exception e) {
-            throw new Exception(e);
-        }
-    }       //REGISTRAR BASE DE DATOS
 
-    public boolean registerBool(Usuario usuario){
+    public boolean register (Usuario usuario) throws Exception {  //REGISTRO EN LA BASE DE DATOS
         try{
-            register(usuario);
+            UsuarioDAO.getInstance().insertUser(usuario);
             return true;
         }
         catch (Exception e){
             return false;
         }
     }
+
 
     public boolean crearUsuario(Usuario usuario) throws Exception{  //CREAR USUARIO EN EL HASHMAP
         try{

@@ -7,11 +7,10 @@ import java.util.List;
 
 public interface MundoInterfaz {
 
-    Usuario login(Usuario usuario) throws Exception; //DAO
-    boolean loginBool(Usuario usuario) throws Exception; //DAO
+    Usuario login2(Usuario usuario) throws Exception; //DAO
+    boolean loginBool2(Usuario usuario) throws Exception; //DAO
 
-    Usuario register(Usuario usuario) throws Exception; //DAO
-    boolean registerBool(Usuario usuario) throws Exception; //DAO
+    public boolean register (Usuario usuario) throws Exception;
 
     boolean deleteUser(Usuario usuario) throws Exception; //DAO
 
