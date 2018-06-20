@@ -157,7 +157,7 @@ public class UsuarioDAO {
             }
         }
 
-    }
+    } // Cambiar password
 
     public void eliminarUsuario (Usuario usuario) throws Exception{
 
@@ -190,6 +190,15 @@ public class UsuarioDAO {
             }
         }
 
+
+    } // Eliminar user
+
+    public Usuario infoUsuario (Usuario usuario) throws Exception {
+
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String query = "SELECT * FROM Usuario WHERE email=? AND password=? ";
 
     }
 
