@@ -46,6 +46,17 @@ public class ServicioRest {
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
     }
 
+    //FUNCIONES de MundoInterfaz
+    @POST
+    @Path("/consultarUsuario2") //Login ANDROID DAO
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response consultarUsuario(Usuario user) {
+        if (mundoImpl.loginBool2(user))//consulta al dao null point exception   pass.equals("pass")
+            return Response.status(200).build();//Login Correcte;
+        else
+            return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
+    }
+
     @POST //Register Web
     @Path("/crearUsuario2")
     @Produces(MediaType.TEXT_PLAIN)
