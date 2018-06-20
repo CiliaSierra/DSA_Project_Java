@@ -159,6 +159,40 @@ public class UsuarioDAO {
 
     }
 
+    public void eliminarUsuario (Usuario usuario) throws Exception{
+
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        String query = "DELETE FROM Usuario WHERE email=? AND password=?";
+
+        try {
+
+            st = con.prepareStatement(query);
+            st.setString(1,usuario.getEmail());
+            st.setString(2,usuario.getPassword());
+
+            if (st.executeUpdate() ==0){
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+        finally {
+            if (st != null){
+                try { st.close();
+                    logger.info("El usuario con mail: "+usuario.getEmail()+" ha sido eliminado");
+                }
+                catch (Exception e) {
+                    new Exception();
+                }
+
+            }
+        }
+
+
+    }
+
     // Funciones Auxiliares
 
     public Usuario convertirLogin (ResultSet rs) throws Exception{

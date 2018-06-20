@@ -84,32 +84,10 @@ public class ServicioRest {
 
     }
 
-    @POST //Sin DAO
-    @Path("/crearUsuario0") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response registerSinDAO(Usuario usuario) throws Exception  {
-        boolean result = mundoImpl.crearUsuario(usuario);
-        if (result) {
-            return Response.status(201).entity(result).build();//Register realizado correcte
-        } else
-            return Response.status(409).entity(result).build();//Register realizado incorrecte
 
-    }
-
-    @POST
+    @POST // Cambiar Password Android
     @Path("/cambiarPass") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response cambiarPass(@FormParam("user") String user,@FormParam("pass") String pass){
-            boolean result = mundoImpl.cambiarPass(user,pass);
-            if( result)
-                return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente
-            else
-                return Response.status(403).entity(result).build();//Error al cambiar contraseña
-    }
-
-    @POST // tiene que recibir un usuario con el mail original y la password nueva
-    @Path("/cambiarPass2") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN) // tiene que recibir un usuario con el mail original y la password nueva
     public Response cambiarPass(Usuario usuario) {
         Usuario u = usuario;
         boolean result = mundoImpl.cambiarPass(u);
@@ -121,17 +99,44 @@ public class ServicioRest {
 
     }
 
-    @DELETE
-    @Path("/eliminarUsuario") //ELIMINAR USER
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response eliminarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) throws Exception {
-        Usuario usuario = new Usuario(user,pass);
-        if (mundoImpl.eliminarUsuario(usuario)) {
-                mundoImpl.deleteUser(usuario);
-                return Response.status(200).build();//User eliminado con exito
-            }
-            else
-                return Response.status(403).build();//user no se ha podido eliminar o por que no exixte o porque la contraseña es incorrecta
+    @POST // Cambiar Password Web
+    @Path("/cambiarPass2") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
+    @Produces(MediaType.TEXT_PLAIN) // tiene que recibir un usuario con el mail original y la password nueva
+    public Response cambiarPass2 (@FormParam("user") String user, @FormParam("pass") String pass,@FormParam("email") String email) throws Exception {
+        Usuario usuario = new Usuario(user,pass,email);
+        boolean result = mundoImpl.cambiarPass(usuario);
+
+        if( result)
+            return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente
+        else
+            return Response.status(403).entity(result).build();//Error al cambiar contraseña
+
+    }
+
+
+    @POST //Eliminar usuario Web
+    @Path("/eliminarUsuario2")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response eliminarUsuario2(@FormParam("user") String user, @FormParam("pass") String pass,@FormParam("email") String email) throws Exception  {
+        Usuario usuario = new Usuario(user,pass,email);
+        usuarioslog=user;
+        boolean result = mundoImpl.eliminaruser(usuario);
+        if (result) {
+            return Response.status(201).build();//Register realizado correcte
+        } else
+            return Response.status(403).build();//Register realizado incorrecte
+
+    }
+
+    @POST //Eliminar usuario Android
+    @Path("/eliminarUsuario")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response eliminarUsuario(Usuario usuario) throws Exception  {
+        boolean result = mundoImpl.eliminaruser(usuario);
+        if (result) {
+            return Response.status(201).build();//Register realizado correcte
+        } else
+            return Response.status(403).build();//Register realizado incorrecte
 
     }
 
@@ -191,6 +196,18 @@ public class ServicioRest {
     @Consumes(MediaType.APPLICATION_JSON)
     public Boolean crearCuenta(@FormParam("titular") String titular) {
         return bancoImpl.crearCuenta(titular);
+    }
+
+    @POST //Sin DAO
+    @Path("/crearUsuario0") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response registerSinDAO(Usuario usuario) throws Exception  {
+        boolean result = mundoImpl.crearUsuario(usuario);
+        if (result) {
+            return Response.status(201).entity(result).build();//Register realizado correcte
+        } else
+            return Response.status(409).entity(result).build();//Register realizado incorrecte
+
     }
 }
 

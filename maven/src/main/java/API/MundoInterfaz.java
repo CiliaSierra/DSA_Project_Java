@@ -12,13 +12,12 @@ public interface MundoInterfaz {
 
     public boolean register (Usuario usuario) throws Exception;
 
-    boolean deleteUser(Usuario usuario) throws Exception; //DAO
+    boolean eliminaruser (Usuario usuario) throws Exception;
+
 
     boolean logInSara(String nombre, String pass);
     boolean cambiarPass(Usuario usuario);
     boolean crearUsuario(Usuario u) throws Exception;
-    boolean eliminarUsuario(String nombre);
-    String consultarUsuario(String nombre);
     List<Usuario> listaUsuario();
     Usuario unUsuario(Usuario user);
     Usuario unUsuario2(String idemail);

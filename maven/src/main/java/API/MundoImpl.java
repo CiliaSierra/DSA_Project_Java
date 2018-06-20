@@ -35,7 +35,7 @@ public class MundoImpl implements MundoInterfaz {
         catch (Exception e){
             throw new Exception(e);
         }
-    }
+    } // Login
 
     public boolean loginBool2 (Usuario usuario){
         try{
@@ -45,17 +45,7 @@ public class MundoImpl implements MundoInterfaz {
         catch (Exception e){
             return false;
         }
-    }
-
-
-    public boolean logInSara(String email, String pass){
-        if(pass.equals(usuarios.get(email).getPassword())){
-            return true;
-        }
-        else
-            return false;
-    }
-
+    } // Auxiliar Login
 
     public boolean cambiarPass(Usuario usuario) {
         try{
@@ -65,8 +55,7 @@ public class MundoImpl implements MundoInterfaz {
         catch (Exception e){
             return false;
         }
-    }
-
+    } // Cambiar contrasña
 
     public boolean register (Usuario usuario) throws Exception {  //REGISTRO EN LA BASE DE DATOS
         try{
@@ -76,50 +65,20 @@ public class MundoImpl implements MundoInterfaz {
         catch (Exception e){
             return false;
         }
-    }
+    } // Register
 
-
-    public boolean crearUsuario(Usuario usuario) throws Exception{  //CREAR USUARIO EN EL HASHMAP
+    public boolean eliminaruser (Usuario usuario) throws Exception{
         try{
-            if(usuarios.containsKey(usuario.getNombre()))
-                return false; //ya hay un ususarios creado con ese nombre
-            else {
-                usuarios.put(usuario.getNombre(), usuario);
-                return true;
-            }
-        }
-        catch (Exception e) {
-            throw new Exception(e);
-        }
-
-    }       //REGISTRAR HASHMAP
-    @Override
-    public boolean eliminarUsuario(String nombre) {
-        return false;
-    }
-
-    public boolean deleteUser(Usuario usuario) throws Exception {     //ELIMINAR DE LA BASE DE DATOS
-        try {
-            DAOImpl.getInstance().delete(usuario);
+            UsuarioDAO.getInstance().eliminarUsuario(usuario);
             return true;
         }
-        catch (Exception e) {
-            throw new Exception(e);
+        catch (Exception e){
+            return false;
         }
-    }
 
-    public boolean eliminarUsuario(Usuario usuario) throws Exception{  //ELIMINAR DEL HASHMAP
-        try {
-            if (usuarios.get(usuario.getNombre()).getPassword().equals(usuario.getPassword())){
-                return usuarios.remove(usuario.getNombre())!=null;
-            }
-            else
-                return false;
-        }
-        catch (Exception e) {
-            throw new Exception(e);
-        }
-    }
+    } // Eliminar usuario
+
+
 
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
@@ -169,11 +128,38 @@ public class MundoImpl implements MundoInterfaz {
         return obj;
     }
 
+    public boolean crearUsuario(Usuario usuario) throws Exception{  //CREAR USUARIO EN EL HASHMAP
+        try{
+            if(usuarios.containsKey(usuario.getNombre()))
+                return false; //ya hay un ususarios creado con ese nombre
+            else {
+                usuarios.put(usuario.getNombre(), usuario);
+                return true;
+            }
+        }
+        catch (Exception e) {
+            throw new Exception(e);
+        }
+
+    }       //REGISTRAR HASHMAP
+
     public List<Mapa> getMapas() {
         return mapas;
     }
 
+    public boolean logInSara(String email, String pass){
+        if(pass.equals(usuarios.get(email).getPassword())){
+            return true;
+        }
+        else
+            return false;
+    }
+
     public void setMapas(List<Mapa> mapas) {
         this.mapas = mapas;
+    }
+
+    public boolean eliminarUsuario(String nombre) {
+        return false;
     }
 }
