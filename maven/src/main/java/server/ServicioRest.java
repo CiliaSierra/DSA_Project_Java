@@ -46,18 +46,6 @@ public class ServicioRest {
           return Response.status(403).build();//Login Incorrecte (las contraseñas no coiciden)
     }
 
-    @POST
-    @Path("/consultarUsuario3") //Login Android SARA, retorna siempre true
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response consultarusuario3 (Usuario usuario) throws SQLException {
-
-        boolean result = mundoImpl.registerSara(usuario);
-        if (result)//consulta al dao null point exception   pass.equals("pass")
-            return Response.status(200).entity(result).build();//Login Correcte;
-        else
-            return Response.status(403).entity(result).build();//Login Incorrecte (las contraseñas no coiciden)
-    }
-
     @POST //Register Web
     @Path("/crearUsuario2")
     @Produces(MediaType.TEXT_PLAIN)
@@ -82,6 +70,17 @@ public class ServicioRest {
         } else
             return Response.status(409).entity(result).build();//Register realizado incorrecte
 
+    }
+
+    @POST
+    @Path("/crearUsuario3") //Register SARA siempre true
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response registerSara (Usuario usuario) throws SQLException {
+        boolean result = mundoImpl.registerSara(usuario);
+        if (result)
+            return Response.status(201).entity(result).build();//Register Correcte
+        else
+            return Response.status(409).entity(result).build();//Register Incorrecte
     }
 
 
