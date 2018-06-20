@@ -58,8 +58,8 @@ public class ServicioRest {
             return Response.status(403).entity(result).build();//Login Incorrecte (las contraseñas no coiciden)
     }
 
-    @POST
-    @Path("/crearUsuario2") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @POST //Register Web
+    @Path("/crearUsuario2")
     @Produces(MediaType.TEXT_PLAIN)
     public Response register2(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
         Usuario usuario = new Usuario(user,pass,email);
@@ -73,7 +73,7 @@ public class ServicioRest {
     }
 
     @POST //Register Android
-    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
+    @Path("/crearUsuario")
     @Produces(MediaType.TEXT_PLAIN)
     public Response register(Usuario usuario) throws Exception  {
         boolean result = mundoImpl.register(usuario);
@@ -83,19 +83,6 @@ public class ServicioRest {
             return Response.status(409).entity(result).build();//Register realizado incorrecte
 
     }
-
-//    @POST //Sin DAO
-//    @Path("/crearUsuario") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
-//    @Produces(MediaType.TEXT_PLAIN)
-//    public Response register(@FormParam("user") String user, @FormParam("pass") String pass, @FormParam("pass2") String pass2,@FormParam("email") String email) throws Exception  {
-//       Usuario usuario = new Usuario(user,pass,email);
-//        boolean result = mundoImpl.crearUsuario(usuario);
-//        if (result) {
-//            return Response.status(201).entity(result).build();//Register realizado correcte
-//        } else
-//            return Response.status(409).entity(result).build();//Register realizado incorrecte
-//
-//    }
 
     @POST //Sin DAO
     @Path("/crearUsuario0") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
