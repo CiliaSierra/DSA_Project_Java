@@ -169,8 +169,6 @@ public class ServicioRest {
 
 
 
-
-
     @GET
     @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)
@@ -229,16 +227,5 @@ public class ServicioRest {
         return bancoImpl.crearCuenta(titular);
     }
 
-    @POST //Sin DAO
-    @Path("/crearUsuario0") //REGISTRARSE http://192.168.1.41:8080/myapp/funciones/crearUsuario
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response registerSinDAO(Usuario usuario) throws Exception  {
-        boolean result = mundoImpl.crearUsuario(usuario);
-        if (result) {
-            return Response.status(201).entity(result).build();//Register realizado correcte
-        } else
-            return Response.status(409).entity(result).build();//Register realizado incorrecte
-
-    }
 }
 

@@ -145,20 +145,7 @@ public class MundoImpl implements MundoInterfaz {
         return obj;
     }
 
-    public boolean crearUsuario(Usuario usuario) throws Exception{  //CREAR USUARIO EN EL HASHMAP
-        try{
-            if(usuarios.containsKey(usuario.getNombre()))
-                return false; //ya hay un ususarios creado con ese nombre
-            else {
-                usuarios.put(usuario.getNombre(), usuario);
-                return true;
-            }
-        }
-        catch (Exception e) {
-            throw new Exception(e);
-        }
 
-    }       //REGISTRAR HASHMAP
 
     public List<Mapa> getMapas() {
         return mapas;
@@ -176,7 +163,4 @@ public class MundoImpl implements MundoInterfaz {
         this.mapas = mapas;
     }
 
-    public boolean eliminarUsuario(String nombre) {
-        return false;
-    }
 }

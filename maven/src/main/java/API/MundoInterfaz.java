@@ -20,7 +20,6 @@ public interface MundoInterfaz {
 
     boolean logInSara(String nombre, String pass);
     boolean cambiarPass(Usuario usuario);
-    boolean crearUsuario(Usuario u) throws Exception;
     List<Usuario> listaUsuario();
     Usuario unUsuario(Usuario user);
     Usuario unUsuario2(String idemail);
