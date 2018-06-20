@@ -35,7 +35,7 @@ public class ServicioRest {
 
     //FUNCIONES de MundoInterfaz
     @POST
-    @Path("/consultarUsuario") //Login WEB
+    @Path("/consultarUsuario") //Login WEB DAO
     @Produces(MediaType.APPLICATION_JSON)
     public Response consultarUsuario(@FormParam("user") String user, @FormParam("pass") String pass) {
         Usuario usuario = new Usuario(user,pass);
