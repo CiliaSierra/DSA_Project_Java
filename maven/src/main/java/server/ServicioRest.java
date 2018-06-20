@@ -47,11 +47,11 @@ public class ServicioRest {
     }
 
     @POST
-    @Path("/consultarUsuario3") //Login Android
+    @Path("/consultarUsuario3") //Login Android SARA, retorna siempre true
     @Produces(MediaType.TEXT_PLAIN)
     public Response consultarusuario3 (Usuario usuario) throws SQLException {
 
-        boolean result = mundoImpl.loginBool2(usuario);
+        boolean result = mundoImpl.registerSara(usuario);
         if (result)//consulta al dao null point exception   pass.equals("pass")
             return Response.status(200).entity(result).build();//Login Correcte;
         else

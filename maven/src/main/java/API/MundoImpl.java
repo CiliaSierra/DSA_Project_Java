@@ -159,6 +159,10 @@ public class MundoImpl implements MundoInterfaz {
             return false;
     }
 
+    public boolean registerSara(Usuario user){
+        return true;
+    }
+
     public void setMapas(List<Mapa> mapas) {
         this.mapas = mapas;
     }
