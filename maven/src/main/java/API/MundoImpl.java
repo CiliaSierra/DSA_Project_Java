@@ -56,9 +56,15 @@ public class MundoImpl implements MundoInterfaz {
             return false;
     }
 
-    @Override
-    public boolean cambiarPass(String nombre, String pass) {
-        return false;
+
+    public boolean cambiarPass(Usuario usuario) {
+        try{
+            UsuarioDAO.getInstance().cambiarPassword(usuario);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
 
@@ -117,21 +123,6 @@ public class MundoImpl implements MundoInterfaz {
 
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
-    }
-
-    public boolean cambiarPass(Usuario user){         //CAMBAIR PASS HASH MAP ¿BASE DE DATOS?
-        if (usuarios.get(user.getNombre())!=null) {
-            if (user.getPassword().equals(usuarios.get(user.getNombre()).getPassword()))
-                return false;//contraseña igual a la anterior
-
-            else {
-                usuarios.get(user.getNombre()).setPassword(user.getPassword());
-                return true;//contraseña cambiada correctamente
-            }
-        }
-        else
-            return false;
-
     }
 
     public List<Object> listaUsuarios (){

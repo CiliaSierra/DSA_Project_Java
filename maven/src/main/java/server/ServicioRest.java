@@ -107,12 +107,12 @@ public class ServicioRest {
                 return Response.status(403).entity(result).build();//Error al cambiar contraseña
     }
 
-    @POST
+    @POST // tiene que recibir un usuario con el mail original y la password nueva
     @Path("/cambiarPass2") //CAMBIAR PASS http://localhost:8080/myapp/funciones/cambiarPass?user=user&pass=123&pass2=123
     @Produces(MediaType.TEXT_PLAIN)
     public Response cambiarPass(Usuario usuario) {
         Usuario u = usuario;
-        boolean result = mundoImpl.cambiarPass(u.getNombre(),u.getPassword());
+        boolean result = mundoImpl.cambiarPass(u);
 
             if( result)
                 return Response.status(200).entity(result).build();//Contraseña cambiada adecuadamente

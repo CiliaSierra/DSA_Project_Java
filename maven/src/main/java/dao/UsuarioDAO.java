@@ -43,6 +43,8 @@ public class UsuarioDAO {
         }
     }
 
+    // Funciones Principales
+
     public Usuario selectUserByUsernameAndPw(String email, String password) throws Exception {
 
         Usuario u = new Usuario();
@@ -84,17 +86,9 @@ public class UsuarioDAO {
 
             }
         }
+        logger.info(u.getEmail()+" se ha conectado");
         return u;
-    }
-
-    public Usuario convertirLogin (ResultSet rs) throws Exception{
-
-        String email = rs.getString("email");
-        String password = rs.getString("password");
-        Usuario u = new Usuario(email,password);
-        u.setId(rs.getInt("id"));
-        return u;
-    }
+    } // Login
 
     public void insertUser(Usuario usuario) throws Exception {
 
@@ -120,7 +114,42 @@ public class UsuarioDAO {
         }
         finally {
             if (st != null){
-                try { st.close();}
+                try { st.close();
+                    logger.info(usuario.getEmail()+" se ha registrado con nombre "+usuario.getNombre());
+                }
+                catch (Exception e) {
+                    new Exception();
+                }
+
+            }
+        }
+
+    } // Register
+
+    public void cambiarPassword (Usuario usuario) throws Exception{
+
+        Connection con = getConnection();
+        PreparedStatement st = null;
+        String query = "UPDATE Usuario SET password =? WHERE email =?";
+
+        try {
+
+            st = con.prepareStatement(query);
+            st.setString(1,usuario.getPassword());
+            st.setString(2,usuario.getEmail());
+
+            if (st.executeUpdate() ==0){
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+        finally {
+            if (st != null){
+                try { st.close();
+                    logger.info("El usuario con mail: "+usuario.getEmail()+" ha modificado su password por: "+usuario.getPassword());
+                }
                 catch (Exception e) {
                     new Exception();
                 }
@@ -130,6 +159,16 @@ public class UsuarioDAO {
 
     }
 
+    // Funciones Auxiliares
+
+    public Usuario convertirLogin (ResultSet rs) throws Exception{
+
+        String email = rs.getString("email");
+        String password = rs.getString("password");
+        Usuario u = new Usuario(email,password);
+        u.setId(rs.getInt("id"));
+        return u;
+    }
 
     public int lastID () throws Exception{
         int lasid;

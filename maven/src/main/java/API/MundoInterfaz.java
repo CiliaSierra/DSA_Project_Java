@@ -15,7 +15,7 @@ public interface MundoInterfaz {
     boolean deleteUser(Usuario usuario) throws Exception; //DAO
 
     boolean logInSara(String nombre, String pass);
-    boolean cambiarPass(String nombre, String pass);
+    boolean cambiarPass(Usuario usuario);
     boolean crearUsuario(Usuario u) throws Exception;
     boolean eliminarUsuario(String nombre);
     String consultarUsuario(String nombre);
