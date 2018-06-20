@@ -94,6 +94,11 @@ public class Usuario implements Serializable {
 
     }
 
+    public Usuario (String email){
+
+        this.setEmail(email);
+    }
+
     @Override
     public String toString(){
         return "Nombre: " + getNombre() + " Password: " + getPassword();

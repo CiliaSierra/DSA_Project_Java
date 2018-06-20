@@ -140,6 +140,37 @@ public class ServicioRest {
 
     }
 
+
+    @POST
+    @Path("/infoUsuario2") //Info WEB
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response infoUsuario2 (@FormParam("email") String email) {
+        Usuario usuario = new Usuario(email);
+
+        if (mundoImpl.infobool(usuario))
+            return Response.status(200).build();
+        else
+            return Response.status(403).build();
+    }
+
+
+    @POST
+    @Path("/infoUsuario") //Login Android
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response infoUsuario (Usuario usuario) throws SQLException {
+
+        boolean result = mundoImpl.infobool(usuario);
+        if (result)
+            return Response.status(200).entity(result).build();
+        else
+            return Response.status(403).entity(result).build();
+    }
+
+
+
+
+
+
     @GET
     @Path("/listaUsuarios") //LIST DE USER
     @Produces(MediaType.APPLICATION_JSON)

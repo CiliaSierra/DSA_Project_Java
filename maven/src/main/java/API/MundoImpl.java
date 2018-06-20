@@ -78,9 +78,24 @@ public class MundoImpl implements MundoInterfaz {
 
     } // Eliminar usuario
 
+    public Usuario infoUsuario (Usuario usuario) throws Exception {
 
+        try {
+            return MundoImpl.getInstance().infoUsuario(usuario);
 
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
 
+    public boolean infobool (Usuario usuario){
+        try{
+        infoUsuario(usuario);
+        return true;
+    }
+    catch (Exception e){
+        return false;
+    }}
 
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
