@@ -65,23 +65,22 @@ public class Usuario implements Serializable {
 
     //Constructores
 
-    public Usuario(int id, String nombre, String password, String email, String imagen, int ultimaposicion){
+    public Usuario(int id, String nombre, String password, String email, String imagen, int ultimaposicion, int obj1, int obj2, int obj3, int obj4){
         this.setId(id);
         this.setNombre(nombre);
         this.setPassword(password);
         this.setEmail(email);
         this.setImagen(imagen);
         this.setUltimaposicion(ultimaposicion);
-        this.Obj1=0;
-        this.Obj2=0;
-        this.Obj3=0;
-        this.Obj4=0;
+        this.setObj1(obj1);
+        this.setObj2(obj2);
+        this.setObj3(obj3);
+        this.setObj4(obj4);
     }
 
     public Usuario(String nombre, String password, String email){
         //funcio per que en les proves on no es posa un id el codi no peti
-        new Usuario(id+0, ""+ nombre, ""+password,""+email,null,0);
-        id++;
+
     }
 
     public Usuario(){

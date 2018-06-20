@@ -80,6 +80,8 @@ public class MundoImpl implements MundoInterfaz {
 
 
 
+
+
     public String consultarUsuario(String nombre){
         return usuarios.get(nombre).getPassword();
     }

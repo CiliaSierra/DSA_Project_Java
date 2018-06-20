@@ -198,7 +198,43 @@ public class UsuarioDAO {
         Connection con = getConnection();
         PreparedStatement st = null;
         ResultSet rs = null;
-        String query = "SELECT * FROM Usuario WHERE email=? AND password=? ";
+        String query = "SELECT * FROM Usuario WHERE email=?";
+
+        try {
+
+            st = con.prepareStatement(query);
+            st.setString(1,usuario.getEmail());
+
+            rs = st.executeQuery();
+            if (rs.next()){
+                usuario = convertirLogin(rs);
+            }
+            else {
+                throw new Exception();
+            }
+
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
+        finally {
+            if (rs != null){
+                try{ rs.close();
+                } catch (Exception e){
+                    new Exception();
+                }
+            }
+            if (st != null){
+                try { st.close();}
+                catch (Exception e) {
+                    new Exception();
+                }
+
+            }
+        }
+        logger.info("Info de: "+usuario.getEmail());
+        return usuario;
+
+
 
     }
 
@@ -210,6 +246,25 @@ public class UsuarioDAO {
         String password = rs.getString("password");
         Usuario u = new Usuario(email,password);
         u.setId(rs.getInt("id"));
+        return u;
+    }
+
+    public Usuario convertirinfo (ResultSet rs) throws Exception{
+
+
+
+        int id = rs.getInt("id");
+        String nombre = rs.getString("nombre");
+        String password = rs.getString("password");
+        String email = rs.getString("email");
+        String imagen = rs.getString("imagen");
+        int posicion = rs.getInt("ultimaposicion");
+        int obj1 = rs.getInt("Obj1");
+        int obj2 = rs.getInt("Obj2");
+        int obj3 = rs.getInt("Obj3");
+        int obj4 = rs.getInt("Obj4");
+
+        Usuario u = new Usuario(id,nombre,email,password,imagen,posicion,obj1,obj2,obj3,obj4);
         return u;
     }
 
